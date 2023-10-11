@@ -1,0 +1,93 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Gérez les paramètres de votre application :</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content-header">
+    <form action="/settings/global" method="POST">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header ui-sortable-handle" style="cursor: move;">
+                        <b>Vous devez configurer tous les paramètres ci-dessous pour utiliser votre application sans
+                            aucun problème (Tous les champs sont obligatoires)</b>
+                    </div>
+                    <div class="card-body">
+                        <input type="hidden" name="_token" value="csrf_token">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>ICE de votre société</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="ICE"
+                                        placeholder="ICE ..." required> <!--[(ngModel)]="settings.Company_ICE"-->
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Taux de TVA de votre société :</label>
+                                    <select name="TVATAUX" id="TVATAUX" class="form-control" required>
+                                        <option value="20">20%</option>
+                                        <option value="10">10%</option>
+                                        <option value="5.5">5.5%</option>
+                                        <option value="2.1">2.1%</option>
+                                        <option value="19.6">19.6%</option>
+                                        <option value="7">7%</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Le lieu de votre société</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="place"
+                                        placeholder="Lieu ..." required><!--[(ngModel)]="settings.Company_Place"-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header ui-sortable-handle" style="cursor: move;">
+                        <b>Paramètres de langue</b>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Langue de votre application :</label>
+                            <select name="LANG" id="LANG" class="form-control"
+                                required><!--[(ngModel)]="settings.APP_lang""-->
+                                <option value="fr">fr</option>
+                                <option value="ar">ar</option>
+                                <option value="en">en</option>
+                            </select>
+                        </div>
+                        <div class="ButtnEnregister">
+                            <button id="savebttn" type="submit" class="btn btn-block btn-primary"
+                                style="background-color:#17a2b8;width: 50%;"><i class="fas fa-check"></i>
+                                <b>ENREGISTRER</b></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header ui-sortable-handle" style="cursor: move;">
+                        <b>Paramètres de thème de facture</b>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Couleur :</label>
+                            <input type="color" class="form-control"
+                                name="COLOR"><!--[(ngModel)]="settings.Invoice_Color"-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
