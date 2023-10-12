@@ -1,0 +1,247 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Hamza welcome to the Create Invoice page</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <!-- Code for displaying messages -->
+        <div class="alert alert-success" role="alert">
+            Message content goes here.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Card for displaying totals -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Table of Invoice Items</h3>
+                    <button type="button" class="btn btn-info add-new" data-toggle="modal"
+                        data-target="#AddNewFactureItemModal">
+                        <i class="fa fa-plus"></i> Ajouter
+                    </button>
+                </div>
+                <div class="card-body table-responsive p-0" style="height: 552px;">
+                    <table id="Table" class="table table-head-fixed text-nowrap">
+                        <thead>
+                            <tr>
+                                <th id="smallth">Qs</th>
+                                <th>DESIGNATION</th>
+                                <th id="smallth">P.U</th>
+                                <th id="smallth">P.T</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table body content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card for form -->
+        <div class="col-md-6">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Enter Billing Information</h3>
+                </div>
+                <div class="card-body">
+                    <form id="Form" action="/create-new-facture/" method="post">
+                        <input type="hidden" name="datatable" id="tableinput" value="" required>
+                        <div class="form-group">
+                            <label>Invoice Number</label>
+                            <input type="number" min="0" class="form-control" name="facture_number"
+                                [value]="newFactureNumber" id="facture_number" placeholder="N°:" required readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Client Name</label>
+                            <div style="display: flex;">
+                                <select id="ClientID" name="client_name" class="form-control"
+                                    style="margin-right: 10px;" [(ngModel)]="selectedClient">
+                                    <option value="-" selected disabled>Select a Client</option>
+                                    <option *ngFor="let client of selectBody" [value]="client.id">{{ client.name }}
+                                    </option>
+                                </select>
+                                <button type="button" class="btn btn-success add-new" (click)="AddNewClient()"><i
+                                        class="fa fa-plus" style="width: 25px;"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input type="date" class="form-control" id="Date" autocomplete="off" name="date"
+                                        [value]="todayDate" placeholder="..." required>
+                                </div>
+                            </div>
+                            <!-- Add other form fields here -->
+                        </div>
+                        <div class="ButtnEnregister">
+                                <button id="savebttn" type="submit" class="btn btn-default btn-info"
+                                    (click)="ValidInputNotEmpty('clientside');">
+                                    <i id="IconPlus" class="fas fa-plus"></i>
+                                    <span id="IconSpin" class="spinner-border spinner-border-sm"
+                                        style="display:none"></span>
+                                    <b>SAVE</b>
+                                </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modals -->
+<div class="modal fade" id="AddNewFactureItemModal" role="dialog">
+    <div class="modal-dialog card card-default">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Enter all information here:</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Qs</label>
+                    <input type="number" min="0" class="form-control" id='Qs' name="Qs" [(ngModel)]="newQs"
+                        (keyup)="calculatePT();" placeholder="Qs" required>
+                </div>
+                <div class="form-group" style="height: 65px">
+                    <label>DESIGNATION</label>
+                    <select id="ProductName" class="form-control" [(ngModel)]="selectedProduct">
+                        <option value="-" disabled selected>Choose a Product</option>
+                        <option *ngFor="let product of selectProductBody" [value]="product.id">{{ product.name }}
+                        </option>
+                    </select>
+                    <input type='text' placeholder="Choose or enter a new product name" class="form-control editOption"
+                        ><!--[(ngModel)]="newProductName"-->
+                </div>
+                <div class="form-group">
+                    <label>PU</label>
+                    <input type="number" class="form-control" id='PU' name="PU" [(ngModel)]="newPU"
+                        (keyup)="calculatePT();" placeholder="PU" required>
+                </div>
+                <div class="form-group">
+                    <label>PT</label>
+                    <input type="number" class="form-control" id='PT' name="PT" [(ngModel)]="newPT" placeholder="PT"
+                        required readonly>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-info" (click)="ValidInputNotEmpty('addnew');"><i
+                        class="fas fa-plus"></i> Add</button>
+                <button type="button" class="btn btn-default btn-success" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EditFactureItemModal" role="dialog">
+    <div class="modal-dialog  card card-default">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Enter all information here:</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id='SelectedRowNumber' value="">
+                <div class="form-group">
+                    <label>Qs</label>
+                    <input type="number" min="0" class="form-control" id='Edit_Qs' name="Qs" [(ngModel)]="editQs"
+                        (keyup)="CalculatePTedit();" placeholder="Qs" required>
+                </div>
+                <div class="form-group" style="height: 65px">
+                    <label>DESIGNATION</label>
+                    <select id="Edit_ProductName" class="form-control" [(ngModel)]="selectedEditProduct">
+                        <option value="-" disabled selected>Choose a Product</option>
+                        <option *ngFor="let product of selectProductBody" [value]="product.id">{{ product.name }}
+                        </option>
+                    </select>
+                    <input type='text' placeholder="Choose or enter a new product name" class="form-control editOption"
+                        ><!--[(ngModel)]="newEditProductName"-->
+                    <script>
+                        function CalculatePTedit() {
+                            document.getElementById('Edit_PT').value = document.getElementById('Edit_Qs').value * document.getElementById("Edit_PU").value
+                        }
+                    </script>
+                </div>
+                <div class="form-group">
+                    <label>PU</label>
+                    <input type="number" class="form-control" id='Edit_PU' name="PU" [(ngModel)]="editPU"
+                        (keyup)="CalculatePTedit();" placeholder="PU" required>
+                </div>
+                <div class="form-group">
+                    <label>PT</label>
+                    <input type="number" class="form-control" id='Edit_PT' name="PT" [(ngModel)]="editPT"
+                        placeholder="PT" required readonly>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-info" (click)="ValidInputNotEmpty('edit');"><i
+                        class="fas fa-plus"></i>Edit</button>
+                <button type="button" class="btn btn-default btn-success" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action='/settings/manage-clients' method='POST' id='AddNewClientForm'>
+    <div class="modal fade" id="AddClientModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Enter all information here:</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id='ClientName' name="ClientName"
+                            [(ngModel)]="newClientName" autocomplete="off" placeholder="Client Name" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-handshake"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id='ICE' name="ICE" [(ngModel)]="newICE"
+                            autocomplete="off" placeholder="Client ICE" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-fingerprint"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id='City' name="City" [(ngModel)]="newCity"
+                            autocomplete="off" placeholder="Client City" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-city"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default btn-info">
+                        <i id='IconPlus' class="fas fa-plus"></i>
+                        <span id='IconSpin' class="spinner-border spinner-border-sm" style='display:none'></span>
+                        Add
+                    </button>
+                    <button type="button" class="btn btn-default btn-success" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

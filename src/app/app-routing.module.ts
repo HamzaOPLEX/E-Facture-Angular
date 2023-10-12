@@ -13,6 +13,15 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ClientsComponent } from './pages/clients/clients.component';
 import { UsersComponent } from './pages/users/users.component';
+import { FactureListComponent } from './pages/facture/facture-list/facture-list.component';
+import { FactureCreateComponent } from './pages/facture/facture-create/facture-create.component';
+import { FactureEditComponent } from './pages/facture/facture-edit/facture-edit.component';
+import { DevisCreateComponent } from './pages/devis/devis-create/devis-create.component';
+import { DevisEditComponent } from './pages/devis/devis-edit/devis-edit.component';
+import { DevisListComponent } from './pages/devis/devis-list/devis-list.component';
+import { BlCreateComponent } from './pages/bl/bl-create/bl-create.component';
+import { BlListComponent } from './pages/bl/bl-list/bl-list.component';
+import { BlEditComponent } from './pages/bl/bl-edit/bl-edit.component';
 
 const routes: Routes = [
     {
@@ -44,6 +53,45 @@ const routes: Routes = [
             {
                 path: 'settings/users',
                 component: UsersComponent
+            },
+            // Facture URL
+            {
+                path: 'invoices/create',
+                component: FactureCreateComponent
+            },
+            {
+                path: 'invoices/list',
+                component: FactureListComponent
+            },
+            {
+                path: 'invoices/edit',
+                component: FactureEditComponent
+            },
+            // Devis URL
+            {
+                path: 'devis/create',
+                component: DevisCreateComponent
+            },
+            {
+                path: 'devis/list',
+                component: DevisListComponent
+            },
+            {
+                path: 'devis/edit/:id',
+                component: DevisEditComponent
+            },
+            // BL URL
+            {
+                path: 'bl/create',
+                component: BlCreateComponent
+            },
+            {
+                path: 'bl/create',
+                component: BlListComponent
+            },
+            {
+                path: 'bl/edit/:id',
+                component: BlEditComponent
             },
         ]
     },

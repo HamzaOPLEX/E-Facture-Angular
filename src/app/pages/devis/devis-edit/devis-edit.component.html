@@ -1,0 +1,252 @@
+<!-- [VARIABLE1] -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Hamza bienvenue sur la page pour Créer un Devis </h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+    </div>
+    <div class="col-md-6">
+        <div class="card card-default">
+            <div class="card-header" style="text-align: center;background: #0d899a;color: white;">
+                <span class="text-left" style="float: left;"> <b>N</b>: <span id="N_ELEMENT">0</span>
+                </span>
+                <span class="text-right" style="float: right;"> <b>TOTAL HT</b>: <span id="HT">0</span> </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Tableau des éléments de <b>Devis</b></h3>
+                    <button type="button" class="btn btn-info add-new" (click)="AddNewFactureItemModalHandler();"><i
+                            class="fa fa-plus"></i> Ajouter</button>
+                </div>
+                <div class="card-body table-responsive p-0" style="height: 552px;">
+                    <table id='Table' class="table table-head-fixed text-nowrap">
+                        <thead>
+                            <tr>
+                                <th id='smallth'>Qs</th>
+                                <th>DESIGNATION</th>
+                                <th id='smallth'>P.U</th>
+                                <th id='smallth'>P.T</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Saisir les informations de <b>Devis</b></h3>
+                </div>
+                <div class="card-body">
+                    <form id='Form' action="/create-new-devis/" method="post">
+                        <input type="hidden" name="datatable" id="tableinput" value="" required>
+                        <div class="form-group">
+                            <label>Numéro de Devis </label>
+                            <input type="number" min="0" class="form-control" name='Devis_number'
+                                value='new_Devis_number' id="facture_number" placeholder="N°:" required readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Nom De Client</label>
+                            <div style="display: flex;">
+                                <select id="ClientID" name="client_name" class="form-control"
+                                    style="margin-right: 10px;">
+                                    <option value="-" selected disabled>Sélectionner Un Client</option>
+                                    <!-- {{ selectbody | CreateHTMLSelectOptionsWith_ID }} -->
+                                </select>
+                                <button type="button" class="btn btn-success add-new" (click)='AddNewClient()'><i
+                                        class="fa fa-plus" style="width: 25px;"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>La Date</label>
+                                    <input type="date" class="form-control" id="Date" autocomplete="off" name="date"
+                                        value="" placeholder="..." required>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                </div>
+                            </div>
+                            <div class="ButtnEnregister" style="margin: auto;">
+                                <button id="savebttn" type="submit" class="btn btn-default btn-info"
+                                    (click)="ValidInputNotEmpty('clientside');">
+                                    <i id='IconPlus' class="fas fa-plus"></i>
+                                    <span id='IconSpin' class="spinner-border spinner-border-sm"
+                                        style='display:none'></span>
+                                    <b>ENREGISTRER</b></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Modal for Adding New Facture Item -->
+<div class="modal fade" id="AddNewFactureItemModal" role="dialog">
+    <div class="modal-dialog card card-default">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Entrez toutes les informations ici : </h4>
+                <button type="button" class="close" data-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Qs</label>
+                    <input type="number" min="0" class="form-control" id='Qs' name="Qs" autocomplete="off"
+                        (keyup)="CalculatePT();" placeholder="Qs" required>
+                </div>
+                <div class="form-group" style="height: 65px">
+                    <label>DESIGNATION</label>
+                    <select id="ProductName" class="form-control" (change)="GetSelectedProductThenSet();">
+                        <option value="-" disabled selected>Choisir Un Produit</option>
+                        <!-- {{selectproductbody | CreateHTMLSelectOptions}} -->
+                    </select>
+                    <input type='text' placeholder="choisissez le nom du produit ou entrez-en un nouveau"
+                        class="form-control editOption" (change)="GetInputAndSet2Select('ProductName',0);">
+                </div>
+                <div class="form-group">
+                    <label>PU</label>
+                    <input type="number" class="form-control" id='PU' name="PU" (keyup)="CalculatePT();"
+                        autocomplete="off" placeholder="PU" required>
+                    <div id="circle_addnew"
+                        style="display: none;width: 33px !important;height: 33px !important;float: right;margin-top: -36px;margin-right: 2px;">
+                        <div class="loader" style="animation: rotate 1.5s linear infinite !important">
+                            <div class="loader" style="animation: rotate 1.5s linear infinite !important">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>PT</label>
+                    <input type="number" class="form-control" id='PT' name="PT" autocomplete="off" placeholder="PT"
+                        required readonly>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-info" (click)="ValidInputNotEmpty('addnew');"><i
+                        class="fas fa-plus"></i> Ajouter</button>
+                <button type="button" class="btn btn-default btn-success" id="closeeditmodal"
+                    data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Editing Facture Item -->
+<div class="modal fade" id="EditFactureItemModal" role="dialog">
+    <div class="modal-dialog  card card-default">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Entrez toutes les informations ici : </h4>
+                <button type="button" class="close" data-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id='SelectedRowNumber' value="">
+                <div class="form-group">
+                    <label>Qs</label>
+                    <input type="number" min="0" class="form-control" id='Edit_Qs' name="Qs" autocomplete="off"
+                        (keyup)="CalculatePTedit();" placeholder="Qs" required>
+                </div>
+                <div class="form-group" style="height: 65px">
+                    <label>DESIGNATION</label>
+                    <select id="Edit_ProductName" class="form-control" (change)="GetSelectedProductThenSetEdit();">
+                        <option value="-" disabled selected>Choisir Un Produit</option>
+                        <!-- {{selectproductbody | CreateHTMLSelectOptions}} -->
+                    </select>
+                    <input type='text' placeholder="choisissez le nom du produit ou entrez-en un nouveau"
+                        class="form-control editOption" (change)="GetInputAndSet2Select('Edit_ProductName',1);">
+                </div>
+                <div class="form-group">
+                    <label>PU</label>
+                    <input type="number" class="form-control" id='Edit_PU' name="PU" (keyup)="CalculatePTedit();"
+                        autocomplete="off" placeholder="PU" required>
+                    <div id="circle_edit"
+                        style="display: none;width: 33px !important;height: 33px !important;float: right;margin-top: -36px;margin-right: 2px;">
+                        <div class="loader" style="animation: rotate 1.5s linear infinite !important">
+                            <div class="loader" style="animation: rotate 1.5s linear infinite !important">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>PT</label>
+                    <input type="number" class="form-control" id='Edit_PT' name="PT" autocomplete="off" placeholder="PT"
+                        required readonly>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-info" (click)="ValidInputNotEmpty('edit');"><i
+                        class="fas fa-plus"></i>Edit</button>
+                <button type="button" class="btn btn-default btn-success" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Adding New Client -->
+<form action='/settings/manage-clients' method='POST' id='AddNewClientForm'>
+    <div class="modal fade" id="AddClientModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Entrez toutes les informations ici : </h4>
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id='ClientName' name="ClientName" autocomplete="off"
+                            placeholder="Nom de Client" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-handshake"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id='ICE' name="ICE" autocomplete="off"
+                            placeholder="ICE De Client" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-fingerprint"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id='City' name="City" autocomplete="off"
+                            placeholder="Ville du client" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-city"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default btn-info">
+                        <i id='IconPlus' class="fas fa-plus"></i>
+                        <span id='IconSpin' class="spinner-border spinner-border-sm" style='display:none'></span>
+                        Ajouter
+                    </button>
+                    <button type="button" class="btn btn-default btn-success" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
