@@ -1,0 +1,45 @@
+<div ngbNoBootstrap>
+    <ng-template #content let-modal >
+<div class="modal-header">
+    <h4 class="modal-title">
+        <h4 class="modal-title">Entrez toutes les informations ici : </h4>
+    </h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" id='ClientName' name="ClientName" autocomplete="off"
+            placeholder="Nom de Client" required>
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-handshake"></span>
+            </div>
+        </div>
+    </div>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" id='ICE' name="ICE" autocomplete="off" placeholder="ICE De Client"
+            required>
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-fingerprint"></span>
+            </div>
+        </div>
+    </div>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" id='City' name="City" autocomplete="off" placeholder="Ville du client"
+            required>
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-city"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default btn-success" (click)="modal.close('Save click')">Save</button>
+</div>
+    </ng-template>
+
+    <button class="btn btn-default btn-success" (click)="open(content)">+</button>
+
+</div>

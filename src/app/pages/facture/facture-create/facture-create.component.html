@@ -9,26 +9,13 @@
 </section>
 
 <section class="content">
-    <div class="container-fluid">
-        <!-- Code for displaying messages -->
-        <div class="alert alert-success" role="alert">
-            Message content goes here.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </div>
-
     <!-- Card for displaying totals -->
     <div class="row">
         <div class="col-md-6">
             <div class="card card-default">
                 <div class="card-header">
                     <h3 class="card-title">Table of Invoice Items</h3>
-                    <button type="button" class="btn btn-info add-new" data-toggle="modal"
-                        data-target="#AddNewFactureItemModal">
-                        <i class="fa fa-plus"></i> Ajouter
-                    </button>
+                    <app-add-new-facture-item-modal></app-add-new-facture-item-modal>
                 </div>
                 <div class="card-body table-responsive p-0" style="height: 552px;">
                     <table id="Table" class="table table-head-fixed text-nowrap">
@@ -42,13 +29,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Table body content -->
+
                         </tbody>
                     </table>
                 </div>
+                <!-- <div class="card"> -->
+                <div class="card-header" style="text-align: center;background: #0d899a;color: white;">
+                    <span class="text-left" style="float: left;"> <b>N</b>: <span id="N_ELEMENT">0</span> </span>
+                    <span class="text-center"> <b>TOTAL HT</b>: <span id="HT">0</span> </span>
+                    <span class="text-right" style="float: right;"> <b>TOTAL TTC</b>: <span id="TTC">0</span> </span><br>
+                    <span class="text-right" style="float: right;"> <b>TVA</b>: <span id="TVA">0</span> </span>
+                </div>
+                <!-- /.card-header -->
             </div>
-        </div>
 
+        </div>
         <!-- Card for form -->
         <div class="col-md-6">
             <div class="card card-default">
@@ -72,20 +67,48 @@
                                     <option *ngFor="let client of selectBody" [value]="client.id">{{ client.name }}
                                     </option>
                                 </select>
-                                <button type="button" class="btn btn-success add-new" (click)="AddNewClient()"><i
-                                        class="fa fa-plus" style="width: 25px;"></i>
-                                </button>
+                                <app-add-client-modal></app-add-client-modal>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Date</label>
-                                    <input type="date" class="form-control" id="Date" autocomplete="off" name="date"
-                                        [value]="todayDate" placeholder="..." required>
+                                    <label>La Date</label>
+                                    <input type="date" class="form-control" id="Date" autocomplete="off" name="date" value=""
+                                        placeholder="..." required>
                                 </div>
                             </div>
-                            <!-- Add other form fields here -->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                </div>
+                            </div>
+                            <div id="avance" class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Avance :</label>
+                                    <input type="number" class="form-control" name="avance" value="0">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Méthode de paiement</label>
+                                    <select class="form-control" id='paiementmethod' name="paiementmethod">
+                                        <option value="-" disabled selected>Choisir Une Méthode</option>
+                                        <option>Espèces</option>
+                                        <option>Chèque</option>
+                                        <option value='Lettre'>Lettre De Change</option>
+                                        <option value='Virement'>Virement Bancaire</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>TTC ou HT :</label>
+                                    <select class="form-control" id="TTTCorHT" name="TTTCorHT">
+                                        <option>TTC</option>
+                                        <option>HT</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="ButtnEnregister">
                                 <button id="savebttn" type="submit" class="btn btn-default btn-info"
@@ -100,6 +123,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </section>
 
@@ -168,8 +192,7 @@
                         <option *ngFor="let product of selectProductBody" [value]="product.id">{{ product.name }}
                         </option>
                     </select>
-                    <input type='text' placeholder="Choose or enter a new product name" class="form-control editOption"
-                        ><!--[(ngModel)]="newEditProductName"-->
+                    <input type='text' placeholder="Choose or enter a new product name" class="form-control editOption"><!--[(ngModel)]="newEditProductName"-->
                     <script>
                         function CalculatePTedit() {
                             document.getElementById('Edit_PT').value = document.getElementById('Edit_Qs').value * document.getElementById("Edit_PU").value
@@ -195,53 +218,3 @@
         </div>
     </div>
 </div>
-
-<form action='/settings/manage-clients' method='POST' id='AddNewClientForm'>
-    <div class="modal fade" id="AddClientModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Enter all information here:</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" id='ClientName' name="ClientName"
-                            [(ngModel)]="newClientName" autocomplete="off" placeholder="Client Name" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-handshake"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" id='ICE' name="ICE" [(ngModel)]="newICE"
-                            autocomplete="off" placeholder="Client ICE" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-fingerprint"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" id='City' name="City" [(ngModel)]="newCity"
-                            autocomplete="off" placeholder="Client City" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-city"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-default btn-info">
-                        <i id='IconPlus' class="fas fa-plus"></i>
-                        <span id='IconSpin' class="spinner-border spinner-border-sm" style='display:none'></span>
-                        Add
-                    </button>
-                    <button type="button" class="btn btn-default btn-success" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>

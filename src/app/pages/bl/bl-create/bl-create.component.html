@@ -99,8 +99,7 @@
                                     <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}
                                     </option>
                                 </select>
-                                <button type="button" class="btn btn-success add-new" (click)="addNewClient()"><i
-                                        class="fa fa-plus"></i></button>
+                                <app-add-client-modal></app-add-client-modal>
                             </div>
                         </div>
 

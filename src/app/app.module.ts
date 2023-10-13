@@ -47,6 +47,12 @@ import { BlEditComponent } from './pages/bl/bl-edit/bl-edit.component';
 import { FactureListComponent } from './pages/facture/facture-list/facture-list.component';
 import { FactureCreateComponent } from './pages/facture/facture-create/facture-create.component';
 import { FactureEditComponent } from './pages/facture/facture-edit/facture-edit.component';
+import { AddClientModalComponent } from './components/add-client-modal/add-client-modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddProductModalComponent } from './components/add-product-modal/add-product-modal.component';
+import { AddNewFactureItemModalComponent } from './components/add-new-facture-item-modal/add-new-facture-item-modal.component';
+import { FactureTableItemsComponent } from './components/facture-table-items/facture-table-items.component';
+import { FactureTotalItemsComponent } from './components/facture-total-items/facture-total-items.component';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -86,6 +92,11 @@ registerLocaleData(localeEn, 'en-EN');
         FactureListComponent,
         FactureCreateComponent,
         FactureEditComponent,
+        AddClientModalComponent,
+        AddProductModalComponent,
+        AddNewFactureItemModalComponent,
+        FactureTableItemsComponent,
+        FactureTotalItemsComponent,
     ],
     imports: [
         ProfabricComponentsModule,
@@ -101,7 +112,8 @@ registerLocaleData(localeEn, 'en-EN');
             timeOut: 3000,
             positionClass: 'toast-top-right',
             preventDuplicates: true
-        })
+        }),
+        NgbModule
     ],
     providers: [],
     bootstrap: [AppComponent]
