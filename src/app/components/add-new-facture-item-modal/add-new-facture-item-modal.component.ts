@@ -29,18 +29,20 @@ export class AddNewFactureItemModalComponent {
 
   constructor(private modalService: NgbModal) { }
 
-  open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+  open(modal) {
+    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title' }).result.then(
       (result) => {
-        this.closeResult = `Closed with: ${result}`;
+        if (result === "add"){
+          console.log("saving to cookies (with facture ID) & table")
+        }
+        else{
+          console.log("saving to cookies (with facture ID)")
+        }
       },
       (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        this.closeResult = `Dismissed ${reason}`;
+        console.log(this.closeResult)
       },
     );
-  }
-
-  private getDismissReason(reason) {
-      console.log(`with: ${reason}`) ;
   }
 }

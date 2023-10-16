@@ -8,7 +8,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class FactureCreateComponent {
 
-
   user = { username: 'JohnDoe' };
   newFactureNumber = 123;
   todayDate = '2023-10-12';

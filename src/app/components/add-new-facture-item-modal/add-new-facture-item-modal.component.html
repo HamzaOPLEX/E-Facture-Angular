@@ -1,8 +1,8 @@
 <div ngbNoBootstrap>
-    <ng-template #content let-modal>
+    <ng-template #modal let-modal>
         <div class="modal-header">
             <h4 class="modal-title">Entrez toutes les informations ici : </h4>
-            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('exit')"></button>
         </div>
         <div class="modal-body">
             <div class="form-group">
@@ -28,10 +28,10 @@
         </div>
         <div class="modal-footer">
             <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-success" (click)="modal.close('Save click')">Save</button>
+                <button type="button" class="btn btn-default btn-success" (click)="modal.close('add')">Add</button>
             </div>
         </div>
     </ng-template>
-    <button class="btn btn-info add-new" (click)="open(content)">+</button>
+    <button class="btn btn-info add-new" (click)="open(modal)">Add New Product</button>
 </div>
 

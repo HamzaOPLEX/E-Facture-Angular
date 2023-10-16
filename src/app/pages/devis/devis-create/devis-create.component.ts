@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./devis-create.component.scss']
 })
 export class DevisCreateComponent {
+  DEVIS: any;
+
   messages: string[] = ["Message 1", "Message 2", "Message 3"]; // Fake messages for testing
 
   // Function for Adding New Facture Item Modal

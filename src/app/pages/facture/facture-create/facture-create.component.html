@@ -11,39 +11,6 @@
 <section class="content">
     <!-- Card for displaying totals -->
     <div class="row">
-        <div class="col-md-6">
-            <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">Table of Invoice Items</h3>
-                    <app-add-new-facture-item-modal></app-add-new-facture-item-modal>
-                </div>
-                <div class="card-body table-responsive p-0" style="height: 552px;">
-                    <table id="Table" class="table table-head-fixed text-nowrap">
-                        <thead>
-                            <tr>
-                                <th id="smallth">Qs</th>
-                                <th>DESIGNATION</th>
-                                <th id="smallth">P.U</th>
-                                <th id="smallth">P.T</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </div>
-                <!-- <div class="card"> -->
-                <div class="card-header" style="text-align: center;background: #0d899a;color: white;">
-                    <span class="text-left" style="float: left;"> <b>N</b>: <span id="N_ELEMENT">0</span> </span>
-                    <span class="text-center"> <b>TOTAL HT</b>: <span id="HT">0</span> </span>
-                    <span class="text-right" style="float: right;"> <b>TOTAL TTC</b>: <span id="TTC">0</span> </span><br>
-                    <span class="text-right" style="float: right;"> <b>TVA</b>: <span id="TVA">0</span> </span>
-                </div>
-                <!-- /.card-header -->
-            </div>
-
-        </div>
         <!-- Card for form -->
         <div class="col-md-6">
             <div class="card card-default">
@@ -123,7 +90,9 @@
                 </div>
             </div>
         </div>
-
+        <div class="col-md-6">
+            <app-facture-table-items TYPE="INVOICE"></app-facture-table-items>
+        </div>
     </div>
 </section>
 
