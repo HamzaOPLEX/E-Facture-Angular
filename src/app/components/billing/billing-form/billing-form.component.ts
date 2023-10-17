@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-facture-create',
-  templateUrl: './facture-create.component.html',
-  styleUrls: ['./facture-create.component.scss']
+  selector: 'app-billing-form',
+  templateUrl: './billing-form.component.html',
+  styleUrls: ['./billing-form.component.scss']
 })
-export class FactureCreateComponent {
+export class BillingFormComponent {
+  @Input() public TYPE: string;
 
   user = { username: 'JohnDoe' };
   newFactureNumber = 123;
@@ -31,12 +31,7 @@ export class FactureCreateComponent {
   selectedClient: number = this.selectBody[0].id; // Set default selected client ID
   selectedProduct: number = this.selectProductBody[0].id; // Set default selected product ID
   selectedEditProduct: number = this.selectProductBody[1].id; // Set default selected product ID for editing
-
-  AddNewClient() {
-    // Add your code here for adding a new client
-  }
-
-  ValidInputNotEmpty(type: string) {
-    // Add your code here for validating input
+  onFormChange() {
+    console.log('Form Changes')
   }
 }

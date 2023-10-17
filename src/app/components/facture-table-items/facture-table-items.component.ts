@@ -9,9 +9,6 @@ export class FactureTableItemsComponent {
 
   @Input() public TYPE: string;
 
-
-
-
   N_ELEMENT: number = 0;
   TOTAL_HT: number = 0;
   TOTAL_TTC: number = 0;

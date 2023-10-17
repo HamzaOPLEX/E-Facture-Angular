@@ -3,9 +3,8 @@
         <h3 class="card-title">Table of Invoice Items</h3> <!-- Title -->
         <button class="btn btn-info add-new" (click)="addRow()">Add Row</button> <!-- Button to Add Row -->
     </div>
-
     <div class="card-body table-responsive p-0" style="height: 552px;"> <!-- Card Body with Table -->
-        <table id="Table" class="table table-head-fixed text-nowrap"> <!-- Table Element -->
+        <table id="{{TYPE}}" class="table table-head-fixed text-nowrap"> <!-- Table Element -->
             <thead> <!-- Table Header -->
                 <tr>
                     <th id="smallth">Qs</th> <!-- Table Header: Quantity -->

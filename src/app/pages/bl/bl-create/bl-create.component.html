@@ -14,115 +14,12 @@
 
 <!-- Main Content Section -->
 <section class="content">
-    <div class="container-fluid">
-        <!-- Display success messages -->
-        <div *ngIf="messages">
-            <div *ngFor="let message of messages" class="alert alert-success" role="alert">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="card card-default">
-            <div class="card-header" style="text-align: center;background: #0d899a;color: white;">
-                <!-- Show N_ELEMENT and HT values -->
-                <span class="text-left" style="float: left;"> <b>N</b>: <span id="N_ELEMENT">0</span> </span>
-                <span class="text-right" style="float: right;"> <b>TOTAL HT</b>: <span id="HT">0</span> </span>
-            </div>
-        </div>
-    </div>
-
     <div class="row">
         <div class="col-md-6">
-            <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">Table of Bon De Livraison Elements</h3>
-                    <!-- Button to add a new item -->
-                    <button type="button" class="btn btn-info add-new" (click)="addNewFactureItem()"><i
-                            class="fa fa-plus"></i> Add New</button>
-                </div>
-
-                <div class="card-body table-responsive p-0" style="height: 552px;">
-                    <table id='Table' class="table table-head-fixed text-nowrap">
-                        <thead>
-                            <tr>
-                                <th id='smallth'>Qs</th>
-                                <th>DESIGNATION</th>
-                                <th id='smallth'>P.U</th>
-                                <th id='smallth'>P.T</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Populate table body -->
-                            <tr *ngFor="let item of items">
-                                <td>{{ item.Qs }}</td>
-                                <td>{{ item.DESIGNATION }}</td>
-                                <td>{{ item.PU }}</td>
-                                <td>{{ item.PT }}</td>
-                                <td>
-                                    <!-- Buttons for actions -->
-                                    <button class="btn btn-info" (click)="editFactureItem()">Edit</button>
-                                    <button class="btn btn-danger" (click)="deleteFactureItem()">Delete</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <app-billing-form TYPE="BL"></app-billing-form>
         </div>
-
         <div class="col-md-6">
-            <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">Enter Bon De Livraison Information</h3>
-                </div>
-
-                <div class="card-body">
-                    <form id='Form' (ngSubmit)="submitForm()">
-                        <div class="form-group">
-                            <label>Numéro De BL</label>
-                            <input type="number" min="0" class="form-control" name='BL_number'
-                                [(ngModel)]="new_BL_number" placeholder="N°:" required readonly>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Nom De Client</label>
-                            <div style="display: flex;">
-                                <select id="ClientID" name="client_name" class="form-control"
-                                    style="margin-right: 10px;" [(ngModel)]="selectedClient">
-                                    <option value="-" selected disabled>Select A Client</option>
-                                    <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}
-                                    </option>
-                                </select>
-                                <app-add-client-modal></app-add-client-modal>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>La Date</label>
-                                    <input type="date" class="form-control" id="Date" autocomplete="off" name="date"
-                                        [(ngModel)]="todaydate" placeholder="..." required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ButtnEnregister">
-                                <button id="savebttn" type="submit" class="btn btn-default btn-info">
-                                    <i id='IconPlus' class="fas fa-plus"></i>
-                                    <span id='IconSpin' class="spinner-border spinner-border-sm"></span>
-                                    <b>ENREGISTRER</b>
-                                </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <app-facture-table-items TYPE="BL"></app-facture-table-items>
         </div>
     </div>
 </section>

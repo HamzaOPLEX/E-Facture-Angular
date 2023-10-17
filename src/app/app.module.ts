@@ -49,10 +49,8 @@ import { FactureCreateComponent } from './pages/facture/facture-create/facture-c
 import { FactureEditComponent } from './pages/facture/facture-edit/facture-edit.component';
 import { AddClientModalComponent } from './components/add-client-modal/add-client-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AddProductModalComponent } from './components/add-product-modal/add-product-modal.component';
-import { AddNewFactureItemModalComponent } from './components/add-new-facture-item-modal/add-new-facture-item-modal.component';
 import { FactureTableItemsComponent } from './components/facture-table-items/facture-table-items.component';
-import { FactureTotalItemsComponent } from './components/facture-total-items/facture-total-items.component';
+import { BillingFormComponent } from './components/billing/billing-form/billing-form.component';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -93,10 +91,8 @@ registerLocaleData(localeEn, 'en-EN');
         FactureCreateComponent,
         FactureEditComponent,
         AddClientModalComponent,
-        AddProductModalComponent,
-        AddNewFactureItemModalComponent,
         FactureTableItemsComponent,
-        FactureTotalItemsComponent,
+        BillingFormComponent,
     ],
     imports: [
         ProfabricComponentsModule,
