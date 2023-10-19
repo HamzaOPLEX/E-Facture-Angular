@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { SharedDataService } from '@services/SharedData/shared-data.service'
+import { FetchDocService } from '@services/fetch-doc/fetch-doc.service' //get documment related data
 
 @Component({
   selector: 'app-facture-create',
@@ -7,6 +9,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./facture-create.component.scss']
 })
 export class FactureCreateComponent {
+  TYPE = 'INVOICE'
+  constructor(private SharedDataService: SharedDataService, private FetchDocService: FetchDocService){}
+  ngOnInit() {
+    // get Doc ID after seting the TYPE in  the shared data
+    let Doc_ID = this.FetchDocService.FetchDocID(this.TYPE)
+    this.SharedDataService.setDoc_ID(Doc_ID)
+    console.log('[+] app-facture-create : Facture Main Component has get/set the ID =>', this.SharedDataService.getDoc_ID())
+  }
+
 
   user = { username: 'JohnDoe' };
   newFactureNumber = 123;
@@ -19,6 +30,8 @@ export class FactureCreateComponent {
     { id: 1, name: 'Product A' },
     { id: 2, name: 'Product B' }
   ];
+
+
 
   newQs: number = 5; // Example Qs value
   newPU: number = 10; // Example PU value

@@ -51,6 +51,7 @@ import { AddClientModalComponent } from './components/add-client-modal/add-clien
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FactureTableItemsComponent } from './components/facture-table-items/facture-table-items.component';
 import { BillingFormComponent } from './components/billing/billing-form/billing-form.component';
+import { DocummentsListingComponent } from './components/documments-listing/documments-listing.component';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -93,6 +94,7 @@ registerLocaleData(localeEn, 'en-EN');
         AddClientModalComponent,
         FactureTableItemsComponent,
         BillingFormComponent,
+        DocummentsListingComponent,
     ],
     imports: [
         ProfabricComponentsModule,

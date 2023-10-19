@@ -22,6 +22,7 @@ import { DevisListComponent } from './pages/devis/devis-list/devis-list.componen
 import { BlCreateComponent } from './pages/bl/bl-create/bl-create.component';
 import { BlListComponent } from './pages/bl/bl-list/bl-list.component';
 import { BlEditComponent } from './pages/bl/bl-edit/bl-edit.component';
+import { DocummentsListingComponent } from './components/documments-listing/documments-listing.component';
 
 const routes: Routes = [
     {
@@ -61,7 +62,7 @@ const routes: Routes = [
             },
             {
                 path: 'invoices/list',
-                component: FactureListComponent
+                component: DocummentsListingComponent
             },
             {
                 path: 'invoices/edit',
@@ -74,7 +75,7 @@ const routes: Routes = [
             },
             {
                 path: 'devis/list',
-                component: DevisListComponent
+                component: DocummentsListingComponent
             },
             {
                 path: 'devis/edit/:id',
@@ -86,8 +87,8 @@ const routes: Routes = [
                 component: BlCreateComponent
             },
             {
-                path: 'bl/create',
-                component: BlListComponent
+                path: 'bl/list',
+                component: DocummentsListingComponent
             },
             {
                 path: 'bl/edit/:id',
