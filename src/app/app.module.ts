@@ -52,7 +52,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FactureTableItemsComponent } from './components/facture-table-items/facture-table-items.component';
 import { BillingFormComponent } from './components/billing/billing-form/billing-form.component';
 import { DocummentsListingComponent } from './components/documments-listing/documments-listing.component';
-// import { DataTablesModule } from 'angular-datatables';
+import { DocumentService } from './components/documments-listing/documentservice';
 // Import PrimeNG modules
 import { AccordionModule } from 'primeng/accordion';
 import { AutoCompleteModule } from 'primeng/autocomplete';
@@ -79,7 +79,6 @@ import { DockModule } from 'primeng/dock';
 import { DragDropModule } from 'primeng/dragdrop';
 import { DropdownModule } from 'primeng/dropdown';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
-import { EditorModule } from 'primeng/editor';
 import { FieldsetModule } from 'primeng/fieldset';
 import { FileUploadModule } from 'primeng/fileupload';
 import { GalleriaModule } from 'primeng/galleria';
@@ -143,7 +142,6 @@ import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 // import { CustomerService } from 'src/service/customerservice';
 
-
 registerLocaleData(localeEn, 'en-EN');
 
 @NgModule({
@@ -189,21 +187,13 @@ registerLocaleData(localeEn, 'en-EN');
 
     ],
     imports: [
-        ProfabricComponentsModule,
-        CommonModule,
+        AvatarModule,
+        AvatarGroupModule,
         BrowserModule,
-        StoreModule.forRoot({auth: authReducer, ui: uiReducer}),
-        HttpClientModule,
         FormsModule,
-        AppRoutingModule,
+        HttpClientModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        ToastrModule.forRoot({
-            timeOut: 3000,
-            positionClass: 'toast-top-right',
-            preventDuplicates: true
-        }),
-        NgbModule,
         AccordionModule,
         AutoCompleteModule,
         BadgeModule,
@@ -228,7 +218,6 @@ registerLocaleData(localeEn, 'en-EN');
         DragDropModule,
         DropdownModule,
         DynamicDialogModule,
-        EditorModule,
         FieldsetModule,
         FileUploadModule,
         GalleriaModule,
@@ -288,8 +277,23 @@ registerLocaleData(localeEn, 'en-EN');
         TreeSelectModule,
         TreeTableModule,
         AnimateModule,
-        CardModule,    ],
-    providers: [],
-    bootstrap: [AppComponent]
+        CardModule,
+        ProfabricComponentsModule,
+        CommonModule,
+        BrowserModule,
+        StoreModule.forRoot({auth: authReducer, ui: uiReducer}),
+        HttpClientModule,
+        FormsModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+            preventDuplicates: true
+        }),
+    ],
+    providers: [DocumentService],
+    bootstrap: [AppComponent, DocummentsListingComponent]
 })
 export class AppModule {}

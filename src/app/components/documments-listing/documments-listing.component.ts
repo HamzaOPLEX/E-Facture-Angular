@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { Customer, Representative } from './customer';
-import { CustomerService } from './customerservice';
-
+import { Component, OnInit } from '@angular/core';
+import { Documment } from './document';
+import { DocumentService } from './documentservice';
 
 @Component({
   selector: 'app-documments-listing',
@@ -9,11 +8,10 @@ import { CustomerService } from './customerservice';
   styleUrls: ['./documments-listing.component.scss']
 })
 export class DocummentsListingComponent {
-  customers!: Customer[];
+  documents!: Documment[];
 
-  selectedCustomers!: Customer[];
+  selectedCustomers!: Documment[];
 
-  representatives!: Representative[];
 
   statuses!: any[];
 
@@ -21,31 +19,18 @@ export class DocummentsListingComponent {
 
   activityValues: number[] = [0, 100];
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private documentService: DocumentService) { }
 
   ngOnInit() {
-    this.customerService.getCustomersLarge().then((customers) => {
-      this.customers = customers;
+    this.documentService.getCustomersLarge().then((documents) => {
+      this.documents = documents;
       this.loading = false;
+      this.documents.forEach((document) => (document.documentDate = new Date(<Date>document.documentDate)));
 
-      this.customers.forEach((customer) => (customer.date = new Date(<Date>customer.date)));
     });
 
-    this.representatives = [
-      { name: 'Amy Elsner', image: 'amyelsner.png' },
-      { name: 'Anna Fali', image: 'annafali.png' },
-      { name: 'Asiya Javayant', image: 'asiyajavayant.png' },
-      { name: 'Bernardo Dominic', image: 'bernardodominic.png' },
-      { name: 'Elwin Sharvill', image: 'elwinsharvill.png' },
-      { name: 'Ioni Bowcher', image: 'ionibowcher.png' },
-      { name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png' },
-      { name: 'Onyama Limba', image: 'onyamalimba.png' },
-      { name: 'Stephen Shaw', image: 'stephenshaw.png' },
-      { name: 'Xuxue Feng', image: 'xuxuefeng.png' }
-    ];
-
     this.statuses = [
-      { label: 'Unqualified', value: 'unqualified' },
+      { label: 'Unqualified', value: 'paid' },
       { label: 'Qualified', value: 'qualified' },
       { label: 'New', value: 'new' },
       { label: 'Negotiation', value: 'negotiation' },

@@ -218,7 +218,7 @@
         box-shadow: none !important;
     }
 
-    td {
+    /* td {
         max-width: 70px !important;
         overflow-x: scroll !important;
         border: 1px solid #b5c0d2 !important;
@@ -228,7 +228,7 @@
     tr {
         overflow: scroll !important;
         border-bottom: solid 1px #b5c0d2 !important;
-    }
+    } */
 
     button.btn.btn-info.add-new {
         float: right !important;

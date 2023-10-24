@@ -51,7 +51,7 @@ export class BillingFormComponent {
           if (this.TYPE == "INVOICE") {
             this.BillingForm = this.fb.group({
               documentNumber: new FormControl(this.Doc_ID), // Set document number with the retrieved ID
-              clientName: [temp_data.clientName], // Initialize client name field
+              clientName: new FormControl(temp_data.clientName), // Initialize client name field
               invoiceDate: [temp_data.invoiceDate], // Initialize invoice date field
               avanceMoney: [temp_data.avanceMoney], // Initialize advance field
               PayingMethod: [temp_data.PayingMethod], // Initialize payment method field
@@ -61,14 +61,15 @@ export class BillingFormComponent {
           else {
             this.BillingForm = this.fb.group({
               documentNumber: new FormControl(this.Doc_ID), // Set document number with the retrieved ID
-              clientName: [temp_data.clientName], // Initialize client name field
+              clientName: new FormControl(temp_data.clientName), // Initialize client name field
               invoiceDate: [temp_data.invoiceDate], // Initialize invoice date field
             });
+            console.log('[+] app-billing-items: loding data done', temp_data)
           }
 
         } 
         else if (temp_data_length == 0) {
-          // No data found in cookies, loading empty table
+          // No data found in cookies, loading empty form
           console.log('[+] app-billing-items: Data Not Found in cookies, loading empty billing form...');
           if (this.TYPE == "INVOICE") {
             this.BillingForm = this.fb.group({
@@ -97,21 +98,20 @@ export class BillingFormComponent {
   user = { username: 'JohnDoe' };
   todayDate = '2023-10-12';
   selectBody = [
-    { id: 1, name: 'Client A' },
-    { id: 2, name: 'Client B' }
+    { id: '1', name: 'Client A' },
+    { id: '2', name: 'Client B' }
   ];
   selectProductBody = [
-    { id: 1, name: 'Product A' },
-    { id: 2, name: 'Product B' }
+    { id: '1', name: 'Product A' },
+    { id: '2', name: 'Product B' }
   ];
 
   newProductName: string = 'New Product'; // Example product name
   newClientName: string = 'New Client'; // Example client name
 
   // Set default selected client and product IDs
-  selectedClient: number = this.selectBody[0].id;
-  selectedProduct: number = this.selectProductBody[0].id;
-  selectedEditProduct: number = this.selectProductBody[1].id;
+  selectedProduct: string = this.selectProductBody[0].id;
+  selectedEditProduct: string = this.selectProductBody[1].id;
 
   // Function to clear cache (delete cookies with the same ID as the current invoice ID)
   ClearCache() {

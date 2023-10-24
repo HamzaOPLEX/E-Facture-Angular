@@ -13,8 +13,7 @@
             <div class="form-group">
                 <label>Client Name</label>
                 <div style="display: flex;">
-                    <select id="ClientID" formControlName="clientName" class="form-control" style="margin-right: 10px;"
-                        [(ngModel)]="selectedClient">
+                    <select id="ClientID" formControlName="clientName" class="form-control" style="margin-right: 10px;">
                         <option value="-" selected disabled>Select a Client</option>
                         <option *ngFor="let client of selectBody" [value]="client.id">{{ client.name }}
                         </option>
