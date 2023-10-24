@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { Customer, Representative } from './customer';
+import { CustomerService } from './customerservice';
+
 
 @Component({
   selector: 'app-documments-listing',
@@ -7,21 +9,67 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./documments-listing.component.scss']
 })
 export class DocummentsListingComponent {
-  messages: string[] = ['Message 1', 'Message 2']; // Add your messages here
-  tablebody: any[] = [/* Add your data here */]; // Assuming tablebody is an array of objects
+  customers!: Customer[];
 
-  deleteForm: FormGroup;
+  selectedCustomers!: Customer[];
 
-  constructor(private fb: FormBuilder) {
-    this.deleteForm = this.fb.group({
-      password: ['', Validators.required]
+  representatives!: Representative[];
+
+  statuses!: any[];
+
+  loading: boolean = true;
+
+  activityValues: number[] = [0, 100];
+
+  constructor(private customerService: CustomerService) { }
+
+  ngOnInit() {
+    this.customerService.getCustomersLarge().then((customers) => {
+      this.customers = customers;
+      this.loading = false;
+
+      this.customers.forEach((customer) => (customer.date = new Date(<Date>customer.date)));
     });
+
+    this.representatives = [
+      { name: 'Amy Elsner', image: 'amyelsner.png' },
+      { name: 'Anna Fali', image: 'annafali.png' },
+      { name: 'Asiya Javayant', image: 'asiyajavayant.png' },
+      { name: 'Bernardo Dominic', image: 'bernardodominic.png' },
+      { name: 'Elwin Sharvill', image: 'elwinsharvill.png' },
+      { name: 'Ioni Bowcher', image: 'ionibowcher.png' },
+      { name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png' },
+      { name: 'Onyama Limba', image: 'onyamalimba.png' },
+      { name: 'Stephen Shaw', image: 'stephenshaw.png' },
+      { name: 'Xuxue Feng', image: 'xuxuefeng.png' }
+    ];
+
+    this.statuses = [
+      { label: 'Unqualified', value: 'unqualified' },
+      { label: 'Qualified', value: 'qualified' },
+      { label: 'New', value: 'new' },
+      { label: 'Negotiation', value: 'negotiation' },
+      { label: 'Renewal', value: 'renewal' },
+      { label: 'Proposal', value: 'proposal' }
+    ];
   }
 
-  ngOnInit(): void { }
+  getSeverity(status: string) {
+    switch (status) {
+      case 'unqualified':
+        return 'danger';
 
-  deleteItem() {
-    const password = this.deleteForm.get('password').value;
-    // Add logic to handle delete action here
+      case 'qualified':
+        return 'success';
+
+      case 'new':
+        return 'info';
+
+      case 'negotiation':
+        return 'warning';
+
+      case 'renewal':
+        return null;
+    }
   }
 }
