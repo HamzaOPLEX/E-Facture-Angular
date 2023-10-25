@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Documment } from './document';
-import { DocumentService } from './documentservice';
+import { FetchDocService } from '@services/fetch-doc/fetch-doc.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-documments-listing',
@@ -8,9 +8,10 @@ import { DocumentService } from './documentservice';
   styleUrls: ['./documments-listing.component.scss']
 })
 export class DocummentsListingComponent {
-  documents!: Documment[];
-
-  selectedCustomers!: Documment[];
+  documents
+  invoices
+  TYPE: string;
+  selectedCustomers
 
 
   statuses!: any[];
@@ -19,38 +20,43 @@ export class DocummentsListingComponent {
 
   activityValues: number[] = [0, 100];
 
-  constructor(private documentService: DocumentService) { }
+  constructor(private FetchDocService: FetchDocService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.documentService.getCustomersLarge().then((documents) => {
-      this.documents = documents;
-      this.loading = false;
-      this.documents.forEach((document) => (document.documentDate = new Date(<Date>document.documentDate)));
-
+    this.route.params.subscribe(params => {
+      this.TYPE = params['type'];
+      this.FetchDocService.getAllDocs(this.TYPE).then((documents) => {
+        if (this.TYPE == 'invoices'){
+          this.invoices = documents
+        }
+        else {
+          this.documents = documents
+        }
+        this.loading = false;
+        this.documents.forEach((document) => (document.documentDate = new Date(<Date>document.documentDate)));
+      });
     });
 
+
     this.statuses = [
-      { label: 'Unqualified', value: 'paid' },
-      { label: 'Qualified', value: 'qualified' },
-      { label: 'New', value: 'new' },
-      { label: 'Negotiation', value: 'negotiation' },
-      { label: 'Renewal', value: 'renewal' },
-      { label: 'Proposal', value: 'proposal' }
+      { label: 'paid', value: 'paid' },
+      { label: 'non-paid', value: 'non-paid' },
+      { label: 'uncompleted', value: 'uncompleted' },
     ];
   }
 
   getSeverity(status: string) {
     switch (status) {
-      case 'unqualified':
+      case 'non-paid':
         return 'danger';
 
-      case 'qualified':
+      case 'paid':
         return 'success';
 
       case 'new':
         return 'info';
 
-      case 'negotiation':
+      case 'uncompleted':
         return 'warning';
 
       case 'renewal':

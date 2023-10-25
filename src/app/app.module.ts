@@ -40,17 +40,15 @@ import { ClientsComponent } from './pages/clients/clients.component';
 import { UsersComponent } from './pages/users/users.component';
 import { DevisCreateComponent } from './pages/devis/devis-create/devis-create.component';
 import { DevisEditComponent } from './pages/devis/devis-edit/devis-edit.component';
-import { DevisListComponent } from './pages/devis/devis-list/devis-list.component';
 import { BlCreateComponent } from './pages/bl/bl-create/bl-create.component';
-import { BlListComponent } from './pages/bl/bl-list/bl-list.component';
 import { BlEditComponent } from './pages/bl/bl-edit/bl-edit.component';
-import { FactureListComponent } from './pages/facture/facture-list/facture-list.component';
 import { FactureCreateComponent } from './pages/facture/facture-create/facture-create.component';
 import { FactureEditComponent } from './pages/facture/facture-edit/facture-edit.component';
 import { AddClientModalComponent } from './components/add-client-modal/add-client-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FactureTableItemsComponent } from './components/facture-table-items/facture-table-items.component';
 import { BillingFormComponent } from './components/billing/billing-form/billing-form.component';
+import { EditBillingFormComponent } from './pages/edit-document/billing-form/billing-form.component';
 import { DocummentsListingComponent } from './components/documments-listing/documments-listing.component';
 import { DocumentService } from './components/documments-listing/documentservice';
 // Import PrimeNG modules
@@ -140,12 +138,15 @@ import { AnimateModule } from 'primeng/animate';
 import { CardModule } from 'primeng/card';
 import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { EditDocumentComponent } from './pages/edit-document/edit-document/edit-document.component';
+import { DocumentTableItemsComponent } from './pages/edit-document/document-table-items/document-table-items.component';
 // import { CustomerService } from 'src/service/customerservice';
 
 registerLocaleData(localeEn, 'en-EN');
 
 @NgModule({
     declarations: [
+        EditBillingFormComponent,
         AppComponent,
         MainComponent,
         LoginComponent,
@@ -173,17 +174,16 @@ registerLocaleData(localeEn, 'en-EN');
         SettingsComponent,
         DevisCreateComponent,
         DevisEditComponent,
-        DevisListComponent,
         BlCreateComponent,
-        BlListComponent,
         BlEditComponent,
-        FactureListComponent,
         FactureCreateComponent,
         FactureEditComponent,
         AddClientModalComponent,
         FactureTableItemsComponent,
         BillingFormComponent,
         DocummentsListingComponent,
+        EditDocumentComponent,
+        DocumentTableItemsComponent,
 
     ],
     imports: [

@@ -1,9 +1,9 @@
 <section class="content">
     <div class="card">
         <div class="card-body">
-            <p-table #dt [value]="documents" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
-                [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+            <p-table #dt [value]="TYPE === 'invoices' ? invoices : documents" [(selection)]="selectedCustomers" dataKey="id"
+                [rowHover]="true" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading"
+                [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
                 [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']">
                 <ng-template pTemplate="caption">
                     <div class="table-header">
@@ -20,7 +20,7 @@
                         <th style="width: 4rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th pSortableColumn="id" style="min-width: 14rem">
+                        <th pSortableColumn="id" style="min-width: 5rem">
                             <div class="flex justify-content-between align-items-center">
                                 ID
                                 <p-sortIcon field="id"></p-sortIcon>
@@ -34,14 +34,14 @@
                                 <p-columnFilter type="text" field="clientName" display="menu" class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                        <th pSortableColumn="documentDate" style="min-width: 14rem">
+                        <th pSortableColumn="documentDate" style="min-width: 5rem">
                             <div class="flex justify-content-between align-items-center">
                                 Date
                                 <p-sortIcon field="documentDate"></p-sortIcon>
                                 <p-columnFilter type="date" field="documentDate" display="menu" class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                        <th pSortableColumn="status" style="min-width: 10rem">
+                        <th pSortableColumn="status" style="min-width: 5rem">
                             <div class="flex justify-content-between align-items-center">
                                 Status
                                 <p-sortIcon field="status"></p-sortIcon>
@@ -57,6 +57,34 @@
                                 </p-columnFilter>
                             </div>
                         </th>
+                        <ng-container *ngIf="TYPE === 'invoices'">
+                            <th pSortableColumn="invoiceAvnace" style="min-width: 5rem"><div class="flex justify-content-between align-items-center">
+                                Avance
+                                <p-sortIcon field="invoiceAvnace"></p-sortIcon>
+                                <p-columnFilter type="number" field="Avance" display="menu" class="ml-auto"></p-columnFilter>
+                            </div></th>
+                            <th pSortableColumn="invoiceRest" style="min-width: 5rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    Reste
+                                    <p-sortIcon field="invoiceRest"></p-sortIcon>
+                                    <p-columnFilter type="number" field="Avance" display="menu" class="ml-auto"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th pSortableColumn="invoiceHT" style="min-width: 5rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    HT
+                                    <p-sortIcon field="invoiceHT"></p-sortIcon>
+                                    <p-columnFilter type="number" field="Avance" display="menu" class="ml-auto"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th pSortableColumn="invoiceTTC" style="min-width: 5rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    TTC
+                                    <p-sortIcon field="invoiceTTC"></p-sortIcon>
+                                    <p-columnFilter type="number" field="Avance" display="menu" class="ml-auto"></p-columnFilter>
+                                </div>
+                            </th>
+                        </ng-container>
                         <th style="width: 10rem">Action</th>
                     </tr>
                 </ng-template>
@@ -79,10 +107,16 @@
                         </td>
                         <td>
                             <span class="p-column-title">Status</span>
-                            <p-tag [value]="document.documentStatus" [severity]="getSeverity(document.status)"></p-tag>
+                            <p-tag [value]="document.documentStatus" [severity]="getSeverity(document.documentStatus)"></p-tag>
                         </td>
+                        <ng-container *ngIf="TYPE === 'invoices'">
+                            <td> <span class="p-column-title">Avance</span> {{ document.invoiceAvnace }} </td>
+                            <td> <span class="p-column-title">Reset</span> {{ document.invoiceRest }} </td>
+                            <td> <span class="p-column-title">HT</span> {{ document.invoiceHT }} </td>
+                            <td> <span class="p-column-title">TTC</span> {{ document.invoiceTTC }} </td>
+                        </ng-container>
                         <td style="text-align: center">
-                            <button pButton type="button" class="p-button-secondary btn" icon="pi pi-file-edit"></button>
+                            <a routerLink="{{ document.editUrl }}"><button pButton type="button" class="p-button-secondary btn" icon="pi pi-file-edit"></button></a>
                             <button pButton type="button" class="p-button-danger btn" icon="pi pi-trash"></button>
                         </td>
                     </tr>

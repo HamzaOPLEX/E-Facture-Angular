@@ -9,6 +9,16 @@ export class SharedDataService {
 
   constructor(private FetchDocService: FetchDocService,) { }
   Doc_ID = ''
+  document_data = ''
+
+  setDoc_Data(data) {
+    this.document_data = data
+    return true
+  }
+  getDoc_Data() {
+    return this.document_data
+  }
+
   setDoc_ID(Doc_ID){
     this.Doc_ID = Doc_ID
     return true

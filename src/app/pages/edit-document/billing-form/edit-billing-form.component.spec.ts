@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BlListComponent } from './bl-list.component';
+import { BillingFormComponent } from './billing-form.component';
 
-describe('BlListComponent', () => {
-  let component: BlListComponent;
-  let fixture: ComponentFixture<BlListComponent>;
+describe('BillingFormComponent', () => {
+  let component: BillingFormComponent;
+  let fixture: ComponentFixture<BillingFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BlListComponent ]
+      declarations: [ BillingFormComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BlListComponent);
+    fixture = TestBed.createComponent(BillingFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
