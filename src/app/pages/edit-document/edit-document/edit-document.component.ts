@@ -24,6 +24,7 @@ export class EditDocumentComponent {
         this.SharedDataService.setDoc_Data(this.document_data)
       })
   };
+
   user = { username: 'JohnDoe' };
   todayDate = '2023-10-12';
   selectBody = [
@@ -34,5 +35,4 @@ export class EditDocumentComponent {
     { id: '1', name: 'Product A' },
     { id: '2', name: 'Product B' }
   ];
-
 }

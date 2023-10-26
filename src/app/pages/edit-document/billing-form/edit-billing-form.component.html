@@ -13,11 +13,19 @@
             <div class="form-group">
                 <label>Client Name</label>
                 <div style="display: flex;">
-                    <select id="ClientID" formControlName="clientName" class="form-control" style="margin-right: 10px;">
-                        <option value="-" selected disabled>Select a Client</option>
-                        <option *ngFor="let client of selectBody" [value]="client.id">{{ client.name }}
-                        </option>
-                    </select>
+                <select id="ClientID" formControlName="clientName" class="form-control" style="margin-right: 10px;">
+                    <option value="-" selected disabled>Select a Client</option>
+                    <option *ngFor="let client of selectBody" [value]="client.id">{{ client.name }}
+                    </option>
+                </select>
+                <!-- <p-dropdown [options]="selectBody" [(ngModel)]="selectBody" optionLabel="name" [filter]="true" filterBy="name"  [showClear]="true" placeholder="Select a Client" >
+                    <ng-template let-client pTemplate="item">
+                        <div class="flex align-items-center gap-2 " >
+                            <div>{{ client.name }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown> -->
+
                     <app-add-client-modal></app-add-client-modal>
                 </div>
             </div>

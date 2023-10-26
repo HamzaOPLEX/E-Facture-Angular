@@ -26,7 +26,7 @@
                             (change)="RowDataSave(item)" disabled required /></td>
                     <!-- Input for Total Price (Disabled) -->
                     <td>
-                        <button (click)="deleteRow(i)">Delete</button> <!-- Button to Delete Row -->
+                        <p-button icon="pi pi-times" styleClass="p-button-rounded p-button-sm p-button-danger p-button-text p-button-raised"(click)="deleteRow(i)"></p-button>
                     </td>
                 </tr>
             </tbody>
@@ -38,7 +38,7 @@
         <span class="text-left" style="float: left;"> <!-- Left-aligned Text -->
             <b>N</b>: <span id="price">{{ N_ELEMENT }}</span> <!-- Total Elements -->
         </span>
-        <ng-container *ngIf="TYPE === 'INVOICE' ; else notInvoice"> <!-- Condition: If TYPE is INVOICE -->
+        <ng-container *ngIf="TYPE === 'invoices' ; else notInvoice"> <!-- Condition: If TYPE is INVOICE -->
             <span class="text-center"> <!-- Centered Text -->
                 <b>TOTAL HT</b>: <span id="price">{{ TOTAL_HT }}</span> <!-- TOTAL_HT -->
             </span>
@@ -48,7 +48,7 @@
                 <b>TOTAL HT</b>: <span id="price">{{ TOTAL_HT }}</span> <!-- TOTAL_HTe -->
             </span>
         </ng-template>
-        <ng-container *ngIf="TYPE === 'INVOICE'"> <!-- Condition: If TYPE is INVOICE -->
+        <ng-container *ngIf="TYPE === 'invoices'"> <!-- Condition: If TYPE is INVOICE -->
             <span class="text-right" style="float: right;"> <!-- Right-aligned and Right-floated Text -->
                 <b>TOTAL TTC</b>: <span id="price">{{ TOTAL_TTC }}</span> <!-- Total TTC -->
             </span><br>

@@ -5,7 +5,6 @@ import { FetchDocService } from '@services/fetch-doc/fetch-doc.service'; // Serv
 import { SharedDataService } from '@services/SharedData/shared-data.service'; // Service for shared data between components
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { type } from 'os';
 
 @Component({
   selector: 'app-edit-billing-form',
@@ -81,6 +80,6 @@ export class EditBillingFormComponent {
   onFormChange() {
     console.log('Form Changes');
     let data = this.BillingForm.getRawValue()
-    console.log(this.BillingForm.getRawValue())
+    console.log("[+] app-billing-items: auto saving data to db",this.BillingForm.getRawValue())
   }
 }

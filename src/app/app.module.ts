@@ -286,7 +286,6 @@ registerLocaleData(localeEn, 'en-EN');
         FormsModule,
         AppRoutingModule,
         ReactiveFormsModule,
-        BrowserAnimationsModule,
         ToastrModule.forRoot({
             timeOut: 3000,
             positionClass: 'toast-top-right',
@@ -294,6 +293,6 @@ registerLocaleData(localeEn, 'en-EN');
         }),
     ],
     providers: [DocumentService],
-    bootstrap: [AppComponent, DocummentsListingComponent]
+    bootstrap: [AppComponent, DocummentsListingComponent,]
 })
 export class AppModule {}

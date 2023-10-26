@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { SaveToCookieService } from '@services/save-to-cookie/save-to-cookie.service'
 import { SharedDataService } from '@services/SharedData/shared-data.service'
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -9,12 +10,14 @@ import { SharedDataService } from '@services/SharedData/shared-data.service'
   styleUrls: ['./document-table-items.component.scss']
 })
 export class DocumentTableItemsComponent {
-  @Input() public TYPE: string = '';
   Doc_ID: string;
+  TYPE: string;
+  document_data;
 
   constructor(
     private SaveToCookieService: SaveToCookieService,
     private SharedDataService: SharedDataService,
+    private route: ActivatedRoute,
   ) { }
 
   N_ELEMENT: number = 0;
@@ -25,33 +28,23 @@ export class DocumentTableItemsComponent {
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
   ngOnInit() {
-    // Get Doc_ID from SharedDataService
-    this.Doc_ID = this.SharedDataService.getDoc_ID();
-
-    // Log the retrieved Doc_ID
-    console.log('[+] app-edit-document-table-items: OnInit table-items has get the ID from shareddata =>', this.Doc_ID);
-
-    // Get saved data from cookies based on Doc_ID
-    const temp_data = this.SaveToCookieService.getData(this.Doc_ID, 'table');
-
-    // Log the retrieved temp_data
-    console.log("[+] app-edit-document-table-items: Getting Saved Table Data =>", temp_data);
-
-    // Check if there is data saved in cookies
-    if (temp_data.length > 0) {
-      // Data found in table, load data
-      console.log('[+] app-edit-document-table-items: Data found in cookies, loading data...');
-
-      // Set tableData to the retrieved data
-      this.tableData = temp_data;
-
-      // Calculate total values based on the loaded data
-      this.calculateTotalValues();
-    } else if (temp_data.length == 0) {
-      // No data found in cookies, loading empty table
-      console.log('[+] app-edit-document-table-items: Data Not Found in cookies, loading empty table...');
-    }
+    this.route.params.subscribe(params => {
+      this.TYPE = params.type;
+      console.log('[+] app-edit-document-table-items: TYPE=', params.type)
+      this.document_data = this.SharedDataService.getDoc_Data()      
+      console.log('[+] app-edit-document-table-items: data retrieved =>', this.document_data)
+      this.tableData = this.document_data.tableData;
+      // loop to data table and calculate needed data
+      this.tableData.forEach((row)=>{
+        this.RowDataSave(row)
+      })
+    })
   }
+
+
+
+
+
   // Function to calculate values
   calculateTotalValues() {
     // Get the number of elements in the tableData array
@@ -79,9 +72,6 @@ export class DocumentTableItemsComponent {
 
     // Increment the number of elements
     this.N_ELEMENT = this.N_ELEMENT + 1;
-
-    // Save the updated tableData to cookies
-    this.SaveToCookieService.save(this.Doc_ID, this.tableData, 'table');
   }
 
   // Function to clean a row by ensuring quantity and unity_total are non-negative
@@ -90,7 +80,6 @@ export class DocumentTableItemsComponent {
       item.quantity = Math.abs(item.quantity);
       item.unity_total = Math.abs(item.unity_total);
     }
-
     // Calculate the total for the row
     item.total = item.quantity * item.unity_total;
   }
@@ -102,9 +91,6 @@ export class DocumentTableItemsComponent {
 
     // Recalculate total values
     this.calculateTotalValues();
-
-    // Save the updated tableData to cookies
-    this.SaveToCookieService.save(this.Doc_ID, this.tableData, 'table');
   }
 
   // Function to delete a row from tableData
@@ -114,9 +100,6 @@ export class DocumentTableItemsComponent {
 
     // Recalculate total values
     this.calculateTotalValues();
-
-    // Save the updated tableData to cookies
-    this.SaveToCookieService.save(this.Doc_ID, this.tableData, 'table');
   }
 
 

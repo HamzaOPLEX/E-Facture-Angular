@@ -22,7 +22,12 @@ export class FetchDocService {
           editUrl: "/invoices/edit/33333",
         },
         tableData:[
-          {Qs :"10",ds:"Name",PU:"1500",PT:""}
+          { id: 1, quantity: "10", name: "Sndo9 d btata", unity_total: "15", total: "" },
+          { id: 1, quantity: "10", name: "Sndo9 d banan", unity_total: "15", total: "" },
+          { id: 1, quantity: "10", name: "Sndo9 d tfa7", unity_total: "15", total: "" },
+          { id: 1, quantity: "10", name: "Sndo9 d avoka", unity_total: "15", total: "" },
+          { id: 1, quantity: "10", name: "Sndo9 d dla7", unity_total: "15", total: "" },
+          { id: 1, quantity: "10", name: "Sndo9 d 3inb", unity_total: "15", total: "" },
         ]
       }
     return data
