@@ -1,0 +1,40 @@
+<div class="login-box">
+    <div class="login-logo">
+        <p
+            style="color: black;padding: 8px;background-color: #ffffff78;width: 100% !important;border-top-left-radius: 14px;border-top-right-radius: 14px;    text-shadow: 1px 1px 2px #0000004d;">
+            <b>E</b>-FACTURE
+        </p>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card" style="background: none;">
+        <div class="card-body login-card-body"
+            style="background-color: #ffffff78;border-bottom-right-radius: 14px;border-bottom-left-radius: 14px;">
+            <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="username" autocomplete="off"
+                        placeholder="Nom d'utilisateur" required formControlName="username">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user-tie"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" name="password" autocomplete="off"
+                        placeholder="Mot de passe" formControlName="password">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-unlock-alt"></i>
+                            S'identifier</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
