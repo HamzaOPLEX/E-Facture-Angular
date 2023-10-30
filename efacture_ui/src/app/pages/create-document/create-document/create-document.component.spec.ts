@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BlEditComponent } from './bl-edit.component';
+import { CreateDocumentComponent } from './create-document.component';
 
-describe('BlEditComponent', () => {
-  let component: BlEditComponent;
-  let fixture: ComponentFixture<BlEditComponent>;
+describe('CreateDocumentComponent', () => {
+  let component: CreateDocumentComponent;
+  let fixture: ComponentFixture<CreateDocumentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BlEditComponent ]
+      declarations: [ CreateDocumentComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BlEditComponent);
+    fixture = TestBed.createComponent(CreateDocumentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

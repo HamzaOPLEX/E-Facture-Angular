@@ -35,16 +35,8 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ClientsComponent } from './pages/clients/clients.component';
 import { UsersComponent } from './pages/users/users.component';
-import { DevisCreateComponent } from './pages/devis/devis-create/devis-create.component';
-import { DevisEditComponent } from './pages/devis/devis-edit/devis-edit.component';
-import { BlCreateComponent } from './pages/bl/bl-create/bl-create.component';
-import { BlEditComponent } from './pages/bl/bl-edit/bl-edit.component';
-import { FactureCreateComponent } from './pages/facture/facture-create/facture-create.component';
-import { FactureEditComponent } from './pages/facture/facture-edit/facture-edit.component';
 import { AddClientModalComponent } from './components/add-client-modal/add-client-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FactureTableItemsComponent } from './components/facture-table-items/facture-table-items.component';
-import { BillingFormComponent } from './components/billing/billing-form/billing-form.component';
 import { EditBillingFormComponent } from './pages/edit-document/billing-form/billing-form.component';
 import { DocummentsListingComponent } from './components/documments-listing/documments-listing.component';
 import { DocumentService } from './components/documments-listing/documentservice';
@@ -139,7 +131,10 @@ import { EditDocumentComponent } from './pages/edit-document/edit-document/edit-
 import { DocumentTableItemsComponent } from './pages/edit-document/document-table-items/document-table-items.component';
 import { JwtModule } from "@auth0/angular-jwt";
 import {JwtAuthService} from "@services/Auth/JWTAuthService/jwt-auth-service.service";
-import { LogoutComponent } from './modules/logout/logout/logout.component'
+import { LogoutComponent } from './modules/logout/logout/logout.component';
+import { CreateDocumentComponent } from './pages/create-document/create-document/create-document.component';
+import { CreateBillingFormComponent } from './pages/create-document/create-billing-form/create-billing-form.component';
+import { CreateDocumentTableItemsComponent } from './pages/create-document/create-document-table-items/create-document-table-items.component'
 
 
 
@@ -169,20 +164,15 @@ registerLocaleData(localeEn, 'en-EN');
         ClientsComponent,
         UsersComponent,
         SettingsComponent,
-        DevisCreateComponent,
-        DevisEditComponent,
-        BlCreateComponent,
-        BlEditComponent,
-        FactureCreateComponent,
-        FactureEditComponent,
         AddClientModalComponent,
-        FactureTableItemsComponent,
-        BillingFormComponent,
         DocummentsListingComponent,
         EditDocumentComponent,
         DocumentTableItemsComponent,
         LoginComponent,
-        LogoutComponent
+        LogoutComponent,
+        CreateDocumentComponent,
+        CreateBillingFormComponent,
+        CreateDocumentTableItemsComponent
 
     ],
     imports: [

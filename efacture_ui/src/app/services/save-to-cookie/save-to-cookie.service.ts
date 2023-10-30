@@ -44,6 +44,9 @@ export class SaveToCookieService {
     else if (type == 'billing'){
       return JSON.parse(localStorage.getItem(Doc_ID))['billing_data'];
     }
+    else if (type == null){
+      return JSON.parse(localStorage.getItem(Doc_ID));
+    }
   }
 
 

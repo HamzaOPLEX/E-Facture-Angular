@@ -39,13 +39,13 @@ export class FetchDocService {
     //send http get request with user token to get new uniq Doc_ID wih TYPE ["INVOICE","DEVIS","BL"]
     
     // this if statement is for testing, after impimenting API remove it
-    if (TYPE=="INVOICE"){
+    if (TYPE=="invoices"){
       return "MA-FA-000001" // COPANY_CODE-DOC_TYPE-DOC_ID
     }
-    else if (TYPE == "DEVIS"){
+    else if (TYPE == "devis"){
       return "MA-DV-000001" // COPANY_CODE-DOC_TYPE-DOC_ID
     }
-    else if(TYPE =="BL"){
+    else if(TYPE =="bl"){
       return "MA-BL-000001" // COPANY_CODE-DOC_TYPE-DOC_ID
     }
   }

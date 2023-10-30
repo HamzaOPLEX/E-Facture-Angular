@@ -11,11 +11,9 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ClientsComponent } from './pages/clients/clients.component';
 import { UsersComponent } from './pages/users/users.component';
-import { FactureCreateComponent } from './pages/facture/facture-create/facture-create.component';
-import { DevisCreateComponent } from './pages/devis/devis-create/devis-create.component';
-import { BlCreateComponent } from './pages/bl/bl-create/bl-create.component';
 import { DocummentsListingComponent } from './components/documments-listing/documments-listing.component';
 import { EditDocumentComponent } from './pages/edit-document/edit-document/edit-document.component';
+import { CreateDocumentComponent } from './pages/create-document/create-document/create-document.component';
 
 
 
@@ -50,36 +48,10 @@ const routes: Routes = [
                 path: 'settings/users',
                 component: UsersComponent
             },
-            // Facture URL
+            // Document URL
             {
-                path: 'invoices/create',
-                component: FactureCreateComponent
-            },
-            {
-                path: ':type/list',
-                component: DocummentsListingComponent
-            },
-            {
-                path: ':type/edit/:id',
-                component: EditDocumentComponent
-            },
-            // Devis URL
-            {
-                path: 'devis/create',
-                component: DevisCreateComponent
-            },
-            {
-                path: ':type/list',
-                component: DocummentsListingComponent
-            },
-            {
-                path: ':type/edit/:id',
-                component: EditDocumentComponent
-            },
-            // BL URL
-            {
-                path: 'bl/create',
-                component: BlCreateComponent
+                path: ':type/create',
+                component: CreateDocumentComponent
             },
             {
                 path: ':type/list',

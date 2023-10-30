@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FetchDocService } from '@services/fetch-doc/fetch-doc.service' //get documment related data
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
