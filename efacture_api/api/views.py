@@ -7,15 +7,17 @@ import jwt, datetime
 from .models import Document
 from .serializers import DocumentSerializer
 from rest_framework import status
+from time import sleep
 
-
-class DocumentAPIView(APIView):
+class DocumentListAPIView(APIView):
     # Get a list of all documents
-    def get(self, request, format=None):
-        documents = Document.objects.all()
+    def get(self, request,type, format=None):
+        sleep(1) # just to test loading in UI
+        documents = Document.objects.filter(document_type=type)
         serializer = DocumentSerializer(documents, many=True)
         return Response(serializer.data)
 
+class DocumentCreateAPIView(APIView):
     # Create a new document
     def post(self, request, format=None):
         serializer = DocumentSerializer(data=request.data)
@@ -23,7 +25,8 @@ class DocumentAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+    
+class DocumentEditAPIView(APIView):
     # Update an existing document
     def put(self, request, pk, format=None):
         document = self.get_object(pk)
@@ -33,12 +36,14 @@ class DocumentAPIView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class DocumentDeleteAPIView(APIView):
     # Delete a document
     def delete(self, request, pk, format=None):
         document = self.get_object(pk)
         document.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class DocumentDetailAPIView(APIView):
     # Helper method to get a specific document by its primary key (pk)
     def get_object(self, pk):
         try:

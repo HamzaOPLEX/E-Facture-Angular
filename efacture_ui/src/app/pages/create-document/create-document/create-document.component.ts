@@ -10,17 +10,12 @@ import { SharedDataService } from '@services/SharedData/shared-data.service'; //
 })
 export class CreateDocumentComponent {
   TYPE
-  Doc_ID
   document_data = {}
   constructor(private FetchDocService: FetchDocService, private route: ActivatedRoute, private SharedDataService: SharedDataService, // Service for shared data
   ) { }
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.TYPE = params['type'];
-      // get Doc ID after seting the TYPE in  the shared data
-      let Doc_ID = this.FetchDocService.FetchDocID(this.TYPE)
-      this.SharedDataService.setDoc_ID(Doc_ID)
-      console.log('[+] app-create-document : Document Main Component has get/set the ID =>', this.SharedDataService.getDoc_ID())
     })
   };
 

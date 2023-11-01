@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from datetime import datetime
 
 # Create your models here.
 class User(AbstractUser):
@@ -8,7 +10,7 @@ class User(AbstractUser):
     password = models.CharField(max_length=255)
 
 class APP_Clients(models.Model):
-    name = models.TextField()
+    name = models.CharField(max_length=255)
     ICE = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
 
@@ -17,9 +19,9 @@ class APP_Clients(models.Model):
 
 class Document(models.Model):
     DOCUMENT_TYPES = [
-        ('INVOICE', 'Invoice'),
-        ('DEVIS', 'Devis'),
-        ('BL', 'BL'),
+        ('invoices', 'INVOICE'),
+        ('devis', 'DEVIS'),
+        ('bl', 'BL'),
     ]
 
     TTC_OR_HT_CHOICES = [
@@ -28,29 +30,36 @@ class Document(models.Model):
     ]
 
     DOCUMENT_STATUS_CHOICES = [
-        ('UNPAID', 'Unpaid'),
-        ('PAID', 'Paid'),
+        ('Unpaid', 'UNPAID'),
+        ('Paid', 'PAID'),
     ]
+
     DOCUMENT_PAIMENT_METHOD_CHOICES = [
-        ('Cash', 'Cash'),
-        ('Check', 'Check'),
-        ('Letter', 'Letter'),
-        ('Bank Transfer', 'Bank Transfer'),
+        ('Cash', 'CASH'),
+        ('Cheque', 'CHEQUE'),
+        ('Letter', 'LETTER'),
+        ('Bank_Transfer', 'BANK_TRANSFER'),
     ]
-    document_number = models.IntegerField(unique=True)
+
+    document_number = models.CharField(max_length=255, unique=True,default='')
     document_client = models.ForeignKey(APP_Clients, on_delete=models.RESTRICT)
     document_date = models.DateField()
-    ttc_or_ht = models.CharField(max_length=3, default='TTC', choices=TTC_OR_HT_CHOICES)
+    ttc_or_ht = models.CharField(max_length=3, default='NONE', choices=TTC_OR_HT_CHOICES)
     document_status = models.CharField(max_length=10, default='UNPAID', choices=DOCUMENT_STATUS_CHOICES)
-    deposit = models.FloatField(null=True, blank=True)
-    document_payment_method = models.CharField(max_length=255,choices=DOCUMENT_PAIMENT_METHOD_CHOICES)  # You may want to add choices here as well
+    deposit = models.FloatField(default=0)
+    document_payment_method = models.CharField(max_length=255,default='NONE',choices=DOCUMENT_PAIMENT_METHOD_CHOICES)  # You may want to add choices here as well
     document_type = models.CharField(max_length=10, default='INVOICE', choices=DOCUMENT_TYPES)
     document_created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, editable=False)
+    document_items = models.JSONField(null=False, blank=False)
 
     def __str__(self):
-        return f"{self.get_document_type_display()} - {self.document_number} for {self.document_client}"
+        return f"{self.document_number} for {self.document_client}"
 
-    # def clean(self):
-    #     if self.isPaid == "Non":
-    #         self.Paiment_Mathod = 'aucun'
-    #         self.Avance = 0
+@receiver(post_save, sender=Document)
+def set_document_number(sender, instance, **kwargs):
+    template = {'invoices':"FA",'bl':"BL","devis":"DV"}
+    if not instance.document_number:
+        current_year = datetime.now().year
+        new_id = Document.objects.filter(document_type=instance.document_type).count()
+        instance.document_number = f'{template[instance.document_type]}-{new_id}/{current_year}'
+        instance.save()

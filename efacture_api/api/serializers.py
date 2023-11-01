@@ -20,6 +20,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class DocumentSerializer(serializers.ModelSerializer):
+    document_client = serializers.CharField(source='document_client.name', read_only=True)
     class Meta:
         model = Document
         fields = '__all__'

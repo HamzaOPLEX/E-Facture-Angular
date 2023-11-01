@@ -8,7 +8,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class SharedDataService {
 
   constructor(private FetchDocService: FetchDocService,) { }
-  Doc_ID = ''
   document_data = ''
 
   setDoc_Data(data) {
@@ -18,13 +17,4 @@ export class SharedDataService {
   getDoc_Data() {
     return this.document_data
   }
-
-  setDoc_ID(Doc_ID){
-    this.Doc_ID = Doc_ID
-    return true
-  }
-  getDoc_ID(){
-    return this.Doc_ID
-  }
-  
 }

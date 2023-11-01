@@ -8,17 +8,12 @@
         <form id="Form" [formGroup]="BillingForm" (change)="onFormChange()" (ngSubmit)="onSubmit()">
             <input type="hidden" name="datatable" id="tableinput" value="" required>
             <div class="form-group">
-                <label>Invoice Number</label>
-                <input type="text" min="0" class="form-control" formControlName="documentNumber" placeholder="N°:"
-                    required readonly>
-            </div>
-            <div class="form-group">
                 <label>Client Name (*) : <span class="text-danger"
-                    *ngIf="(BillingForm.get('clientName').invalid || submitted) && BillingForm.get('clientName').errors?.invalidClientName">
+                    *ngIf="(BillingForm.get('document_client').invalid || submitted) && BillingForm.get('document_client').errors?.invalidClientName">
                     This Field is Required
                 </span></label>
                 <div style="display: flex;">
-                    <select id="ClientID" formControlName="clientName" class="form-control" style="margin-right: 10px;">
+                    <select id="ClientID" formControlName="document_client" class="form-control" style="margin-right: 10px;">
                         <option value="-" selected disabled>Select a Client</option>
                         <option *ngFor="let client of Clients" [value]="client.id">{{ client.name }}
                         </option>
@@ -30,10 +25,10 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Date (*):<span class="text-danger"
-                            *ngIf="(BillingForm.get('invoiceDate').invalid || submitted) && BillingForm.get('invoiceDate').errors?.required">
+                            *ngIf="(BillingForm.get('document_date').invalid || submitted) && BillingForm.get('document_date').errors?.required">
                             Date Field Is Required
                         </span></label>
-                        <input type="date" class="form-control" id="Date" autocomplete="off" formControlName="invoiceDate" value="" placeholder="..." required>
+                        <input type="date" class="form-control" id="Date" autocomplete="off" formControlName="document_date" value="" placeholder="..." required>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -44,10 +39,10 @@
                 <div *ngIf="TYPE === 'invoices'" id="avance" class="col-sm-6">
                     <div class="form-group">
                         <label>Avance (*): <span class="text-danger"
-                            *ngIf="(BillingForm.get('avanceMoney').invalid || submitted) && BillingForm.get('avanceMoney').errors?.required">
+                            *ngIf="(BillingForm.get('deposit').invalid || submitted) && BillingForm.get('deposit').errors?.required">
                             This Field is Required
                         </span></label>
-                        <input type="number" class="form-control" formControlName="avanceMoney" value="0">
+                        <input type="number" class="form-control" formControlName="deposit" value="0">
 
                     </div>
                 </div>
@@ -55,15 +50,15 @@
                 <div *ngIf="TYPE === 'invoices'" class="col-sm-6">
                     <div class="form-group">
                         <label>Méthode de paiement (*): <span class="text-danger"
-                            *ngIf="(BillingForm.get('PayingMethod').invalid || submitted) && BillingForm.get('PayingMethod').errors?.invalidClientName">
+                            *ngIf="(BillingForm.get('document_payment_method').invalid || submitted) && BillingForm.get('document_payment_method').errors?.invalidClientName">
                             This Field is Required
                         </span></label>
-                        <select class="form-control" id='paiementmethod' formControlName="PayingMethod">
-                            <option value="-" disabled selected>Choisir Une Méthode</option>
-                            <option>Espèces</option>
-                            <option>Chèque</option>
+                        <select class="form-control" id='paiementmethod' formControlName="document_payment_method">
+                            <option value="-" disabled selected>Choose a paiment method</option>
+                            <option value='Cash'>Cash</option>
+                            <option value='Cheque'>Cheque</option>
                             <option value='Lettre'>Lettre De Change</option>
-                            <option value='Virement'>Virement Bancaire</option>
+                            <option value='Bank_Transfer'>Bank Tansfer</option>
                         </select>
                     </div>
                 </div>
@@ -71,10 +66,10 @@
                 <div *ngIf="TYPE === 'invoices'" class="col-sm-6">
                     <div class="form-group">
                         <label>TTC ou HT (*): <span class="text-danger"
-                            *ngIf="(BillingForm.get('TTTCorHT').invalid || submitted) && BillingForm.get('TTTCorHT').errors?.required">
+                            *ngIf="(BillingForm.get('ttc_or_ht').invalid || submitted) && BillingForm.get('ttc_or_ht').errors?.required">
                             This Field is Required
                         </span></label>
-                        <select class="form-control" id="TTTCorHT" formControlName="TTTCorHT">
+                        <select class="form-control" id="ttc_or_ht" formControlName="ttc_or_ht">
                             <option>HT</option>
                             <option>TTC</option>
                         </select>

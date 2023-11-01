@@ -11,7 +11,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CreateDocumentTableItemsComponent {
 
   TYPE;
-  Doc_ID: string;
 
   constructor(
     private SaveToCookieService: SaveToCookieService,
@@ -29,14 +28,9 @@ export class CreateDocumentTableItemsComponent {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.TYPE = params.type;
-      // Get Doc_ID from SharedDataService
-      this.Doc_ID = this.SharedDataService.getDoc_ID();
-
-      // Log the retrieved Doc_ID
-      console.log('[+] app-table-items: OnInit table-items has get the ID from shareddata =>', this.Doc_ID);
 
       // Get saved data from cookies based on Doc_ID
-      const temp_data = this.SaveToCookieService.getData(this.Doc_ID, 'table');
+      const temp_data = this.SaveToCookieService.getData(this.TYPE, 'table');
 
       // Log the retrieved temp_data
       console.log("[+] app-table-items: Getting Saved Table Data =>", temp_data);
@@ -86,7 +80,7 @@ export class CreateDocumentTableItemsComponent {
     this.N_ELEMENT = this.N_ELEMENT + 1;
 
     // Save the updated tableData to cookies
-    this.SaveToCookieService.save(this.Doc_ID, this.tableData, 'table');
+    this.SaveToCookieService.save(this.TYPE, this.tableData, 'table');
   }
 
   // Function to clean a row by ensuring quantity and unity_total are non-negative
@@ -109,7 +103,7 @@ export class CreateDocumentTableItemsComponent {
     this.calculateTotalValues();
 
     // Save the updated tableData to cookies
-    this.SaveToCookieService.save(this.Doc_ID, this.tableData, 'table');
+    this.SaveToCookieService.save(this.TYPE, this.tableData, 'table');
   }
 
   // Function to delete a row from tableData
@@ -121,7 +115,7 @@ export class CreateDocumentTableItemsComponent {
     this.calculateTotalValues();
 
     // Save the updated tableData to cookies
-    this.SaveToCookieService.save(this.Doc_ID, this.tableData, 'table');
+    this.SaveToCookieService.save(this.TYPE, this.tableData, 'table');
   }
 
   

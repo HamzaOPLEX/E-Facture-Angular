@@ -7,7 +7,7 @@ import { SubmitFormService } from '@services/Http/submit-form.service'
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-interface PayingMethods {
+interface document_payment_methods {
   method: string;
 }
 
@@ -19,10 +19,9 @@ interface PayingMethods {
 })
 export class CreateBillingFormComponent {
   TYPE: string; // Input property for component type
-  Doc_ID: string; // Variable to store document ID
   BillingForm!: FormGroup; // Form group for billing form
   submitted = false;
-  PaimentMethod: PayingMethods[] | undefined;
+  PaimentMethod: document_payment_methods[] | undefined;
   constructor(
     private SaveToCookieService: SaveToCookieService, // Service for saving data to cookies
     private FetchDocService: FetchDocService, // Service for fetching document data
@@ -38,18 +37,15 @@ export class CreateBillingFormComponent {
       this.TYPE = params.type;
       console.log('[+] app-billing-form: TYPE=', params.type)
 
-      // Get document ID from shared data service
-      this.Doc_ID = this.SharedDataService.getDoc_ID();
-
       // Log the retrieved document ID
-      console.log('[+] app-billing-form: OnInit billing form has got the ID from shareddata and set to HTML input =>', this.Doc_ID);
+      console.log('[+] app-billing-form: OnInit billing form has got the ID from shareddata and set to HTML input =>', this.TYPE);
 
       // SetupCookies : Create a temporary data cookie with the fetched data ID
-      let temp_data = JSON.parse(localStorage.getItem(this.Doc_ID)); // check if Cookies are setuped if not setup it
+      let temp_data = JSON.parse(localStorage.getItem(this.TYPE)); // check if Cookies are setuped if not setup it
       console.log('[+] app-billing-form: temp data ', temp_data)
       if (temp_data == null) { // if cookies not setuped
         console.log('[+] app-billing-form: setting up cookies ', temp_data)
-        this.SaveToCookieService.setupCookies(this.Doc_ID); // setuping cookies
+        this.SaveToCookieService.setupCookies(this.TYPE); // setuping cookies
         console.log('[+] app-billing-form: setting up cookies done', temp_data)
 
       }
@@ -64,19 +60,17 @@ export class CreateBillingFormComponent {
 
           if (this.TYPE == "invoices") {
             this.BillingForm = this.fb.group({
-              documentNumber: [this.Doc_ID, Validators.required], // Set document number with the retrieved ID
-              clientName: [temp_data.clientName, [Validators.required, this.validateClientName]], // Initialize client name field
-              invoiceDate: [temp_data.invoiceDate, Validators.required], // Initialize invoice date field
-              avanceMoney: [temp_data.avanceMoney, Validators.required], // Initialize advance field
-              PayingMethod: [temp_data.PayingMethod, [Validators.required, this.validateClientName]], // Initialize payment method field
-              TTTCorHT: [temp_data.TTTCorHT, Validators.required] // Initialize TTTCorHT field with default value 'TTC'
+              document_client: [temp_data.document_client, [Validators.required, this.validateClientName]], // Initialize client name field
+              document_date: [temp_data.document_date, Validators.required], // Initialize invoice date field
+              deposit: [temp_data.deposit, Validators.required], // Initialize advance field
+              document_payment_method: [temp_data.document_payment_method, [Validators.required, this.validateClientName]], // Initialize payment method field
+              ttc_or_ht: [temp_data.ttc_or_ht, Validators.required] // Initialize ttc_or_ht field with default value 'TTC'
             });
           }
           else {
             this.BillingForm = this.fb.group({
-              documentNumber: [this.Doc_ID, Validators.required], // Set document number with the retrieved ID
-              clientName: [temp_data.clientName, [Validators.required, this.validateClientName]], // Initialize client name field
-              invoiceDate: [temp_data.invoiceDate, Validators.required], // Initialize invoice date field
+              document_client: [temp_data.document_client, [Validators.required, this.validateClientName]], // Initialize client name field
+              document_date: [temp_data.document_date, Validators.required], // Initialize invoice date field
             });
             console.log('[+] app-billing-items: loding data done', temp_data)
           }
@@ -87,19 +81,17 @@ export class CreateBillingFormComponent {
           console.log('[+] app-billing-items: Data Not Found in cookies, loading empty billing form...');
           if (this.TYPE == "invoices") {
             this.BillingForm = this.fb.group({
-              documentNumber: [this.Doc_ID, Validators.required], // Set document number with the retrieved ID
-              clientName: ['-', [Validators.required, this.validateClientName]], // Initialize client name field
-              invoiceDate: ['', Validators.required], // Initialize invoice date field
-              avanceMoney: ['0', Validators.required], // Initialize advance field
-              PayingMethod: ['-', [Validators.required, this.validateClientName]], // Initialize payment method field
-              TTTCorHT: ['TTC', Validators.required] // Initialize TTTCorHT field with default value 'TTC'
+              document_client: ['-', [Validators.required, this.validateClientName]], // Initialize client name field
+              document_date: ['', Validators.required], // Initialize invoice date field
+              deposit: ['0', Validators.required], // Initialize advance field
+              document_payment_method: ['-', [Validators.required, this.validateClientName]], // Initialize payment method field
+              ttc_or_ht: ['TTC', Validators.required] // Initialize ttc_or_ht field with default value 'TTC'
             });
           }
           else {
             this.BillingForm = this.fb.group({
-              documentNumber: [this.Doc_ID, Validators.required], // Set document number with the retrieved ID
-              clientName: ['', [Validators.required, this.validateClientName]], // Initialize client name field
-              invoiceDate: ['', Validators.required], // Initialize invoice date field
+              document_client: ['', [Validators.required, this.validateClientName]], // Initialize client name field
+              document_date: ['', Validators.required], // Initialize invoice date field
             });
           }
         }
@@ -121,40 +113,48 @@ export class CreateBillingFormComponent {
     { id: '2', name: 'Client B' }
   ];
 
-  PayingMethod =[
-    { method: 'Espèces',},
-    { method: 'Chèque',},
-    { method: 'Lettre De Change', },
-    { method: 'Virement Bancaire'},
-  ]
+
 
   // Function to clear cache (delete cookies with the same ID as the current invoice ID)
   ClearCache() {
-    localStorage.removeItem(this.Doc_ID) // remove current document cookie
-    this.SaveToCookieService.setupCookies(this.Doc_ID) // setup  new  empty temp_data cookie
-    location.reload() // reload page to refresh the view
+    this.SaveToCookieService.ClearCache(this.TYPE)
   }
 
   // Function called when form changes
   onFormChange() {
     console.log('Form Changes');
     let data = this.BillingForm.getRawValue()
-    this.SaveToCookieService.save(this.Doc_ID, data, "billing")
+    this.SaveToCookieService.save(this.TYPE, data, "billing")
   }
 
   onSubmit(){
     this.submitted = true;
-    let table_data = this.SaveToCookieService.getData(this.Doc_ID,null)
-    let isEmpty = Object.keys(table_data['table_data']).length > 0; // check data in the table
+    let table_data = this.SaveToCookieService.getData(this.TYPE,null)
+    let isNotEmpty = Object.keys(table_data['table_data']).length > 0; // check data in the table
+    const isValid = function () {
+      let valid = false
+      table_data['table_data'].forEach(element => {
+        let id = element.id.toString().trim()
+        let name = element.name.toString().trim()
+        let quantity = element.quantity.toString().trim()
+        let unity_total = element.unity_total.toString().trim()
+        let total = element.total.toString().trim()
+        if (id != '' && name != '' && quantity != '' && unity_total != '' && total != '') {
+          valid = true
+        }
+        else {
+          valid = false
+        }
+      });
+      return valid
+    }
 
     // stop here if form is invalid
-    if (this.BillingForm.invalid || isEmpty == false) {
-      alert('Form Not Completed')
-      this.SubmitFormService.CreateDocument(this.Doc_ID)
+    if (this.BillingForm.invalid || isNotEmpty == false || isValid() == false) {
+      alert('Form not complete please to check that all required field are filled')
     }
     else {
-      // display form values on success
-      alert('Invoice Has Been Created');
+      this.SubmitFormService.CreateDocument(this.TYPE)
     }
   }
 }
