@@ -1,6 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoadingInterceptor } from './loading.interceptor';
 
 import {AppRoutingModule} from '@/app-routing.module';
 import {AppComponent} from './app.component';
@@ -39,7 +40,6 @@ import { AddClientModalComponent } from './components/add-client-modal/add-clien
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditBillingFormComponent } from './pages/edit-document/billing-form/billing-form.component';
 import { DocummentsListingComponent } from './components/documments-listing/documments-listing.component';
-import { DocumentService } from './components/documments-listing/documentservice';
 // Import PrimeNG modules
 import { AccordionModule } from 'primeng/accordion';
 import { AutoCompleteModule } from 'primeng/autocomplete';
@@ -134,7 +134,10 @@ import {JwtAuthService} from "@services/Auth/JWTAuthService/jwt-auth-service.ser
 import { LogoutComponent } from './modules/logout/logout/logout.component';
 import { CreateDocumentComponent } from './pages/create-document/create-document/create-document.component';
 import { CreateBillingFormComponent } from './pages/create-document/create-billing-form/create-billing-form.component';
-import { CreateDocumentTableItemsComponent } from './pages/create-document/create-document-table-items/create-document-table-items.component'
+import { CreateDocumentTableItemsComponent } from './pages/create-document/create-document-table-items/create-document-table-items.component';
+import { LoadingComponent } from './components/loading/loading/loading.component';
+import { DeleteItemComponent } from './components/delete/delete-item/delete-item.component'
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 
@@ -172,7 +175,9 @@ registerLocaleData(localeEn, 'en-EN');
         LogoutComponent,
         CreateDocumentComponent,
         CreateBillingFormComponent,
-        CreateDocumentTableItemsComponent
+        CreateDocumentTableItemsComponent,
+        LoadingComponent,
+        DeleteItemComponent
 
     ],
     imports: [
@@ -290,7 +295,11 @@ registerLocaleData(localeEn, 'en-EN');
             },
         }),
     ],
-    providers: [DocumentService],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
+        }, ConfirmationService, MessageService,
+    ],
     bootstrap: [AppComponent, DocummentsListingComponent,]
 })
 export class AppModule {}

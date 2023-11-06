@@ -1,14 +1,30 @@
 import { Injectable } from '@angular/core';
-import { FetchDocService } from '@services/fetch-doc/fetch-doc.service' //get documment related data
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedDataService {
-
-  constructor(private FetchDocService: FetchDocService,) { }
+  loading = true
+  constructor() { }
   document_data = ''
+  clients
+
+  setClients(data){
+    console.log('[+] Client Data Has Been Shared')
+    this.clients = data
+  }
+  getClients(){
+    return this.clients
+  }
+
+
+  setLoadingStatus(status){
+    this.loading = status
+  }
+  getLoadingStatus(){
+    return this.loading
+  }
 
   setDoc_Data(data) {
     this.document_data = data

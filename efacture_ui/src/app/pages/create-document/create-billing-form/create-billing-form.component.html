@@ -1,3 +1,4 @@
+
 <div class="card card-default">
     <div class="card-header">
         <h3 class="card-title">Enter Billing Information</h3>
@@ -13,12 +14,11 @@
                     This Field is Required
                 </span></label>
                 <div style="display: flex;">
-                    <select id="ClientID" formControlName="document_client" class="form-control" style="margin-right: 10px;">
+                    <select id="document_client" formControlName="document_client" class="p-inputtext p-component p-element ng-pristine ng-valid ng-touched" style="margin-right: 10px;width: 100%;">
                         <option value="-" selected disabled>Select a Client</option>
-                        <option *ngFor="let client of Clients" [value]="client.id">{{ client.name }}
-                        </option>
+                        <option *ngFor="let client of clients" [value]="client.id">{{ client.client_name }}</option>
                     </select>
-                    <app-add-client-modal></app-add-client-modal>
+                    <app-add-client-modal (clients)="handleClientDataEvent($event)"></app-add-client-modal>
                 </div>
             </div>
             <div class="row">

@@ -1,11 +1,12 @@
 // Importing necessary modules and services
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SaveToCookieService } from '@services/save-to-cookie/save-to-cookie.service';
 import { FetchDocService } from '@services/fetch-doc/fetch-doc.service'; // Service for retrieving document-related data
 import { SharedDataService } from '@services/SharedData/shared-data.service'; // Service for shared data between components
 import { SubmitFormService } from '@services/Http/submit-form.service'
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 
 interface document_payment_methods {
   method: string;
@@ -17,11 +18,14 @@ interface document_payment_methods {
   templateUrl: './create-billing-form.component.html',
   styleUrls: ['./create-billing-form.component.scss']
 })
-export class CreateBillingFormComponent {
+export class CreateBillingFormComponent implements OnInit {
   TYPE: string; // Input property for component type
   BillingForm!: FormGroup; // Form group for billing form
   submitted = false;
   PaimentMethod: document_payment_methods[] | undefined;
+  SelectClient
+  clients;
+
   constructor(
     private SaveToCookieService: SaveToCookieService, // Service for saving data to cookies
     private FetchDocService: FetchDocService, // Service for fetching document data
@@ -29,11 +33,23 @@ export class CreateBillingFormComponent {
     private SubmitFormService: SubmitFormService, // Service for shared data
     private fb: FormBuilder, // Form builder for creating forms
     private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef
   ) { }
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
   ngOnInit() {
+    console.log(this.SelectClient)
     this.route.params.subscribe(params => {
+      this.FetchDocService.getAllClient().subscribe(
+        (response: any) => {
+          console.log('change detected')
+          this.SharedDataService.setClients(response)
+          this.clients = response
+        },
+        (error) => {
+          console.error(error)
+        }
+      )
       this.TYPE = params.type;
       console.log('[+] app-billing-form: TYPE=', params.type)
 
@@ -81,7 +97,7 @@ export class CreateBillingFormComponent {
           console.log('[+] app-billing-items: Data Not Found in cookies, loading empty billing form...');
           if (this.TYPE == "invoices") {
             this.BillingForm = this.fb.group({
-              document_client: ['-', [Validators.required, this.validateClientName]], // Initialize client name field
+              document_client: ["-", [Validators.required, this.validateClientName]], // Initialize client name field
               document_date: ['', Validators.required], // Initialize invoice date field
               deposit: ['0', Validators.required], // Initialize advance field
               document_payment_method: ['-', [Validators.required, this.validateClientName]], // Initialize payment method field
@@ -90,7 +106,7 @@ export class CreateBillingFormComponent {
           }
           else {
             this.BillingForm = this.fb.group({
-              document_client: ['', [Validators.required, this.validateClientName]], // Initialize client name field
+              document_client: ['-', [Validators.required, this.validateClientName]], // Initialize client name field
               document_date: ['', Validators.required], // Initialize invoice date field
             });
           }
@@ -108,12 +124,13 @@ export class CreateBillingFormComponent {
   // Example data
   user = { username: 'JohnDoe' };
   todayDate = '2023-10-12';
-  Clients = [
-    { id: '1', name: 'Client A' },
-    { id: '2', name: 'Client B' }
-  ];
 
 
+
+  handleClientDataEvent(data){
+    this.clients = data['clientData']
+    this.BillingForm.patchValue({"document_client":data['selectedClient']}) // select new created client
+  }
 
   // Function to clear cache (delete cookies with the same ID as the current invoice ID)
   ClearCache() {
@@ -124,6 +141,7 @@ export class CreateBillingFormComponent {
   onFormChange() {
     console.log('Form Changes');
     let data = this.BillingForm.getRawValue()
+    console.log(data)
     this.SaveToCookieService.save(this.TYPE, data, "billing")
   }
 

@@ -4,6 +4,7 @@ import {UiState} from '@/store/ui/state';
 import {Component, HostBinding, OnInit, Renderer2} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
+import { SharedDataService } from '@services/SharedData/shared-data.service'; // Service for shared data between components
 
 @Component({
     selector: 'app-main',
@@ -11,12 +12,14 @@ import {Observable} from 'rxjs';
     styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+    loading
     @HostBinding('class') class = 'wrapper';
     public ui: Observable<UiState>;
 
-    constructor(private renderer: Renderer2, private store: Store<AppState>) {}
+    constructor(private renderer: Renderer2, private store: Store<AppState>, private SharedDataService: SharedDataService,) {}
 
     ngOnInit() {
+
         this.ui = this.store.select('ui');
         this.renderer.removeClass(
             document.querySelector('app-root'),

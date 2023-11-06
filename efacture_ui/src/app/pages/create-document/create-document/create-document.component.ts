@@ -10,23 +10,26 @@ import { SharedDataService } from '@services/SharedData/shared-data.service'; //
 })
 export class CreateDocumentComponent {
   TYPE
-  document_data = {}
+  clients;
+  loading = true
   constructor(private FetchDocService: FetchDocService, private route: ActivatedRoute, private SharedDataService: SharedDataService, // Service for shared data
   ) { }
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.TYPE = params['type'];
+      this.FetchDocService.getAllClient().subscribe(
+        (response: any) => {
+          console.log('change detected')
+          this.clients = response
+          this.loading = false
+        },
+        (error) => {
+          console.error(error)
+        }
+      )
     })
   };
 
   user = { username: 'JohnDoe' };
-  todayDate = '2023-10-12';
-  selectBody = [
-    { id: '1', name: 'Client A' },
-    { id: '2', name: 'Client B' }
-  ];
-  selectProductBody = [
-    { id: '1', name: 'Product A' },
-    { id: '2', name: 'Product B' }
-  ];
+
 }

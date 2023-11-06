@@ -3,6 +3,7 @@ import { SaveToCookieService } from '@services/save-to-cookie/save-to-cookie.ser
 import { ValidatorsService } from '@services/Validators/validators.service'; // Service for shared data between components
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { MessageService} from 'primeng/api';
 
 
 
@@ -18,7 +19,8 @@ export class SubmitFormService {
     private SaveToCookieService: SaveToCookieService,
     private ValidatorsService: ValidatorsService,
     private http: HttpClient,
-    public jwtHelper: JwtHelperService
+    public jwtHelper: JwtHelperService,
+    private messageService: MessageService,
     ) {
   }
 
@@ -32,11 +34,13 @@ export class SubmitFormService {
     formated_data['document_items'] = data['table_data']
     formated_data['document_created_by'] = this.jwtHelper.decodeToken().id
     formated_data['document_type'] = TYPE
+    
 
     this.http.post(url, formated_data).subscribe(
       (response: any) => {
         // display form values on success
         alert('Invoice Has Been Created '+response.document_number);
+        // this.messageService.add({ severity: 'info', summary: 'Document Has Been Created ' + response.document_number });
         this.SaveToCookieService.ClearCache(TYPE)
       },
       (error) => {

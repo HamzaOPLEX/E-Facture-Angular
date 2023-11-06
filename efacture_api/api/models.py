@@ -9,13 +9,13 @@ class User(AbstractUser):
     email = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
 
-class APP_Clients(models.Model):
-    name = models.CharField(max_length=255)
-    ICE = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
+class Client(models.Model):
+    client_name = models.CharField(max_length=255,unique=True,blank=False)
+    client_ICE = models.CharField(max_length=255,unique=True,blank=False)
+    client_city = models.CharField(max_length=255,blank=False)
 
     def __str__(self):
-        return self.name
+        return self.client_name
 
 class Document(models.Model):
     DOCUMENT_TYPES = [
@@ -42,7 +42,7 @@ class Document(models.Model):
     ]
 
     document_number = models.CharField(max_length=255, unique=True,default='')
-    document_client = models.ForeignKey(APP_Clients, on_delete=models.RESTRICT)
+    document_client = models.ForeignKey(Client, on_delete=models.RESTRICT)
     document_date = models.DateField()
     ttc_or_ht = models.CharField(max_length=3, default='NONE', choices=TTC_OR_HT_CHOICES)
     document_status = models.CharField(max_length=10, default='UNPAID', choices=DOCUMENT_STATUS_CHOICES)
