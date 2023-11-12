@@ -38,7 +38,6 @@ import { ClientsComponent } from './pages/clients/clients.component';
 import { UsersComponent } from './pages/users/users.component';
 import { AddClientModalComponent } from './components/add-client-modal/add-client-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { EditBillingFormComponent } from './pages/edit-document/billing-form/billing-form.component';
 import { DocummentsListingComponent } from './components/documments-listing/documments-listing.component';
 // Import PrimeNG modules
 import { AccordionModule } from 'primeng/accordion';
@@ -128,7 +127,6 @@ import { CardModule } from 'primeng/card';
 import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { EditDocumentComponent } from './pages/edit-document/edit-document/edit-document.component';
-import { DocumentTableItemsComponent } from './pages/edit-document/document-table-items/document-table-items.component';
 import { JwtModule } from "@auth0/angular-jwt";
 import {JwtAuthService} from "@services/Auth/JWTAuthService/jwt-auth-service.service";
 import { LogoutComponent } from './modules/logout/logout/logout.component';
@@ -138,6 +136,9 @@ import { CreateDocumentTableItemsComponent } from './pages/create-document/creat
 import { LoadingComponent } from './components/loading/loading/loading.component';
 import { DeleteItemComponent } from './components/delete/delete-item/delete-item.component'
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { EditBillingFormComponent } from './pages/edit-document/edit-billing-form/edit-billing-form.component';
+import { EditDocumentTableItemsComponent } from './pages/edit-document/edit-document-table-items/edit-document-table-items.component';
+import { EditClientModalComponent } from './components/edit-client-modal/edit-client-modal.component';
 
 
 
@@ -145,7 +146,6 @@ registerLocaleData(localeEn, 'en-EN');
 
 @NgModule({
     declarations: [
-        EditBillingFormComponent,
         AppComponent,
         MainComponent,
         HeaderComponent,
@@ -170,14 +170,16 @@ registerLocaleData(localeEn, 'en-EN');
         AddClientModalComponent,
         DocummentsListingComponent,
         EditDocumentComponent,
-        DocumentTableItemsComponent,
         LoginComponent,
         LogoutComponent,
         CreateDocumentComponent,
         CreateBillingFormComponent,
         CreateDocumentTableItemsComponent,
         LoadingComponent,
-        DeleteItemComponent
+        DeleteItemComponent,
+        EditBillingFormComponent,
+        EditDocumentTableItemsComponent,
+        EditClientModalComponent
 
     ],
     imports: [

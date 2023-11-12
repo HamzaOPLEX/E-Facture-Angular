@@ -2,21 +2,20 @@ import { Component, Input } from '@angular/core';
 import { SaveToCookieService } from '@services/save-to-cookie/save-to-cookie.service'
 import { SharedDataService } from '@services/SharedData/shared-data.service'
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { SaveToDbService } from '@services/save-to-db/save-to-db.service';
 
 @Component({
   selector: 'app-edit-document-table-items',
-  templateUrl: './document-table-items.component.html',
-  styleUrls: ['./document-table-items.component.scss']
+  templateUrl: './edit-document-table-items.component.html',
+  styleUrls: ['./edit-document-table-items.component.scss']
 })
-export class DocumentTableItemsComponent {
-  Doc_ID: string;
-  TYPE: string;
-  document_data;
+export class EditDocumentTableItemsComponent {
+  TYPE;
+  ID;
+  @Input() document_data;
 
   constructor(
-    private SaveToCookieService: SaveToCookieService,
-    private SharedDataService: SharedDataService,
+    private SaveToDbService: SaveToDbService,
     private route: ActivatedRoute,
   ) { }
 
@@ -30,21 +29,30 @@ export class DocumentTableItemsComponent {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.TYPE = params.type;
-      console.log('[+] app-edit-document-table-items: TYPE=', params.type)
-      this.document_data = this.SharedDataService.getDoc_Data()      
-      console.log('[+] app-edit-document-table-items: data retrieved =>', this.document_data)
-      this.tableData = this.document_data.tableData;
-      // loop to data table and calculate needed data
-      this.tableData.forEach((row)=>{
-        this.RowDataSave(row)
-      })
+      this.ID = params.id
+
+      // Get saved data from DB based on Doc_ID
+      const temp_data = this.document_data.document_items
+
+      // Log the retrieved temp_data
+      console.log("[+] app-table-items: Getting Saved Table Data =>", temp_data);
+
+      // Check if there is data saved in DB
+      if (temp_data.length > 0) {
+        // Data found in table, load data
+        console.log('[+] app-table-items: Data found in DB, loading data...');
+
+        // Set tableData to the retrieved data
+        this.tableData = temp_data;
+
+        // Calculate total values based on the loaded data
+        this.calculateTotalValues();
+      } else if (temp_data.length == 0) {
+        // No data found in DB, loading empty table
+        console.log('[+] app-table-items: Data Not Found in DB, loading empty table...');
+      }
     })
   }
-
-
-
-
-
   // Function to calculate values
   calculateTotalValues() {
     // Get the number of elements in the tableData array
@@ -72,6 +80,11 @@ export class DocumentTableItemsComponent {
 
     // Increment the number of elements
     this.N_ELEMENT = this.N_ELEMENT + 1;
+
+    let document_items = { 'document_items': this.tableData }
+    // Save the updated tableData to DB
+    this.SaveToDbService.AutoSave(this.ID, document_items, this.TYPE)
+
   }
 
   // Function to clean a row by ensuring quantity and unity_total are non-negative
@@ -80,6 +93,7 @@ export class DocumentTableItemsComponent {
       item.quantity = Math.abs(item.quantity);
       item.unity_total = Math.abs(item.unity_total);
     }
+
     // Calculate the total for the row
     item.total = item.quantity * item.unity_total;
   }
@@ -91,6 +105,12 @@ export class DocumentTableItemsComponent {
 
     // Recalculate total values
     this.calculateTotalValues();
+
+    // Save the updated tableData to DB
+    // this.SaveToCookieService.save(this.TYPE, this.tableData, 'table');
+    let document_items = { 'document_items': this.tableData }
+    // Save the updated tableData to DB
+    this.SaveToDbService.AutoSave(this.ID, document_items, this.TYPE)
   }
 
   // Function to delete a row from tableData
@@ -100,6 +120,11 @@ export class DocumentTableItemsComponent {
 
     // Recalculate total values
     this.calculateTotalValues();
+
+    let document_items = {'document_items':this.tableData}
+    // Save the updated tableData to DB
+    this.SaveToDbService.AutoSave(this.ID, document_items, this.TYPE)
+
   }
 
 

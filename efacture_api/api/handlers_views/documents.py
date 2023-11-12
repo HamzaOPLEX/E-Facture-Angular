@@ -4,16 +4,15 @@ from rest_framework.exceptions import AuthenticationFailed
 from ..serializers import UserSerializer
 from ..models import User
 from ..models import Document
-from ..serializers import DocumentSerializer
+from ..serializers import *
 from rest_framework import status
 from time import sleep
 
 class DocumentListAPIView(APIView):
     # Get a list of all documents
     def get(self, request,type, format=None):
-        sleep(1) # just to test loading in UI
         documents = Document.objects.filter(document_type=type)
-        serializer = DocumentSerializer(documents, many=True)
+        serializer = DocumentListSerializer(documents, many=True)
         return Response(serializer.data)
 
 class DocumentCreateAPIView(APIView):
@@ -22,15 +21,16 @@ class DocumentCreateAPIView(APIView):
         # request.data['document_client'] = int(request.data['document_client'])
         serializer = DocumentSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            document = serializer.save()
+            ser = DocumentListSerializer(document)
+            return Response(ser.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class DocumentEditAPIView(APIView):
     # Update an existing document
     def put(self, request, pk, format=None):
-        document = self.get_object(pk)
-        serializer = DocumentSerializer(document, data=request.data)
+        document = Document.objects.all().get(id=pk)
+        serializer = DocumentEditSerializer(document, data=request.data,partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -45,8 +45,8 @@ class DocumentDeleteAPIView(APIView):
 
 class DocumentDetailAPIView(APIView):
     # Helper method to get a specific document by its primary key (pk)
-    def get_object(self, pk):
-        try:
-            return Document.objects.get(pk=pk)
-        except Document.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+    # Get a list of all documents
+    def get(self, request,type,pk, format=None):
+        documents = Document.objects.filter(id=pk)
+        serializer = DocumentListSerializer(documents, many=True)
+        return Response(serializer.data[0])

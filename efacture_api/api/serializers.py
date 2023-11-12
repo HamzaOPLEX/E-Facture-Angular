@@ -19,6 +19,39 @@ class UserSerializer(serializers.ModelSerializer):
         return instance
 
 
+
+
+class APP_ClientsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Client
+        fields = '__all__'
+
+
+class DocumentListSerializer(serializers.ModelSerializer):
+    document_client = APP_ClientsSerializer()
+    class Meta:
+        model = Document
+        fields = '__all__'
+
+class DocumentListSerializer(serializers.ModelSerializer):
+    document_client = APP_ClientsSerializer()
+    class Meta:
+        model = Document
+        fields = '__all__'
+
+class DocumentEditSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Document
+        fields ='__all__'
+
+    # Add this method to allow partial updates
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+        return instance
+
+
 class DocumentSerializer(serializers.ModelSerializer):
     # document_client = serializers.CharField(source='document_client.name', read_only=True)
     class Meta:
@@ -26,8 +59,3 @@ class DocumentSerializer(serializers.ModelSerializer):
         fields = '__all__'
     def create(self, validated_data):
         return Document.objects.create(**validated_data)
-
-class APP_ClientsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Client
-        fields = '__all__'

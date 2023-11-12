@@ -71,8 +71,8 @@
                         </td>
                         <td style="text-align: center">
                             <!-- <button pButton type="button" class="p-button-danger btn" icon="pi pi-trash"></button> -->
-                            <app-delete-item [Item_ID]="clients.id"></app-delete-item>
-                            <button pButton type="button" class="p-button-warning btn" icon="pi pi-file-edit"></button>
+                            <app-delete-item [Item_ID]="clients.id" URL="http://127.0.0.1:8000/api/clients/delete/"></app-delete-item>
+                            <app-edit-client-modal [Item_ID]="clients.id" URL="http://127.0.0.1:8000/api/clients/update/"></app-edit-client-modal>
                         </td>
                     </tr>
                 </ng-template>

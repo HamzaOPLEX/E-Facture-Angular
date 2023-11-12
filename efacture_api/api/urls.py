@@ -15,15 +15,15 @@ urlpatterns = [
     # Document CRUD
     path('documents/<str:type>', DocumentListAPIView.as_view(), name='document-list'),
     path('documents/create/', DocumentCreateAPIView.as_view(), name='document-create'),
-    path('documents/<int:pk>/', DocumentDetailAPIView.as_view(), name='document-detail'),
-    path('documents/<int:pk>/update/', DocumentEditAPIView.as_view(), name='document-edit'),
-    path('documents/<int:pk>/delete/', DocumentDeleteAPIView.as_view(), name='document-delete'),
+    path('<str:type>/document/<int:pk>', DocumentDetailAPIView.as_view(), name='document-detail'),
+    path('documents/update/<int:pk>', DocumentEditAPIView.as_view(), name='document-edit'),
+    path('documents/delete/<int:pk>', DocumentDeleteAPIView.as_view(), name='document-delete'),
 
-    # Document CRUD
+    # Client CRUD
     path('clients/', ClientsListAPIView.as_view(), name='clients-list'),
     path('clients/create/', ClientsCreateAPIView.as_view(), name='client-create'),
     path('clients/<int:pk>/', ClientsDetailAPIView.as_view(), name='client-detail'),
-    path('clients/<int:pk>/update/', ClientsEditAPIView.as_view(), name='client-edit'),
-    path('clients/<int:pk>/delete/', ClientsDeleteAPIView.as_view(), name='client-delete'),
+    path('clients/update/<int:pk>', ClientsEditAPIView.as_view(), name='client-edit'),
+    path('clients/delete/<int:pk>', ClientsDeleteAPIView.as_view(), name='client-delete'),
 
 ]

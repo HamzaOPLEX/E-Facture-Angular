@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedDataService } from '@services/SharedData/shared-data.service'; // Service for shared data between components
+import { MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-add-client-modal',
@@ -13,7 +14,11 @@ export class AddClientModalComponent {
   submitted = false;
   closeResult = '';
   ClientForm!: FormGroup;
-  constructor(private http: HttpClient, private fb: FormBuilder, private SharedDataService: SharedDataService) { }
+  constructor(
+    private http: HttpClient, 
+    private fb: FormBuilder, 
+    private messageService: MessageService
+    ) {}
 
   visible: boolean = false;
 
@@ -49,19 +54,16 @@ export class AddClientModalComponent {
       let url = 'http://127.0.0.1:8000/api/clients/create/'
       this.http.post(url, this.ClientForm.getRawValue()).subscribe(
         (response: any) => {
-          console.log('created')
           this.visible = false;
-          alert('Client Has Been Created ');
           this.resetForm()
           let data = {}
           data['clientData'] = response[0]
           data['selectedClient'] = response[1]
-          console.log(data)
           this.emitEvent(data)
+          this.messageService.add({ severity: 'info', summary: 'Client Created', detail: 'Client has been created' });
         },
         (error) => {
-          console.log(JSON.stringify(error.error))
-          alert('Invoice Creation Error ' + JSON.stringify(error.error));
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: JSON.stringify(error.error) });
         }
       )    
     }

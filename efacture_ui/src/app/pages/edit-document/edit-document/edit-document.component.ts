@@ -13,26 +13,23 @@ import { SharedDataService } from '@services/SharedData/shared-data.service'; //
 export class EditDocumentComponent {
   TYPE
   Doc_ID
-  document_data = {}
+  document_data
   constructor(private FetchDocService: FetchDocService, private route: ActivatedRoute, private SharedDataService: SharedDataService, // Service for shared data
 ) { }
   ngOnInit(){
       this.route.params.subscribe(params => {
         this.TYPE = params['type'];
         this.Doc_ID = params['id'];
-        this.document_data = this.FetchDocService.getDocumentData(this.Doc_ID);
-        this.SharedDataService.setDoc_Data(this.document_data)
+        this.FetchDocService.getDocumentData(this.Doc_ID,this.TYPE).subscribe(
+          (respond)=>{
+            this.document_data = respond
+          },
+          (error)=>{
+            console.log(error.error)
+          }
+        )
+        // this.SharedDataService.setDoc_Data(this.document_data)
       })
   };
 
-  user = { username: 'JohnDoe' };
-  todayDate = '2023-10-12';
-  selectBody = [
-    { id: '1', name: 'Client A' },
-    { id: '2', name: 'Client B' }
-  ];
-  selectProductBody = [
-    { id: '1', name: 'Product A' },
-    { id: '2', name: 'Product B' }
-  ];
 }

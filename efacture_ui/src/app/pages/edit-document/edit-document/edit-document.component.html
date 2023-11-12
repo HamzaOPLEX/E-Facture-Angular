@@ -12,11 +12,11 @@
     <!-- Card for displaying totals -->
     <div class="row">
         <!-- Card for form -->
-        <div class="col-md-6">
-            <app-edit-billing-form></app-edit-billing-form> <!-- get type from URL -->
+        <div class="col-md-6" *ngIf="document_data">
+            <app-edit-billing-form [document_data]="this.document_data"></app-edit-billing-form> <!-- get type from URL -->
         </div>
-        <div class="col-md-6">
-            <app-edit-document-table-items></app-edit-document-table-items>
+        <div class="col-md-6" *ngIf="document_data">
+            <app-edit-document-table-items [document_data]="this.document_data"></app-edit-document-table-items>
         </div>
     </div>
 </section>

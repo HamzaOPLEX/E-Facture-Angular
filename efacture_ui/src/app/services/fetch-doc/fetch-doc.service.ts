@@ -12,9 +12,10 @@ export class FetchDocService {
     return this.http.get(url)
   }
 
-  getDocumentData(id){
-    return true
-  }
+  getDocumentData(id,TYPE){
+    let url = `http://127.0.0.1:8000/api/${TYPE.trim()}/document/${id}`
+    return this.http.get(url)
+    }
 
   getAllDocs(TYPE) {
     let url = "http://127.0.0.1:8000/api/documents/" + TYPE.trim()

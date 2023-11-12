@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -10,11 +10,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class DeleteItemComponent {
   @Input() Item_ID
-
+  @Input() URL
+  @Output() DATA = new EventEmitter<string>();
   constructor(private confirmationService: ConfirmationService, private messageService: MessageService, private http: HttpClient,) { }
-
+  emitEvent(data) {
+    this.DATA.emit(data);
+  }
   Delete(){
-    let url = 'http://127.0.0.1:8000/api/documents/' + this.Item_ID +'/delete/'
+    let url = this.URL + this.Item_ID
     this.http.delete(url).subscribe(
       (response: any) => {
         // display form values on success
@@ -22,8 +25,7 @@ export class DeleteItemComponent {
         location.reload()
       },
       (error) => {
-        console.log(JSON.stringify(error.error))
-        alert('Deletion Error ' + JSON.stringify(error.error));
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: JSON.stringify(error.error)});
       }
     )
   }

@@ -4,6 +4,7 @@ import { ValidatorsService } from '@services/Validators/validators.service'; // 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { MessageService} from 'primeng/api';
+import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 
 
@@ -36,18 +37,7 @@ export class SubmitFormService {
     formated_data['document_type'] = TYPE
     
 
-    this.http.post(url, formated_data).subscribe(
-      (response: any) => {
-        // display form values on success
-        alert('Invoice Has Been Created '+response.document_number);
-        // this.messageService.add({ severity: 'info', summary: 'Document Has Been Created ' + response.document_number });
-        this.SaveToCookieService.ClearCache(TYPE)
-      },
-      (error) => {
-        console.log(JSON.stringify(error.error))
-        alert('Invoice Creation Error ' + JSON.stringify(error.error));
-      }
-    )
+    return this.http.post(url, formated_data)
   }
 
 }

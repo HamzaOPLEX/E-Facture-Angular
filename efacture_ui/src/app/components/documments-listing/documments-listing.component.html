@@ -99,7 +99,7 @@
                         </td>
                         <td>
                             <span class="p-column-title">Client Name</span>
-                            <span class="ml-1 vertical-align-middle">{{ document.document_client }}</span>
+                            <span class="ml-1 vertical-align-middle">{{ document.document_client.client_name }}</span>
                         </td>
                         <td>
                             <span class="p-column-title">Date</span>
@@ -117,7 +117,7 @@
                         </ng-container>
                         <td style="text-align: center">
                             <a routerLink="/{{TYPE}}/edit/{{document.id}}"><button pButton type="button" class="p-button-secondary btn" icon="pi pi-file-edit"></button></a>
-                            <app-delete-item [Item_ID]="document.id"></app-delete-item>
+                            <app-delete-item [Item_ID]="document.id" URL="http://127.0.0.1:8000/api/documents/delete/"></app-delete-item>
                         </td>
                     </tr>
                 </ng-template>

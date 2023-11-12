@@ -4,6 +4,7 @@ import { SaveToCookieService } from '@services/save-to-cookie/save-to-cookie.ser
 import { FetchDocService } from '@services/fetch-doc/fetch-doc.service'; // Service for retrieving document-related data
 import { SharedDataService } from '@services/SharedData/shared-data.service'; // Service for shared data between components
 import { SubmitFormService } from '@services/Http/submit-form.service'
+import { PdfGeneratorService } from '@services/pdf-generator/pdf-generator.service'
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
@@ -33,8 +34,8 @@ export class CreateBillingFormComponent implements OnInit {
     private SubmitFormService: SubmitFormService, // Service for shared data
     private fb: FormBuilder, // Form builder for creating forms
     private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef
-  ) { }
+    private pdfService: PdfGeneratorService  
+    ) { }
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
   ngOnInit() {
@@ -149,30 +150,51 @@ export class CreateBillingFormComponent implements OnInit {
     this.submitted = true;
     let table_data = this.SaveToCookieService.getData(this.TYPE,null)
     let isNotEmpty = Object.keys(table_data['table_data']).length > 0; // check data in the table
-    const isValid = function () {
-      let valid = false
-      table_data['table_data'].forEach(element => {
-        let id = element.id.toString().trim()
-        let name = element.name.toString().trim()
-        let quantity = element.quantity.toString().trim()
-        let unity_total = element.unity_total.toString().trim()
-        let total = element.total.toString().trim()
-        if (id != '' && name != '' && quantity != '' && unity_total != '' && total != '') {
-          valid = true
-        }
-        else {
-          valid = false
-        }
-      });
-      return valid
-    }
+    const isvalid = this.isValid(table_data)
 
     // stop here if form is invalid
-    if (this.BillingForm.invalid || isNotEmpty == false || isValid() == false) {
+    if (this.BillingForm.invalid || isNotEmpty == false || isvalid == false) {
       alert('Form not complete please to check that all required field are filled')
     }
     else {
-      this.SubmitFormService.CreateDocument(this.TYPE)
-    }
+      let formated_data = {}
+      formated_data = table_data['billing_data']
+      formated_data['document_items'] = table_data['table_data']
+      this.SubmitFormService.CreateDocument(this.TYPE).subscribe(
+        (response: any) => {
+          // display form values on success
+          alert('Invoice Has Been Created ' + response.document_number);
+          // this.messageService.add({ severity: 'info', summary: 'Document Has Been Created ' + response.document_number });
+          this.pdfService.generateInvoice(response);
+          console.log(response)
+          this.SaveToCookieService.ClearCache(this.TYPE)
+        },
+        (error) => {
+          console.log(JSON.stringify(error.error))
+          alert('Invoice Creation Error ' + JSON.stringify(error.error));
+        }
+      )
+    }                    
   }
+
+
+  isValid(table_data){
+    let valid = false
+    table_data['table_data'].forEach(element => {
+      let id = element.id.toString().trim()
+      let name = element.name.toString().trim()
+      let quantity = element.quantity.toString().trim()
+      let unity_total = element.unity_total.toString().trim()
+      let total = element.total.toString().trim()
+      if (id != '' && name != '' && quantity != '' && unity_total != '' && total != '') {
+        valid = true
+      }
+      else {
+        valid = false
+      }
+    });
+    return valid
+  }
+
+
 }

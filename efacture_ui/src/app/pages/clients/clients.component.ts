@@ -16,6 +16,7 @@ export class ClientsComponent {
 
   loading: boolean = true;
   clients
+
   ngOnInit(){
     this.FetchDocService.getAllClient().subscribe(
       (response: any) => {

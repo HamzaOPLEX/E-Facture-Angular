@@ -7,6 +7,7 @@ from ..models import Client
 from ..serializers import APP_ClientsSerializer
 from rest_framework import status
 from time import sleep
+from django.http import JsonResponse
 
 class ClientsListAPIView(APIView):
     # Get a list of all clients
@@ -19,7 +20,6 @@ class ClientsListAPIView(APIView):
 class ClientsCreateAPIView(APIView):
     # Create a new client
     def post(self, request, format=None):
-        sleep(2)
         serializer = APP_ClientsSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -42,14 +42,16 @@ class ClientsEditAPIView(APIView):
 class ClientsDeleteAPIView(APIView):
     # Delete a client
     def delete(self, request, pk, format=None):
-        client = self.get_object(pk)
-        client.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        try :
+            client = Client.objects.all().filter(id=pk)
+            client.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Exception as Error:
+            return JsonResponse({'error': str(Error)}, status=500)
 
 class ClientsDetailAPIView(APIView):
-    # Helper method to get a specific client by its primary key (pk)
-    def get_object(self, pk):
-        try:
-            return Client.objects.get(pk=pk)
-        except Client.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+    def get(self, request,pk, format=None):
+        print('GEEEEEEEEEEEEEEEEEEEET')
+        clients = Client.objects.filter(id=pk)
+        serializer = APP_ClientsSerializer(clients, many=True)
+        return Response(serializer.data[0])
