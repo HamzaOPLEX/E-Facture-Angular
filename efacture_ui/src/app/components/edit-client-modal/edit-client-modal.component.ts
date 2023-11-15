@@ -44,7 +44,9 @@ export class EditClientModalComponent {
     this.http.get(url).subscribe(
       (response: any) => {
         // this.visible = false;
-        console.log(response)
+        this.ClientForm.controls['client_name'].setValue(response.client_name)
+        this.ClientForm.controls['client_ICE'].setValue(response.client_ICE)
+        this.ClientForm.controls['client_city'].setValue(response.client_city)
       },
       (error) => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: JSON.stringify(error.error) });
@@ -53,33 +55,19 @@ export class EditClientModalComponent {
   }
 
   Change() {
-    console.log(this.ClientForm.getRawValue())
+    let data = this.ClientForm.getRawValue()
+    let url = "http://127.0.0.1:8000/api/clients/update/" + this.Item_ID
+    this.http.put(url, data).subscribe(
+      (response: any) => {
+        // this.visible = false;
+        this.messageService.add({ severity: 'info', summary: 'Saved', detail: 'Client Informations Saved Successfully' });
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: JSON.stringify(error.error) });
+      }
+    )
   }
   // emitEvent(data) {
   //   this.clients.emit(data);
   // }
-  onSubmit() {
-    // this.submitted = true;
-    // // stop here if form is invalid
-    // if (this.ClientForm.invalid) {
-    //   alert('Form not complete please to check that all required field are filled')
-    // }
-    // else {
-    //   let url = "http://127.0.0.1:8000/api/clients/"+this.Item_ID
-    //   this.http.get(url).subscribe(
-    //     (response: any) => {
-    //       this.visible = false;
-    //       this.ClientForm = this.fb.group({
-    //         client_name: [response.client_name, [Validators.required]],
-    //         client_ICE: [response.client_ICE, [Validators.required]],
-    //         client_city: [response.client_city, [Validators.required]]
-    //       })
-    //       this.resetForm()
-    //     },
-    //     (error) => {
-    //       this.messageService.add({ severity: 'error', summary: 'Error', detail: JSON.stringify(error.error) });
-    //     }
-    //   )
-    // }
-  }
 }

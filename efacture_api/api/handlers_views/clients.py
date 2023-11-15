@@ -32,7 +32,7 @@ class ClientsCreateAPIView(APIView):
 class ClientsEditAPIView(APIView):
     # Update an existing client
     def put(self, request, pk, format=None):
-        client = self.get_object(pk)
+        client = Client.objects.get(id=pk)
         serializer = APP_ClientsSerializer(client, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -51,7 +51,6 @@ class ClientsDeleteAPIView(APIView):
 
 class ClientsDetailAPIView(APIView):
     def get(self, request,pk, format=None):
-        print('GEEEEEEEEEEEEEEEEEEEET')
         clients = Client.objects.filter(id=pk)
         serializer = APP_ClientsSerializer(clients, many=True)
         return Response(serializer.data[0])

@@ -36,40 +36,23 @@ var EditClientModalComponent = /** @class */ (function () {
         var url = "http://127.0.0.1:8000/api/clients/" + this.Item_ID;
         this.http.get(url).subscribe(function (response) {
             // this.visible = false;
-            console.log(response);
+            _this.ClientForm.controls['client_name'].setValue(response.client_name);
+            _this.ClientForm.controls['client_ICE'].setValue(response.client_ICE);
+            _this.ClientForm.controls['client_city'].setValue(response.client_city);
         }, function (error) {
             _this.messageService.add({ severity: 'error', summary: 'Error', detail: JSON.stringify(error.error) });
         });
     };
     EditClientModalComponent.prototype.Change = function () {
-        console.log(this.ClientForm.getRawValue());
-    };
-    // emitEvent(data) {
-    //   this.clients.emit(data);
-    // }
-    EditClientModalComponent.prototype.onSubmit = function () {
-        // this.submitted = true;
-        // // stop here if form is invalid
-        // if (this.ClientForm.invalid) {
-        //   alert('Form not complete please to check that all required field are filled')
-        // }
-        // else {
-        //   let url = "http://127.0.0.1:8000/api/clients/"+this.Item_ID
-        //   this.http.get(url).subscribe(
-        //     (response: any) => {
-        //       this.visible = false;
-        //       this.ClientForm = this.fb.group({
-        //         client_name: [response.client_name, [Validators.required]],
-        //         client_ICE: [response.client_ICE, [Validators.required]],
-        //         client_city: [response.client_city, [Validators.required]]
-        //       })
-        //       this.resetForm()
-        //     },
-        //     (error) => {
-        //       this.messageService.add({ severity: 'error', summary: 'Error', detail: JSON.stringify(error.error) });
-        //     }
-        //   )
-        // }
+        var _this = this;
+        var data = this.ClientForm.getRawValue();
+        var url = "http://127.0.0.1:8000/api/clients/update/" + this.Item_ID;
+        this.http.put(url, data).subscribe(function (response) {
+            // this.visible = false;
+            _this.messageService.add({ severity: 'info', summary: 'Saved', detail: 'Client Informations Saved Successfully' });
+        }, function (error) {
+            _this.messageService.add({ severity: 'error', summary: 'Error', detail: JSON.stringify(error.error) });
+        });
     };
     __decorate([
         core_1.Output()

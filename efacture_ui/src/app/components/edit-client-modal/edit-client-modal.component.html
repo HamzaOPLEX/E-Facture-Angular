@@ -1,7 +1,7 @@
 <button pButton type="button" class="p-button-secondary btn" icon="pi pi-file-edit" (click)="showDialog()"></button>
 <p-dialog header="Edit Client" [(visible)]="visible" [modal]="true"  [draggable]="false" style="width: 50vw;"
     [resizable]="true">
-    <form (submit)="onSubmit()" (change)="Change()" [formGroup]="ClientForm">
+    <form (change)="Change()" [formGroup]="ClientForm">
         <div class=" flex justify-content-center">
                 <span class="text-danger"
                     *ngIf="(ClientForm.get('client_name').invalid || submitted) && ClientForm.get('client_name').errors?.required">This
@@ -32,10 +32,6 @@
                     <span class="p-inputgroup-addon"><i class="pi pi-home"></i></span>
                     <input type="text" pInputText placeholder="City" formControlName="client_city"/>
                 </div>
-
-        </div>
-        <div class="flex justify-content-center flex-wrap" style="text-align: center">
-            <p-button label="Save" icon="pi pi-check" styleClass="p-button-success" type="submit"></p-button>
         </div>
     </form>
 </p-dialog>

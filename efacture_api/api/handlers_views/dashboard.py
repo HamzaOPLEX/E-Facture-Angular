@@ -1,0 +1,22 @@
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from ..models import *
+
+class DashboardAPIView(APIView):
+    def get(self, request, format=None):
+        # Calculate total counts
+        total_invoices = Document.objects.filter(document_type='invoices').count()
+        total_devis = Document.objects.filter(document_type='devis').count()
+        total_bl = Document.objects.filter(document_type='bl').count()
+        total_clients = Client.objects.count()
+
+        # Create a dictionary with the counts
+        data = {
+            'total_invoices': total_invoices,
+            'total_devis': total_devis,
+            'total_bl': total_bl,
+            'total_clients': total_clients,
+        }
+
+        return Response(data, status=status.HTTP_200_OK)

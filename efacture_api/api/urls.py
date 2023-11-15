@@ -26,4 +26,6 @@ urlpatterns = [
     path('clients/update/<int:pk>', ClientsEditAPIView.as_view(), name='client-edit'),
     path('clients/delete/<int:pk>', ClientsDeleteAPIView.as_view(), name='client-delete'),
 
+    # Dashboard
+    path('api/dashboard/', DashboardAPIView.as_view(), name='api-dashboard'),
 ]
