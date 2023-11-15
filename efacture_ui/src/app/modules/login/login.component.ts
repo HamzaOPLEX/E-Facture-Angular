@@ -12,6 +12,7 @@ import { AbstractControl, FormBuilder, Validators } from "@angular/forms";
 import { JwtAuthService } from '@services/Auth/JWTAuthService/jwt-auth-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { Header, MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-login',
@@ -36,6 +37,8 @@ export class LoginComponent {
         private toastr: ToastrService,
         private router: Router,
         private renderer: Renderer2,
+        private messageService: MessageService
+
     ) { }
 
     loginForm = this.formBuilder.group({
@@ -61,12 +64,15 @@ export class LoginComponent {
                     console.log('Login successful:', token);
                     this.jwtAuthService.setToken(token)
                     this.router.navigateByUrl('/');
-                    location.reload();
+                    // location.reload();
+                    this.messageService.add({ severity: 'success', summary: 'Login Successfull', detail: 'Welcome To E-facture' });
 
                     // Handle successful login (e.g., redirect to another page)
                 },
                 (error) => {
                     console.error('Login failed:', error);
+                    this.messageService.add({ severity: 'error', summary: 'Login Error', detail: error });
+
                     // Handle login error (e.g., display error message)
                 }
             );
