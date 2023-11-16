@@ -66,19 +66,18 @@ export class LoginComponent {
                     this.router.navigateByUrl('/');
                     // location.reload();
                     this.messageService.add({ severity: 'success', summary: 'Login Successfull', detail: 'Welcome To E-facture' });
-
                     // Handle successful login (e.g., redirect to another page)
                 },
                 (error) => {
-                    console.error('Login failed:', error);
-                    this.messageService.add({ severity: 'error', summary: 'Login Error', detail: error });
-
+                    this.messageService.add({ severity: 'error', summary: 'Login Error', detail: error.error.detail.detail });
                     // Handle login error (e.g., display error message)
                 }
             );
         }
         if (this.loginForm.invalid) {
             console.log("Login Form Invalid")
+            this.messageService.add({ severity: 'error', summary: 'Login Error', detail: "Login Form Invalid" });
+
         }
     }
 

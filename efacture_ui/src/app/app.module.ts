@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingInterceptor } from './loading.interceptor';
-
+import {AuthInterceptorInterceptor} from './services/Auth/AuthInterceptor/auth-interceptor.interceptor';
 import {AppRoutingModule} from '@/app-routing.module';
 import {AppComponent} from './app.component';
 import {MainComponent} from '@modules/main/main.component';
@@ -300,7 +300,12 @@ registerLocaleData(localeEn, 'en-EN');
     providers: [
         {
             provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
-        }, ConfirmationService, MessageService,
+        }, 
+        ConfirmationService, 
+        MessageService,
+        {
+            provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true
+        }
     ],
     bootstrap: [AppComponent, DocummentsListingComponent,]
 })

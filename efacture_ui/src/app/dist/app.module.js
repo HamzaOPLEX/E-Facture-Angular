@@ -11,6 +11,7 @@ var platform_browser_1 = require("@angular/platform-browser");
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
 var loading_interceptor_1 = require("./loading.interceptor");
+var auth_interceptor_interceptor_1 = require("./services/Auth/AuthInterceptor/auth-interceptor.interceptor");
 var app_routing_module_1 = require("@/app-routing.module");
 var app_component_1 = require("./app.component");
 var main_component_1 = require("@modules/main/main.component");
@@ -303,7 +304,12 @@ var AppModule = /** @class */ (function () {
             providers: [
                 {
                     provide: http_1.HTTP_INTERCEPTORS, useClass: loading_interceptor_1.LoadingInterceptor, multi: true
-                }, api_1.ConfirmationService, api_1.MessageService,
+                },
+                api_1.ConfirmationService,
+                api_1.MessageService,
+                {
+                    provide: http_1.HTTP_INTERCEPTORS, useClass: auth_interceptor_interceptor_1.AuthInterceptorInterceptor, multi: true
+                }
             ],
             bootstrap: [app_component_1.AppComponent, documments_listing_component_1.DocummentsListingComponent,]
         })

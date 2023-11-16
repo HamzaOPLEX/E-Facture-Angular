@@ -49,13 +49,13 @@ var LoginComponent = /** @class */ (function () {
                 _this.messageService.add({ severity: 'success', summary: 'Login Successfull', detail: 'Welcome To E-facture' });
                 // Handle successful login (e.g., redirect to another page)
             }, function (error) {
-                console.error('Login failed:', error);
-                _this.messageService.add({ severity: 'error', summary: 'Login Error', detail: error });
+                _this.messageService.add({ severity: 'error', summary: 'Login Error', detail: error.error.detail.detail });
                 // Handle login error (e.g., display error message)
             });
         }
         if (this.loginForm.invalid) {
             console.log("Login Form Invalid");
+            this.messageService.add({ severity: 'error', summary: 'Login Error', detail: "Login Form Invalid" });
         }
     };
     Object.defineProperty(LoginComponent.prototype, "controls", {

@@ -8,8 +8,9 @@ from .models import Document
 from .serializers import DocumentSerializer
 from rest_framework import status
 from time import sleep
+from efacture_api.settings import SECRET_KEY
+from rest_framework_simplejwt.tokens import RefreshToken
 
-# Create your views here.
 class RegisterView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
@@ -25,25 +26,15 @@ class LoginView(APIView):
 
         user = User.objects.filter(username=username).first()
 
-        if user is None:
-            raise AuthenticationFailed('User not found!')
+        if user is None or not user.check_password(password):
+            raise AuthenticationFailed('Invalid username or password')
 
-        if not user.check_password(password):
-            raise AuthenticationFailed('Incorrect password!')
-
-        payload = {
-            'id': user.id,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
-            'iat': datetime.datetime.utcnow()
-        }
-
-        token = jwt.encode(payload, 'secret', algorithm='HS256')
+        refresh = RefreshToken.for_user(user)
+        access_token = str(refresh.access_token)
 
         response = Response()
-
-        response.set_cookie(key='jwt', value=token, httponly=True)
         response.data = {
-            'jwt': token
+            'jwt': access_token
         }
         return response
 
@@ -64,14 +55,3 @@ class UserView(APIView):
         user = User.objects.filter(id=payload['id']).first()
         serializer = UserSerializer(user)
         return Response(serializer.data)
-
-
-class LogoutView(APIView):
-    def post(self, request):
-        print(request.COOKIES)
-        response = Response()
-        response.delete_cookie('jwt')
-        response.data = {
-            'message': 'success'
-        }
-        return response

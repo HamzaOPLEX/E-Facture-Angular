@@ -8,8 +8,11 @@ from ..serializers import APP_ClientsSerializer
 from rest_framework import status
 from time import sleep
 from django.http import JsonResponse
+from rest_framework.permissions import IsAuthenticated
 
 class ClientsListAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     # Get a list of all clients
     def get(self, request, format=None):
         sleep(1) # just to test loading in UI
@@ -18,6 +21,8 @@ class ClientsListAPIView(APIView):
         return Response(serializer.data)
 
 class ClientsCreateAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     # Create a new client
     def post(self, request, format=None):
         serializer = APP_ClientsSerializer(data=request.data)
@@ -30,6 +35,8 @@ class ClientsCreateAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class ClientsEditAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     # Update an existing client
     def put(self, request, pk, format=None):
         client = Client.objects.get(id=pk)
@@ -40,6 +47,8 @@ class ClientsEditAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ClientsDeleteAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     # Delete a client
     def delete(self, request, pk, format=None):
         try :
@@ -50,6 +59,8 @@ class ClientsDeleteAPIView(APIView):
             return JsonResponse({'error': str(Error)}, status=500)
 
 class ClientsDetailAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request,pk, format=None):
         clients = Client.objects.filter(id=pk)
         serializer = APP_ClientsSerializer(clients, many=True)
