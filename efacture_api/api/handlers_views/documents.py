@@ -8,15 +8,35 @@ from ..serializers import *
 from rest_framework import status
 from time import sleep
 from rest_framework.permissions import IsAuthenticated
+from django.views.decorators.cache import cache_page
+from django.core.cache import cache
+from django.utils.decorators import method_decorator
 
 class DocumentListAPIView(APIView):
     permission_classes = [IsAuthenticated]
-    # Get a list of all documents
-    def get(self, request,type, format=None):
-        # print(request.headers)
+
+    @method_decorator(cache_page(60))  # Cache the result for 60 seconds
+    def get(self, request, type, format=None):
+        # Define a unique cache key based on the request
+        cache_key = f"document_list:{request.user.id}:{type}"
+
+        # Try to get the result from the cache
+        cached_result = cache.get(cache_key)
+
+        if cached_result is not None:
+            # If the result is in the cache, return it
+            print('from cash')
+            return Response(cached_result)
+
+        # If the result is not in the cache, perform the expensive operation
         documents = Document.objects.filter(document_type=type)
         serializer = DocumentListSerializer(documents, many=True)
-        return Response(serializer.data)
+        result = serializer.data
+
+        # Save the result in the cache for future use
+        cache.set(cache_key, result)
+
+        return Response(result)
 
 class DocumentCreateAPIView(APIView):
     permission_classes = [IsAuthenticated]
