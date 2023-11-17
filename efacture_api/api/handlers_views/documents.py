@@ -14,28 +14,11 @@ from django.utils.decorators import method_decorator
 
 class DocumentListAPIView(APIView):
     permission_classes = [IsAuthenticated]
-
-    @method_decorator(cache_page(60))  # Cache the result for 60 seconds
+    @method_decorator(cache_page(60*60*2))
     def get(self, request, type, format=None):
-        # Define a unique cache key based on the request
-        cache_key = f"document_list:{request.user.id}:{type}"
-
-        # Try to get the result from the cache
-        cached_result = cache.get(cache_key)
-
-        if cached_result is not None:
-            # If the result is in the cache, return it
-            print('from cash')
-            return Response(cached_result)
-
-        # If the result is not in the cache, perform the expensive operation
         documents = Document.objects.filter(document_type=type)
         serializer = DocumentListSerializer(documents, many=True)
         result = serializer.data
-
-        # Save the result in the cache for future use
-        cache.set(cache_key, result)
-
         return Response(result)
 
 class DocumentCreateAPIView(APIView):

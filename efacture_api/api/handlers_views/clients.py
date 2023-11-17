@@ -9,16 +9,21 @@ from rest_framework import status
 from time import sleep
 from django.http import JsonResponse
 from rest_framework.permissions import IsAuthenticated
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+from django.core.cache import cache
 
 class ClientsListAPIView(APIView):
     permission_classes = [IsAuthenticated]
-
+    @method_decorator(cache_page(60*60*2))
     # Get a list of all clients
     def get(self, request, format=None):
         sleep(1) # just to test loading in UI
         clients = Client.objects.all()
         serializer = APP_ClientsSerializer(clients, many=True)
         return Response(serializer.data)
+
+
 
 class ClientsCreateAPIView(APIView):
     permission_classes = [IsAuthenticated]
@@ -54,13 +59,20 @@ class ClientsDeleteAPIView(APIView):
         try :
             client = Client.objects.all().filter(id=pk)
             client.delete()
+            print('deleted')
+            # Clear the cache associated with ClientsListAPIView
+            clients_list_view = ClientsListAPIView()
+            clients_list_view.request = request
+            clients_list_view.clear_cache()
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Exception as Error:
             return JsonResponse({'error': str(Error)}, status=500)
 
+
 class ClientsDetailAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
+    @method_decorator(cache_page(60*60*2))
     def get(self, request,pk, format=None):
         clients = Client.objects.filter(id=pk)
         serializer = APP_ClientsSerializer(clients, many=True)

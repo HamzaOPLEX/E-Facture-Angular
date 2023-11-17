@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import datetime
+from django.core.cache import cache
 
 # Create your models here.
 class User(AbstractUser):
@@ -54,6 +55,10 @@ class Document(models.Model):
 
     def __str__(self):
         return f"{self.document_number} for {self.document_client}"
+
+    def save(self, *args, **kwargs):
+        cache.delete('all_posts')
+        super().save(*args, **kwargs)
 
 @receiver(post_save, sender=Document)
 def set_document_number(sender, instance, **kwargs):
