@@ -33,6 +33,8 @@ INTERNAL_IPs = [
     '127.0.0.1'
 ]
 
+REDIS_SERVER = '192.168.1.9'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -83,9 +85,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'efacture_api.wsgi.application'
 
 
-
-
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -99,10 +98,11 @@ DATABASES = {
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://192.168.183.129:6379/1',
+        'LOCATION': f'redis://{REDIS_SERVER}:6379/1',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
+        },
+        'KEY_PREFIX': 'myapp_cache',
     }
 }
 
