@@ -105,7 +105,7 @@ CACHES = {
         'KEY_PREFIX': 'myapp_cache',
     }
 }
-
+CACHE_TIME = 5 # 15min
 
 
 REST_FRAMEWORK = {

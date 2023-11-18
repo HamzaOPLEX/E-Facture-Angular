@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchDocService } from '@services/fetch-doc/fetch-doc.service'; // Importing custom service
 import { Router, ActivatedRoute } from '@angular/router';
+import { PdfGeneratorService } from '@services/pdf-generator/pdf-generator.service'
 
 @Component({
   selector: 'app-documments-listing',
@@ -21,7 +22,11 @@ export class DocummentsListingComponent {
   activityValues: number[] = [0, 100]; // Initializing an array
 
   // Constructor function to inject services
-  constructor(private FetchDocService: FetchDocService, private route: ActivatedRoute) { }
+  constructor(
+    private FetchDocService: FetchDocService, 
+    private route: ActivatedRoute,
+    private pdfService: PdfGeneratorService,
+) { }
 
   // ngOnInit is a lifecycle hook that runs when the component is initialized
   ngOnInit() {
@@ -96,5 +101,16 @@ export class DocummentsListingComponent {
       case 'renewal':
         return null; // No specific severity
     }
+  }
+  PrintPDF(ID){
+    let data = this.FetchDocService.getDocumentData(ID,this.TYPE).subscribe(
+      (respond)=>{
+        this.pdfService.generateInvoice(respond);
+        console.log(respond)
+      },
+      (error)=>{
+        console.log(error)
+      }
+    )
   }
 }

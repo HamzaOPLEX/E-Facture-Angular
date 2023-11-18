@@ -7,7 +7,7 @@ import { SubmitFormService } from '@services/Http/submit-form.service'
 import { PdfGeneratorService } from '@services/pdf-generator/pdf-generator.service'
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ChangeDetectorRef } from '@angular/core';
+import { MessageService} from 'primeng/api';
 
 interface document_payment_methods {
   method: string;
@@ -34,7 +34,9 @@ export class CreateBillingFormComponent implements OnInit {
     private SubmitFormService: SubmitFormService, // Service for shared data
     private fb: FormBuilder, // Form builder for creating forms
     private route: ActivatedRoute,
-    private pdfService: PdfGeneratorService  
+    private pdfService: PdfGeneratorService,
+    private messageService: MessageService,
+    private router: Router,
     ) { }
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
@@ -154,7 +156,8 @@ export class CreateBillingFormComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.BillingForm.invalid || isNotEmpty == false || isvalid == false) {
-      alert('Form not complete please to check that all required field are filled')
+      this.messageService.add({ severity: 'error', summary: 'Form not complete please to check that all required field are filled' });
+
     }
     else {
       let formated_data = {}
@@ -163,15 +166,13 @@ export class CreateBillingFormComponent implements OnInit {
       this.SubmitFormService.CreateDocument(this.TYPE).subscribe(
         (response: any) => {
           // display form values on success
-          alert('Invoice Has Been Created ' + response.document_number);
-          // this.messageService.add({ severity: 'info', summary: 'Document Has Been Created ' + response.document_number });
+          this.messageService.add({ severity: 'info', summary: 'Document Has Been Created ' + response.document_number });
           this.pdfService.generateInvoice(response);
-          console.log(response)
           this.SaveToCookieService.ClearCache(this.TYPE)
+          this.router.navigateByUrl('/invoices/list');
         },
         (error) => {
-          console.log(JSON.stringify(error.error))
-          alert('Invoice Creation Error ' + JSON.stringify(error.error));
+          this.messageService.add({ severity: 'error', summary: 'JSON.stringify(error.error)' });
         }
       )
     }                    

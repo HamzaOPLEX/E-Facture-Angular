@@ -68,7 +68,7 @@ export class SaveToCookieService {
   ClearCache(TYPE) {
     localStorage.removeItem(TYPE) // remove current document cookie
     this.setupCookies(TYPE) // setup  new  empty temp_data cookie
-    location.reload() // reload page to refresh the view
+    // location.reload() // reload page to refresh the view
   }
   constructor() { }
 }

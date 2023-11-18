@@ -12,10 +12,11 @@ from django.views.decorators.cache import cache_page
 from django.core.cache import cache
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_control
+from efacture_api import settings
 
 class DocumentListAPIView(APIView):
     permission_classes = [IsAuthenticated]
-    @method_decorator(cache_page(1))
+    @method_decorator(cache_page(settings.CACHE_TIME))
     @method_decorator(cache_control(no_cache=True, must_revalidate=True))
     def get(self, request, type, format=None):
         documents = Document.objects.filter(document_type=type)
@@ -74,7 +75,7 @@ class SearchDocument(APIView):
 
     # Helper method to get a specific document by its primary key (pk)
     # Get a list of all documents
-    @method_decorator(cache_page(1))
+    @method_decorator(cache_page(settings.CACHE_TIME))
     @method_decorator(cache_control(no_cache=True, must_revalidate=True))
     def get(self, request,document_number, format=None):
         documents = Document.objects.filter(document_number=document_number)
