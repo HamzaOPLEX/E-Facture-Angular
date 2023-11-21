@@ -54,9 +54,12 @@ class DocumentDeleteAPIView(APIView):
 
     # Delete a document
     def delete(self, request, pk, format=None):
-        document = Document.objects.all().filter(id=pk)
+        document = Document.objects.all().get(id=pk)
+        TYPE = document.document_type
         document.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        documents = Document.objects.filter(document_type=TYPE)
+        serializer = DocumentListSerializer(documents, many=True)
+        return Response(serializer.data,status=status.HTTP_200_OK)
 
 class DocumentDetailAPIView(APIView):
     permission_classes = [IsAuthenticated]

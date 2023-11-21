@@ -14,15 +14,12 @@ export class ClientsComponent {
     private FetchDocService: FetchDocService
     ){}
 
-  loading: boolean = true;
   clients
 
   ngOnInit(){
     this.FetchDocService.getAllClient().subscribe(
       (response: any) => {
         this.clients = response
-        console.log(this.clients)
-        this.loading = false
       },
     (error) => {
         console.error(error)
@@ -30,7 +27,12 @@ export class ClientsComponent {
     )
   }
   handleClientDataEvent(data) {
+    console.log(data)
     this.clients = data['clientData']
+  }
+  handleClientDeletion(data){
+    console.log("mn 3andk khokom walid o a7san walid :",data)
+    this.clients = data
   }
   User = {
     username: "Hamza"

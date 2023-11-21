@@ -33,7 +33,9 @@ INTERNAL_IPs = [
     '127.0.0.1'
 ]
 
-REDIS_SERVER = '192.168.1.9'
+# REDIS_SERVER = '192.168.1.9'
+REDIS_SERVER = '192.168.183.129'
+
 
 # Application definition
 

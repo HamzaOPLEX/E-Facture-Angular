@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FetchDocService } from '@services/fetch-doc/fetch-doc.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SharedDataService } from '@services/SharedData/shared-data.service'; // Service for shared data between components
+import { JwtAuthService } from '@services/Auth/JWTAuthService/jwt-auth-service.service';
 
 @Component({
   selector: 'app-create-document',
@@ -11,25 +12,18 @@ import { SharedDataService } from '@services/SharedData/shared-data.service'; //
 export class CreateDocumentComponent {
   TYPE
   clients;
-  loading = true
-  constructor(private FetchDocService: FetchDocService, private route: ActivatedRoute, private SharedDataService: SharedDataService, // Service for shared data
+  User;
+  constructor(
+    private FetchDocService: FetchDocService, 
+    private route: ActivatedRoute, 
+    private SharedDataService: SharedDataService, // Service for shared data
+    private jwtHelper: JwtAuthService,
   ) { }
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.TYPE = params['type'];
-      this.FetchDocService.getAllClient().subscribe(
-        (response: any) => {
-          console.log('change detected')
-          this.clients = response
-          this.loading = false
-        },
-        (error) => {
-          console.error(error)
-        }
-      )
+      this.User = this.jwtHelper.getUser().username
     })
   };
-
-  user = { username: 'JohnDoe' };
 
 }

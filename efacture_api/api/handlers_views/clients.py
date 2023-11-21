@@ -61,7 +61,9 @@ class ClientsDeleteAPIView(APIView):
         try :
             client = Client.objects.all().filter(id=pk)
             client.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            clients = Client.objects.all()
+            serializer = APP_ClientsSerializer(clients, many=True)
+            return Response(serializer.data,status=status.HTTP_200_OK)
         except Exception as Error:
             return JsonResponse({'error': str(Error)}, status=500)
 

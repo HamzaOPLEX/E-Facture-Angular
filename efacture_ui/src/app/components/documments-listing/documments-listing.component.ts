@@ -36,7 +36,6 @@ export class DocummentsListingComponent {
 
       // Declare a variable to store the list of documents
       let documents_list
-      this.loading = true;
 
       // Call the service to fetch documents
       this.FetchDocService.getAllDocs(this.TYPE).subscribe(
@@ -66,8 +65,6 @@ export class DocummentsListingComponent {
             this.documents = response;
           }
 
-          // Set loading to false after data is loaded
-          this.loading = false;
         },
         (error) => {
           console.log(error); // Log any errors
@@ -112,5 +109,16 @@ export class DocummentsListingComponent {
         console.log(error)
       }
     )
+  }
+
+  handleDocumentDeletion(data){
+    // Assign data based on 'TYPE'
+    console.log('o a7san walid o walid o a7san walid',data)
+    if (this.TYPE == 'invoices') {
+      this.invoices = data;
+    } 
+    else {
+      this.documents = data;
+    }
   }
 }
