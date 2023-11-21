@@ -192,6 +192,10 @@ CORS_ALLOWED_ORIGINS = ['http://localhost:4200/',"http://172.25.242.100:4200/"]
 CORS_ALLOWED_ORIGINS = [
     "http://172.25.242.100:4200/",  # The origin of your Angular application
 ]
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+r"^http://\w+\172\.25\.242\.100:4200$",
+]
 LOGIN_REDIRECT_URL = '/'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
