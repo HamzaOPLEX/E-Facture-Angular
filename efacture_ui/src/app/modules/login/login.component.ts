@@ -13,6 +13,7 @@ import { JwtAuthService } from '@services/Auth/JWTAuthService/jwt-auth-service.s
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Header, MessageService } from 'primeng/api';
+import { environment } from 'environments/environment';
 
 @Component({
     selector: 'app-login',
@@ -46,6 +47,7 @@ export class LoginComponent {
         password: ['', [Validators.required]]
     })
 
+    api_server = environment.api_server
 
     onSubmit() {
         if (this.loginForm.valid) {
@@ -53,7 +55,7 @@ export class LoginComponent {
                 username: this.loginForm.get('username')?.value,
                 password: this.loginForm.get('password')?.value,
             };
-            const apiUrl = 'http://127.0.0.1:8000/api/auth/login';
+            const apiUrl = `http://${this.api_server}/api/auth/login`;
             this.http.post(apiUrl, formData, {
                 headers: {
                     'Content-Type': 'application/json',
