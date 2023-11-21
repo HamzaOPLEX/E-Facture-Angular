@@ -28,13 +28,13 @@ SECRET_KEY = 'django-insecure-#@*_$il3ro_un2(ebww+k(vp45p%j#z67cd@m&a1oq^^*rh*n2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 INTERNAL_IPs = [
     '127.0.0.1'
 ]
 
 # REDIS_SERVER = '192.168.1.9'
-REDIS_SERVER = '192.168.183.129'
+REDIS_SERVER = '172.25.242.100'
 
 
 # Application definition
@@ -187,9 +187,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'api.User'
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:4200']
+CORS_ALLOWED_ORIGINS = ['http://localhost:4200/',"http://172.25.242.100:4200/"]
 
-
+CORS_ALLOWED_ORIGINS = [
+    "http://172.25.242.100:4200/",  # The origin of your Angular application
+]
 LOGIN_REDIRECT_URL = '/'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
