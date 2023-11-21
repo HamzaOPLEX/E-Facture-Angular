@@ -14,6 +14,17 @@ export class JwtAuthService {
     return token
   }
 
+  getUser(){
+    const token = localStorage.getItem('token');
+    let username = this.jwtHelper.decodeToken(token).username
+    let userID = this.jwtHelper.decodeToken(token).user_id
+    return {
+            username:username,
+            userID:userID
+          }
+  }
+
+
 
   public isAuthenticated(): boolean {
     const token = this.getToken();

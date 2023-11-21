@@ -11,10 +11,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class DeleteItemComponent {
   @Input() Item_ID
   @Input() URL
-  @Output() DATA = new EventEmitter<string>();
+  @Output() data = new EventEmitter<string>();
   constructor(private confirmationService: ConfirmationService, private messageService: MessageService, private http: HttpClient,) { }
   emitEvent(data) {
-    this.DATA.emit(data);
+    this.data.emit(data);
   }
   Delete(){
     let url = this.URL + this.Item_ID
@@ -22,7 +22,8 @@ export class DeleteItemComponent {
       (response: any) => {
         // display form values on success
         this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: this.Item_ID + ' deleted' });
-        location.reload()
+        this.emitEvent(response)
+        // location.reload()
       },
       (error) => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: JSON.stringify(error.error)});

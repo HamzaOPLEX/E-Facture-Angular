@@ -30,6 +30,8 @@ class LoginView(APIView):
             raise AuthenticationFailed('Invalid username or password')
 
         refresh = RefreshToken.for_user(user)
+        refresh.payload['username'] = username
+        print(refresh.payload)
         access_token = str(refresh.access_token)
 
         response = Response()
