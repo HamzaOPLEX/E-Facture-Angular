@@ -11,6 +11,7 @@ export class FetchDocService {
   clientsURL = environment.endpoints.clientsList
   documentsURL = environment.endpoints.documentList
   documentDetailURL = environment.endpoints.documentDetail
+  dashboardURL = environment.endpoints.dashboard
   getAllClient(){
     let url = this.api_server+"/"+this.clientsURL
     return this.http.get(url)
@@ -26,6 +27,10 @@ export class FetchDocService {
 
   getAllDocs(TYPE) {
     let url = `${this.api_server}/${this.documentsURL}/${TYPE.trim()}`
+    return this.http.get(url)
+  }
+  getDashboardData() {
+    let url = `${this.api_server}/${this.dashboardURL}`
     return this.http.get(url)
   }
 }

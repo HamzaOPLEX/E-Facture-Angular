@@ -14,25 +14,25 @@ export class ProductsComponent {
     private FetchDocService: FetchDocService
   ) { }
 
-  Products;
+  products
 
   ngOnInit() {
-    this.FetchDocService.getAllProduct().subscribe(
+    this.FetchDocService.getAllClient().subscribe(
       (response: any) => {
-        this.Products = response
+        this.products = response
       },
       (error) => {
         console.error(error)
       }
     )
   }
-  handleProductDataEvent(data) {
+  handleClientDataEvent(data) {
     console.log(data)
-    this.Products = data['ProductData']
+    this.products = data['clientData']
   }
-  handleProductDeletion(data) {
+  handleClientDeletion(data) {
     console.log("mn 3andk khokom walid o a7san walid :", data)
-    this.Products = data
+    this.products = data
   }
   User = {
     username: "Hamza"

@@ -10,6 +10,14 @@ class User(AbstractUser):
     email = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
 
+
+class Product(models.Model):
+    product_name = models.CharField(max_length=255,unique=True,blank=False)
+    product_price = models.FloatField(blank=False,default=0)
+
+    def ___str__(self):
+        return self.product_name
+
 class Client(models.Model):
     client_name = models.CharField(max_length=255,unique=True,blank=False)
     client_ICE = models.CharField(max_length=255,unique=True,blank=False)

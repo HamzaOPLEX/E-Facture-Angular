@@ -26,6 +26,10 @@ class APP_ClientsSerializer(serializers.ModelSerializer):
         model = Client
         fields = '__all__'
 
+class APP_ProductsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Client
+        fields = '__all__'
 
 class DocumentListSerializer(serializers.ModelSerializer):
     document_client = APP_ClientsSerializer()

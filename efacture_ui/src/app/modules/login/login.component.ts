@@ -54,7 +54,7 @@ export class LoginComponent {
                 username: this.loginForm.get('username')?.value,
                 password: this.loginForm.get('password')?.value,
             };
-            const apiUrl = `http://${this.api_server}/api/auth/login`;
+            const apiUrl = `${this.api_server}/api/auth/login`;
             this.http.post(apiUrl, formData, {
                 headers: {
                     'Content-Type': 'application/json',

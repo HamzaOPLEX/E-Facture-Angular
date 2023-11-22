@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
+import { FetchDocService } from '@services/fetch-doc/fetch-doc.service'; // Importing custom service
 
 
 
@@ -13,7 +14,8 @@ import { MessageService } from 'primeng/api';
 export class DashboardComponent {
     constructor(
         private http: HttpClient,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private FetchDocService: FetchDocService
         ){
 
     }
@@ -25,7 +27,7 @@ export class DashboardComponent {
         len_clients: 0
     };
     ngOnInit(){
-        this.http.get('http://127.0.0.1:8000/api/api/dashboard/').subscribe(
+        this.FetchDocService.getDashboardData().subscribe(
             (response) => {
                 this.Lenghts = {
                     len_factures: response['total_invoices'], // Replace with actual values
