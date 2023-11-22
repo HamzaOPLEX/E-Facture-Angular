@@ -28,14 +28,16 @@ SECRET_KEY = 'django-insecure-#@*_$il3ro_un2(ebww+k(vp45p%j#z67cd@m&a1oq^^*rh*n2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+PRIVATE_SERVER_ADDRESS = ["127.0.0.1","localhost"]
+PUBLIC_SERVER_ADRESS = ["172.25.242.100"]
+FRONT_END_SERVER = "http://172.25.242.100:4200"
+
 ALLOWED_HOSTS = []
-INTERNAL_IPs = [
-    '127.0.0.1'
-]
+[ALLOWED_HOSTS.append(i) for i in PRIVATE_SERVER_ADDRESS]
+[ALLOWED_HOSTS.append(i) for i in PUBLIC_SERVER_ADRESS]
 
-# REDIS_SERVER = '192.168.1.9'
-REDIS_SERVER = '192.168.183.129'
-
+REDIS_SERVER = '172.25.242.100'
+DB_SERVER = '172.25.242.100'
 
 # Application definition
 
@@ -91,9 +93,14 @@ WSGI_APPLICATION = 'efacture_api.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'efacture',
+        'USER': 'postgres',
+        'PASSWORD': 'db@admin',
+        'HOST': DB_SERVER,
+        'PORT': '5432',
     }
 }
 
@@ -104,7 +111,7 @@ CACHES = {
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         },
-        'KEY_PREFIX': 'myapp_cache',
+        'KEY_PREFIX': 'efacture',
     }
 }
 CACHE_TIME = 5 # 15min
@@ -174,10 +181,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = 'static/'
 
 # Default primary key field type
@@ -187,9 +190,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'api.User'
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:4200']
-
+CORS_ORIGIN_ALLOW_ALL = True
 
 LOGIN_REDIRECT_URL = '/'
+
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

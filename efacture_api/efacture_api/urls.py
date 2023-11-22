@@ -5,6 +5,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.views.generic.base import RedirectView
+from efacture_api import settings
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -24,5 +25,5 @@ urlpatterns = [
          name='schema-redoc'),
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    path('',RedirectView.as_view(url='http://localhost:4200/'))
+    path('',RedirectView.as_view(url=settings.FRONT_END_SERVER))
 ]

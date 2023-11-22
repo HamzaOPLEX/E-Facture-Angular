@@ -41,84 +41,76 @@ export class CreateBillingFormComponent implements OnInit {
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
   ngOnInit() {
-    console.log("[+] app-billing-form: o a7san walid o walid ")
     this.route.params.subscribe(params => {
+      this.TYPE = params.type;
+      this.SetupCookies()
       this.FetchDocService.getAllClient().subscribe(
         (response: any) => {
-          this.SharedDataService.setClients(response)
           this.clients = response
-          console.log(this.clients)
-          this.TYPE = params.type;
-          console.log('[+] app-billing-form: TYPE=', params.type)
-
-          // SetupCookies : Create a temporary data cookie with the fetched data ID
-          let temp_data = JSON.parse(localStorage.getItem(this.TYPE)); // check if Cookies are setuped if not setup it
-          console.log('[+] app-billing-form: temp data ', temp_data)
-          if (temp_data == null) { // if cookies not setuped
-            console.log('[+] app-billing-form: setting up cookies ', temp_data)
-            this.SaveToCookieService.setupCookies(this.TYPE); // setuping cookies
-            console.log('[+] app-billing-form: setting up cookies done', temp_data)
-
-          }
-          else if (temp_data !== null) { // if cookies are setuped
-            temp_data = temp_data['billing_data']
-            let temp_data_length = Object.values(temp_data).length
-            console.log('[+] app-billing-form: temp data lengh', temp_data_length)
-            // Check if there is data saved in cookies
-            if (temp_data_length > 0) {
-              // Data found in table, load data
-              console.log('[+] app-billing-items: Data found in cookies, loading data...');
-
-              if (this.TYPE == "invoices") {
-                this.BillingForm = this.fb.group({
-                  document_client: [temp_data.document_client, [Validators.required, this.validateClientName]], // Initialize client name field
-                  document_date: [temp_data.document_date, Validators.required], // Initialize invoice date field
-                  deposit: [temp_data.deposit, Validators.required], // Initialize advance field
-                  document_payment_method: [temp_data.document_payment_method, [Validators.required, this.validateClientName]], // Initialize payment method field
-                  ttc_or_ht: [temp_data.ttc_or_ht, Validators.required] // Initialize ttc_or_ht field with default value 'TTC'
-                });
-              }
-              else {
-                this.BillingForm = this.fb.group({
-                  document_client: [temp_data.document_client, [Validators.required, this.validateClientName]], // Initialize client name field
-                  document_date: [temp_data.document_date, Validators.required], // Initialize invoice date field
-                });
-                console.log('[+] app-billing-items: loding data done', temp_data)
-              }
-
-            }
-            else if (temp_data_length == 0) {
-              // No data found in cookies, loading empty form
-              console.log('[+] app-billing-items: Data Not Found in cookies, loading empty billing form...');
-              if (this.TYPE == "invoices") {
-                this.BillingForm = this.fb.group({
-                  document_client: ["-", [Validators.required, this.validateClientName]], // Initialize client name field
-                  document_date: ['', Validators.required], // Initialize invoice date field
-                  deposit: ['0', Validators.required], // Initialize advance field
-                  document_payment_method: ['-', [Validators.required, this.validateClientName]], // Initialize payment method field
-                  ttc_or_ht: ['TTC', Validators.required] // Initialize ttc_or_ht field with default value 'TTC'
-                });
-              }
-              else {
-                this.BillingForm = this.fb.group({
-                  document_client: ['-', [Validators.required, this.validateClientName]], // Initialize client name field
-                  document_date: ['', Validators.required], // Initialize invoice date field
-                });
-              }
-            }
-          }
         },
         (error) => {
-          console.error(error)
+          console.log("a7san error",error)
+          this.clients = []
         }
       )
       
     })
   }
+  SetupCookies(){
+    // SetupCookies : Create a temporary data cookie with the fetched data ID
+    let temp_data = JSON.parse(localStorage.getItem(this.TYPE)); // check if Cookies are setuped if not setup it
+    if (temp_data == null) { // if cookies not setuped
+      this.SaveToCookieService.setupCookies(this.TYPE); // setuping cookies
+    }
+    else if (temp_data !== null) { // if cookies are setuped
+      temp_data = temp_data['billing_data']
+      let temp_data_length = Object.values(temp_data).length
+      // Check if there is data saved in cookies
+      if (temp_data_length > 0) {
+        // Data found in table, load data
+        if (this.TYPE == "invoices") {
+          this.BillingForm = this.fb.group({
+            document_client: [temp_data.document_client, [Validators.required, this.validateClientName]], // Initialize client name field
+            document_date: [temp_data.document_date, Validators.required], // Initialize invoice date field
+            deposit: [temp_data.deposit, Validators.required], // Initialize advance field
+            document_payment_method: [temp_data.document_payment_method, [Validators.required, this.validateClientName]], // Initialize payment method field
+            ttc_or_ht: [temp_data.ttc_or_ht, Validators.required] // Initialize ttc_or_ht field with default value 'TTC'
+          });
+        }
+        else {
+          this.BillingForm = this.fb.group({
+            document_client: [temp_data.document_client, [Validators.required, this.validateClientName]], // Initialize client name field
+            document_date: [temp_data.document_date, Validators.required], // Initialize invoice date field
+          });
+        }
+
+      }
+      else if (temp_data_length == 0) {
+        // No data found in cookies, loading empty form
+        console.log('[+] app-billing-items: Data Not Found in cookies, loading empty billing form...');
+        if (this.TYPE == "invoices") {
+          this.BillingForm = this.fb.group({
+            document_client: ["-", [Validators.required, this.validateClientName]], // Initialize client name field
+            document_date: ['', Validators.required], // Initialize invoice date field
+            deposit: ['0', Validators.required], // Initialize advance field
+            document_payment_method: ['-', [Validators.required, this.validateClientName]], // Initialize payment method field
+            ttc_or_ht: ['TTC', Validators.required] // Initialize ttc_or_ht field with default value 'TTC'
+          });
+        }
+        else {
+          this.BillingForm = this.fb.group({
+            document_client: ['-', [Validators.required, this.validateClientName]], // Initialize client name field
+            document_date: ['', Validators.required], // Initialize invoice date field
+          });
+        }
+      }
+    }
+  }
   validateClientName(control) {
     if (control.value !== '-') {
       return null; // Validation passed
-    } else {
+    } 
+    else {
       return { invalidClientName: true }; // Validation failed
     }
   }

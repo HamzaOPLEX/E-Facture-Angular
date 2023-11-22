@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FetchDocService } from '@services/fetch-doc/fetch-doc.service'; // Importing custom service
 import { Router, ActivatedRoute } from '@angular/router';
 import { PdfGeneratorService } from '@services/pdf-generator/pdf-generator.service'
+import { MessageService } from 'primeng/api';
+import { JwtAuthService } from '@services/Auth/JWTAuthService/jwt-auth-service.service';
 
 @Component({
   selector: 'app-documments-listing',
@@ -18,6 +20,7 @@ export class DocummentsListingComponent {
   statuses!: any[]; // Declaration without initialization
 
   loading: boolean = true;
+  User
 
   activityValues: number[] = [0, 100]; // Initializing an array
 
@@ -26,11 +29,16 @@ export class DocummentsListingComponent {
     private FetchDocService: FetchDocService, 
     private route: ActivatedRoute,
     private pdfService: PdfGeneratorService,
+    private messageService: MessageService,
+    private jwtHelper: JwtAuthService,
+
 ) { }
 
   // ngOnInit is a lifecycle hook that runs when the component is initialized
   ngOnInit() {
     // Subscribe to route params (when the URL changes)
+    this.User = this.jwtHelper.getUser().username
+
     this.route.params.subscribe(params => {
       this.TYPE = params['type']; // Retrieve 'type' parameter from the URL
 
@@ -67,7 +75,7 @@ export class DocummentsListingComponent {
 
         },
         (error) => {
-          console.log(error); // Log any errors
+          this.messageService.add({ severity: 'error', summary: 'Request Error', detail: "Server Request Error, Please Contact The Administrator" });
         }
       )
     });

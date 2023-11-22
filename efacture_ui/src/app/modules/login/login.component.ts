@@ -12,7 +12,7 @@ import { AbstractControl, FormBuilder, Validators } from "@angular/forms";
 import { JwtAuthService } from '@services/Auth/JWTAuthService/jwt-auth-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { Header, MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { environment } from 'environments/environment';
 
 @Component({
@@ -35,7 +35,6 @@ export class LoginComponent {
         private http: HttpClient,
         private formBuilder: FormBuilder,
         public jwtAuthService: JwtAuthService,
-        private toastr: ToastrService,
         private router: Router,
         private renderer: Renderer2,
         private messageService: MessageService
@@ -71,7 +70,12 @@ export class LoginComponent {
                     // Handle successful login (e.g., redirect to another page)
                 },
                 (error) => {
-                    this.messageService.add({ severity: 'error', summary: 'Login Error', detail: error.error.detail.detail });
+                    try{
+                        this.messageService.add({ severity: 'error', summary: 'Login Error', detail: error.error.detail.detail });
+                    }
+                    catch(err){
+                        this.messageService.add({ severity: 'error', summary: 'Server Error', detail: "Server Error Please Contact The Administrator" });
+                    }
                     // Handle login error (e.g., display error message)
                 }
             );

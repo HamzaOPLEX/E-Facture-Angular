@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
+
 
 
 @Component({
@@ -10,7 +11,10 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class DashboardComponent {
-    constructor(private http: HttpClient){
+    constructor(
+        private http: HttpClient,
+        private messageService: MessageService
+        ){
 
     }
     Lenghts = {
@@ -32,7 +36,7 @@ export class DashboardComponent {
                 };
             },
             (error) => {
-
+                this.messageService.add({ severity: 'error', summary: 'Request Error', detail: "Server Request Error, Please Contact The Administrator" });
             }
         )
     }
