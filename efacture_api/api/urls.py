@@ -14,7 +14,7 @@ urlpatterns = [
     # Document CRUD
     path('documents/<str:type>', DocumentListAPIView.as_view(), name='document-list'),
     path('documents/create/', DocumentCreateAPIView.as_view(), name='document-create'),
-    path('<str:type>/document/<int:pk>', DocumentDetailAPIView.as_view(), name='document-detail'),
+    path('document/<str:type>/<int:pk>', DocumentDetailAPIView.as_view(), name='document-detail'),
     path('documents/update/<int:pk>', DocumentEditAPIView.as_view(), name='document-edit'),
     path('documents/delete/<int:pk>', DocumentDeleteAPIView.as_view(), name='document-delete'),
 
@@ -26,5 +26,5 @@ urlpatterns = [
     path('clients/delete/<int:pk>', ClientsDeleteAPIView.as_view(), name='client-delete'),
 
     # Dashboard
-    path('api/dashboard/', DashboardAPIView.as_view(), name='api-dashboard'),
+    path('dashboard/', DashboardAPIView.as_view(), name='api-dashboard'),
 ]

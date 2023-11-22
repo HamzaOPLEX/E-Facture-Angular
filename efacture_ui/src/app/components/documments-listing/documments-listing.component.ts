@@ -48,7 +48,6 @@ export class DocummentsListingComponent {
       // Call the service to fetch documents
       this.FetchDocService.getAllDocs(this.TYPE).subscribe(
         (response: any) => {
-          console.log(response)
           // Process the response data
           let HT;
           let Rest;

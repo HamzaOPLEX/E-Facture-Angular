@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FetchDocService } from '@services/fetch-doc/fetch-doc.service'; // Importing custom service
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
   selector: 'app-clients',

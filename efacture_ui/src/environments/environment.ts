@@ -1,13 +1,20 @@
 export const environment = {
     production: false,
-    api_server: "172.25.242.100:8000"
+    api_server: "http://172.25.242.100:8000",
+    endpoints: {
+        register: 'api/auth/register',
+        login: 'api/auth/login',
+        user: 'api/auth/user',
+        documentList: 'api/documents', // + <type>
+        documentCreate: 'api/documents/create/',
+        documentDetail: 'api/document', // <type>/<pk>
+        documentEdit: 'api/documents/update/<pk>',
+        documentDelete: 'api/documents/delete/<pk>',
+        clientsList: 'api/clients/',
+        clientCreate: 'api/clients/create/',
+        clientDetail: 'api/clients/<pk>/',
+        clientEdit: 'api/clients/update/<pk>',
+        clientDelete: 'api/clients/delete/<pk>',
+        dashboard: 'api/dashboard/',
+    },
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
