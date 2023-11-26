@@ -1,6 +1,6 @@
 export const environment = {
-    production: false,
-    api_server: "http://172.25.242.100:8000",
+    production: true,
+    api_server: "http://172.25.242.100:8080",
     endpoints: {
         register: 'api/auth/register',
         login: 'api/auth/login',
