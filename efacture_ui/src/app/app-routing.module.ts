@@ -14,6 +14,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { DocummentsListingComponent } from './components/documments-listing/documments-listing.component';
 import { EditDocumentComponent } from './pages/edit-document/edit-document/edit-document.component';
 import { CreateDocumentComponent } from './pages/create-document/create-document/create-document.component';
+import { RegistrationComponent } from './modules/registration/registration.component';
 
 
 
@@ -76,6 +77,11 @@ const routes: Routes = [
         path: 'logout',
         component: LogoutComponent,
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'register',
+        component: RegistrationComponent,
+        canActivate: [LoginAuthGuard]
     },
     {path: '**', redirectTo: ''}
 ];

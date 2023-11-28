@@ -128,7 +128,6 @@ import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { EditDocumentComponent } from './pages/edit-document/edit-document/edit-document.component';
 import { JwtModule } from "@auth0/angular-jwt";
-import {JwtAuthService} from "@services/Auth/JWTAuthService/jwt-auth-service.service";
 import { LogoutComponent } from './modules/logout/logout/logout.component';
 import { CreateDocumentComponent } from './pages/create-document/create-document/create-document.component';
 import { CreateBillingFormComponent } from './pages/create-document/create-billing-form/create-billing-form.component';
@@ -139,6 +138,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { EditBillingFormComponent } from './pages/edit-document/edit-billing-form/edit-billing-form.component';
 import { EditDocumentTableItemsComponent } from './pages/edit-document/edit-document-table-items/edit-document-table-items.component';
 import { EditClientModalComponent } from './components/edit-client-modal/edit-client-modal.component';
+import { RegistrationComponent } from './modules/registration/registration.component';
 
 
 
@@ -179,8 +179,8 @@ registerLocaleData(localeEn, 'en-EN');
         DeleteItemComponent,
         EditBillingFormComponent,
         EditDocumentTableItemsComponent,
-        EditClientModalComponent
-
+        EditClientModalComponent,
+        RegistrationComponent
     ],
     imports: [
         AvatarModule,

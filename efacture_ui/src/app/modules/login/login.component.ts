@@ -47,14 +47,14 @@ export class LoginComponent {
     })
 
     api_server = environment.api_server
-
+    login_path = environment.endpoints.login
     onSubmit() {
         if (this.loginForm.valid) {
             let formData = {
                 username: this.loginForm.get('username')?.value,
                 password: this.loginForm.get('password')?.value,
             };
-            const apiUrl = `${this.api_server}/api/auth/login`;
+            const apiUrl = `${this.api_server}/${this.login_path}`;
             this.http.post(apiUrl, formData, {
                 headers: {
                     'Content-Type': 'application/json',

@@ -9,6 +9,7 @@
 
 # dependencies
 /node_modules
+/dist
 node_modules
 efacture_ui/node_modules
 # profiling files
