@@ -5,7 +5,7 @@ from .models import *
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'password']
+        fields = ['id', 'username', 'password',"email"]
         extra_kwargs = {
             'password': {'write_only': True}
         }
@@ -18,8 +18,19 @@ class UserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-
-
+class UserEmailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["email"]
+    email = serializers.EmailField()
+    def validate_email(self, value):
+        """
+        Check if the provided email already exists in the database.
+        """
+        if User.objects.filter(email=value).exists():
+            return value
+        else :
+            raise serializers.ValidationError("This email is not registered.")
 
 class APP_ClientsSerializer(serializers.ModelSerializer):
     class Meta:

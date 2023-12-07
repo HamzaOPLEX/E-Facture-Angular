@@ -5,12 +5,18 @@ from .handlers_views.clients import *
 from .handlers_views.products import *
 from .handlers_views.documents import *
 from .handlers_views.app_settings import *
-
+from .handlers_views.auth import *
 urlpatterns = [
     # Authentication
     path('auth/register', RegisterView.as_view()),
     path('auth/login', LoginView.as_view()),
     path('auth/user', UserView.as_view()),
+    path('auth/reset-password/verify',ValidateEmailAPIView.as_view()), # get user email & send password reset url via email
+    # path('auth/reset-password/<str:token>'), # Validate Token and redirect to reset password page
+    # path('auth/reset-password/') # save new password
+    
+
+
 
     # Document CRUD
     path('documents/<str:type>', DocumentListAPIView.as_view(), name='document-list'),
@@ -35,4 +41,6 @@ urlpatterns = [
 
     # Dashboard
     path('dashboard/', DashboardAPIView.as_view(), name='api-dashboard'),
+
+
 ]

@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppRoutingModule": () => (/* binding */ AppRoutingModule)
 /* harmony export */ });
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/router */ 60124);
 /* harmony import */ var _modules_main_main_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @modules/main/main.component */ 8187);
 /* harmony import */ var _modules_login_login_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @modules/login/login.component */ 60744);
 /* harmony import */ var _modules_logout_logout_logout_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @modules/logout/logout/logout.component */ 23019);
@@ -27,7 +27,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_edit_document_edit_document_edit_document_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/edit-document/edit-document/edit-document.component */ 66031);
 /* harmony import */ var _pages_create_document_create_document_create_document_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/create-document/create-document/create-document.component */ 29603);
 /* harmony import */ var _modules_registration_registration_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/registration/registration.component */ 43891);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _modules_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/reset-password/reset-password.component */ 50978);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/core */ 22560);
+
 
 
 
@@ -97,6 +99,10 @@ const routes = [{
   component: _modules_registration_registration_component__WEBPACK_IMPORTED_MODULE_14__.RegistrationComponent,
   canActivate: [_services_Auth_LoginCanActivate_auth_guard_guard__WEBPACK_IMPORTED_MODULE_5__.LoginAuthGuard]
 }, {
+  path: 'reset-password',
+  component: _modules_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_15__.ResetPasswordComponent,
+  canActivate: [_services_Auth_LoginCanActivate_auth_guard_guard__WEBPACK_IMPORTED_MODULE_5__.LoginAuthGuard]
+}, {
   path: '**',
   redirectTo: ''
 }];
@@ -104,17 +110,17 @@ class AppRoutingModule {
   static #_ = this.ɵfac = function AppRoutingModule_Factory(t) {
     return new (t || AppRoutingModule)();
   };
-  static #_2 = this.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_15__["ɵɵdefineNgModule"]({
+  static #_2 = this.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_16__["ɵɵdefineNgModule"]({
     type: AppRoutingModule
   });
-  static #_3 = this.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_15__["ɵɵdefineInjector"]({
-    imports: [_angular_router__WEBPACK_IMPORTED_MODULE_16__.RouterModule.forRoot(routes, {}), _angular_router__WEBPACK_IMPORTED_MODULE_16__.RouterModule]
+  static #_3 = this.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_16__["ɵɵdefineInjector"]({
+    imports: [_angular_router__WEBPACK_IMPORTED_MODULE_17__.RouterModule.forRoot(routes, {}), _angular_router__WEBPACK_IMPORTED_MODULE_17__.RouterModule]
   });
 }
 (function () {
-  (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_15__["ɵɵsetNgModuleScope"](AppRoutingModule, {
-    imports: [_angular_router__WEBPACK_IMPORTED_MODULE_16__.RouterModule],
-    exports: [_angular_router__WEBPACK_IMPORTED_MODULE_16__.RouterModule]
+  (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_16__["ɵɵsetNgModuleScope"](AppRoutingModule, {
+    imports: [_angular_router__WEBPACK_IMPORTED_MODULE_17__.RouterModule],
+    exports: [_angular_router__WEBPACK_IMPORTED_MODULE_17__.RouterModule]
   });
 })();
 
@@ -177,8 +183,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppModule": () => (/* binding */ AppModule)
 /* harmony export */ });
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! @angular/platform-browser */ 34497);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! @angular/common/http */ 58987);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @angular/platform-browser */ 34497);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! @angular/common/http */ 58987);
 /* harmony import */ var _loading_interceptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./loading.interceptor */ 19527);
 /* harmony import */ var _services_Auth_AuthInterceptor_auth_interceptor_interceptor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/Auth/AuthInterceptor/auth-interceptor.interceptor */ 86343);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/app-routing.module */ 90158);
@@ -188,24 +194,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_main_header_header_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @modules/main/header/header.component */ 85718);
 /* harmony import */ var _modules_main_footer_footer_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @modules/main/footer/footer.component */ 95044);
 /* harmony import */ var _modules_main_menu_sidebar_menu_sidebar_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @modules/main/menu-sidebar/menu-sidebar.component */ 86008);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @angular/forms */ 2508);
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! @angular/platform-browser/animations */ 37146);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! @angular/forms */ 2508);
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! @angular/platform-browser/animations */ 37146);
 /* harmony import */ var _pages_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @pages/dashboard/dashboard.component */ 24789);
-/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_136__ = __webpack_require__(/*! ngx-toastr */ 94817);
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_137__ = __webpack_require__(/*! ngx-toastr */ 94817);
 /* harmony import */ var _modules_main_header_messages_messages_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @modules/main/header/messages/messages.component */ 23649);
 /* harmony import */ var _modules_main_header_notifications_notifications_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @modules/main/header/notifications/notifications.component */ 50125);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! @angular/common */ 94666);
-/* harmony import */ var _angular_common_locales_en__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! @angular/common/locales/en */ 49137);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! @angular/common */ 94666);
+/* harmony import */ var _angular_common_locales_en__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! @angular/common/locales/en */ 49137);
 /* harmony import */ var _modules_main_header_user_user_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @modules/main/header/user/user.component */ 45112);
 /* harmony import */ var _modules_main_header_language_language_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @modules/main/header/language/language.component */ 63081);
 /* harmony import */ var _pages_main_menu_main_menu_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/main-menu/main-menu.component */ 42917);
 /* harmony import */ var _pages_main_menu_sub_menu_sub_menu_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/main-menu/sub-menu/sub-menu.component */ 63895);
 /* harmony import */ var _components_menu_item_menu_item_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/menu-item/menu-item.component */ 41459);
 /* harmony import */ var _modules_main_control_sidebar_control_sidebar_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./modules/main/control-sidebar/control-sidebar.component */ 7269);
-/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_135__ = __webpack_require__(/*! @ngrx/store */ 23488);
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_136__ = __webpack_require__(/*! @ngrx/store */ 23488);
 /* harmony import */ var _store_auth_reducer__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./store/auth/reducer */ 7590);
 /* harmony import */ var _store_ui_reducer__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./store/ui/reducer */ 36555);
-/* harmony import */ var _profabric_angular_components__WEBPACK_IMPORTED_MODULE_134__ = __webpack_require__(/*! @profabric/angular-components */ 9700);
+/* harmony import */ var _profabric_angular_components__WEBPACK_IMPORTED_MODULE_135__ = __webpack_require__(/*! @profabric/angular-components */ 9700);
 /* harmony import */ var _components_sidebar_search_sidebar_search_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/sidebar-search/sidebar-search.component */ 93254);
 /* harmony import */ var _pages_dashboard_chartjs_chartjs_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @pages/dashboard/chartjs/chartjs.component */ 51649);
 /* harmony import */ var _pages_admin_admin_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./pages/admin/admin.component */ 56601);
@@ -215,107 +221,108 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_users_users_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./pages/users/users.component */ 31524);
 /* harmony import */ var _components_add_client_modal_add_client_modal_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/add-client-modal/add-client-modal.component */ 58071);
 /* harmony import */ var _components_documments_listing_documments_listing_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/documments-listing/documments-listing.component */ 34265);
-/* harmony import */ var primeng_accordion__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! primeng/accordion */ 79854);
-/* harmony import */ var primeng_autocomplete__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! primeng/autocomplete */ 75630);
-/* harmony import */ var primeng_avatar__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! primeng/avatar */ 37063);
-/* harmony import */ var primeng_avatargroup__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! primeng/avatargroup */ 11385);
-/* harmony import */ var primeng_badge__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! primeng/badge */ 52381);
-/* harmony import */ var primeng_breadcrumb__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! primeng/breadcrumb */ 47298);
-/* harmony import */ var primeng_button__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! primeng/button */ 76328);
-/* harmony import */ var primeng_calendar__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! primeng/calendar */ 32547);
-/* harmony import */ var primeng_carousel__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! primeng/carousel */ 8707);
-/* harmony import */ var primeng_cascadeselect__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! primeng/cascadeselect */ 78671);
-/* harmony import */ var primeng_chart__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! primeng/chart */ 62348);
-/* harmony import */ var primeng_checkbox__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! primeng/checkbox */ 40749);
-/* harmony import */ var primeng_chip__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! primeng/chip */ 80287);
-/* harmony import */ var primeng_chips__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! primeng/chips */ 65980);
-/* harmony import */ var primeng_confirmdialog__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! primeng/confirmdialog */ 60097);
-/* harmony import */ var primeng_colorpicker__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! primeng/colorpicker */ 26303);
-/* harmony import */ var primeng_contextmenu__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! primeng/contextmenu */ 55945);
-/* harmony import */ var primeng_dataview__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! primeng/dataview */ 81233);
-/* harmony import */ var primeng_virtualscroller__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! primeng/virtualscroller */ 58476);
-/* harmony import */ var primeng_dialog__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! primeng/dialog */ 1837);
-/* harmony import */ var primeng_divider__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! primeng/divider */ 1154);
-/* harmony import */ var primeng_dock__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! primeng/dock */ 41706);
-/* harmony import */ var primeng_dragdrop__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! primeng/dragdrop */ 92281);
-/* harmony import */ var primeng_dropdown__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! primeng/dropdown */ 38992);
-/* harmony import */ var primeng_dynamicdialog__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! primeng/dynamicdialog */ 62648);
-/* harmony import */ var primeng_fieldset__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! primeng/fieldset */ 94619);
-/* harmony import */ var primeng_fileupload__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! primeng/fileupload */ 16193);
-/* harmony import */ var primeng_galleria__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! primeng/galleria */ 70806);
-/* harmony import */ var primeng_inplace__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! primeng/inplace */ 82116);
-/* harmony import */ var primeng_inputmask__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! primeng/inputmask */ 51227);
-/* harmony import */ var primeng_inputswitch__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! primeng/inputswitch */ 13585);
-/* harmony import */ var primeng_inputtext__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! primeng/inputtext */ 69906);
-/* harmony import */ var primeng_inputnumber__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! primeng/inputnumber */ 87990);
-/* harmony import */ var primeng_inputtextarea__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! primeng/inputtextarea */ 71102);
-/* harmony import */ var primeng_image__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! primeng/image */ 21478);
-/* harmony import */ var primeng_knob__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! primeng/knob */ 74397);
-/* harmony import */ var primeng_listbox__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! primeng/listbox */ 2210);
-/* harmony import */ var primeng_megamenu__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! primeng/megamenu */ 66792);
-/* harmony import */ var primeng_menu__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! primeng/menu */ 60625);
-/* harmony import */ var primeng_menubar__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! primeng/menubar */ 80552);
-/* harmony import */ var primeng_message__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! primeng/message */ 73589);
-/* harmony import */ var primeng_messages__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(/*! primeng/messages */ 58547);
-/* harmony import */ var primeng_multiselect__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(/*! primeng/multiselect */ 30850);
-/* harmony import */ var primeng_orderlist__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! primeng/orderlist */ 67397);
-/* harmony import */ var primeng_organizationchart__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! primeng/organizationchart */ 95918);
-/* harmony import */ var primeng_overlaypanel__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! primeng/overlaypanel */ 16664);
-/* harmony import */ var primeng_paginator__WEBPACK_IMPORTED_MODULE_95__ = __webpack_require__(/*! primeng/paginator */ 42722);
-/* harmony import */ var primeng_panel__WEBPACK_IMPORTED_MODULE_96__ = __webpack_require__(/*! primeng/panel */ 24266);
-/* harmony import */ var primeng_panelmenu__WEBPACK_IMPORTED_MODULE_97__ = __webpack_require__(/*! primeng/panelmenu */ 39028);
-/* harmony import */ var primeng_password__WEBPACK_IMPORTED_MODULE_98__ = __webpack_require__(/*! primeng/password */ 68848);
-/* harmony import */ var primeng_picklist__WEBPACK_IMPORTED_MODULE_99__ = __webpack_require__(/*! primeng/picklist */ 19238);
-/* harmony import */ var primeng_progressbar__WEBPACK_IMPORTED_MODULE_101__ = __webpack_require__(/*! primeng/progressbar */ 88395);
-/* harmony import */ var primeng_radiobutton__WEBPACK_IMPORTED_MODULE_102__ = __webpack_require__(/*! primeng/radiobutton */ 69902);
-/* harmony import */ var primeng_rating__WEBPACK_IMPORTED_MODULE_103__ = __webpack_require__(/*! primeng/rating */ 62415);
-/* harmony import */ var primeng_scroller__WEBPACK_IMPORTED_MODULE_106__ = __webpack_require__(/*! primeng/scroller */ 73705);
-/* harmony import */ var primeng_scrollpanel__WEBPACK_IMPORTED_MODULE_107__ = __webpack_require__(/*! primeng/scrollpanel */ 14250);
-/* harmony import */ var primeng_scrolltop__WEBPACK_IMPORTED_MODULE_108__ = __webpack_require__(/*! primeng/scrolltop */ 68933);
-/* harmony import */ var primeng_selectbutton__WEBPACK_IMPORTED_MODULE_104__ = __webpack_require__(/*! primeng/selectbutton */ 70205);
-/* harmony import */ var primeng_sidebar__WEBPACK_IMPORTED_MODULE_105__ = __webpack_require__(/*! primeng/sidebar */ 34179);
-/* harmony import */ var primeng_skeleton__WEBPACK_IMPORTED_MODULE_109__ = __webpack_require__(/*! primeng/skeleton */ 32712);
-/* harmony import */ var primeng_slidemenu__WEBPACK_IMPORTED_MODULE_110__ = __webpack_require__(/*! primeng/slidemenu */ 40691);
-/* harmony import */ var primeng_slider__WEBPACK_IMPORTED_MODULE_111__ = __webpack_require__(/*! primeng/slider */ 14950);
-/* harmony import */ var primeng_speeddial__WEBPACK_IMPORTED_MODULE_112__ = __webpack_require__(/*! primeng/speeddial */ 19869);
-/* harmony import */ var primeng_spinner__WEBPACK_IMPORTED_MODULE_113__ = __webpack_require__(/*! primeng/spinner */ 65233);
-/* harmony import */ var primeng_splitbutton__WEBPACK_IMPORTED_MODULE_115__ = __webpack_require__(/*! primeng/splitbutton */ 33650);
-/* harmony import */ var primeng_splitter__WEBPACK_IMPORTED_MODULE_114__ = __webpack_require__(/*! primeng/splitter */ 80330);
-/* harmony import */ var primeng_steps__WEBPACK_IMPORTED_MODULE_116__ = __webpack_require__(/*! primeng/steps */ 72420);
-/* harmony import */ var primeng_tabmenu__WEBPACK_IMPORTED_MODULE_118__ = __webpack_require__(/*! primeng/tabmenu */ 67077);
-/* harmony import */ var primeng_table__WEBPACK_IMPORTED_MODULE_117__ = __webpack_require__(/*! primeng/table */ 17485);
-/* harmony import */ var primeng_tabview__WEBPACK_IMPORTED_MODULE_119__ = __webpack_require__(/*! primeng/tabview */ 79504);
-/* harmony import */ var primeng_tag__WEBPACK_IMPORTED_MODULE_120__ = __webpack_require__(/*! primeng/tag */ 33042);
-/* harmony import */ var primeng_terminal__WEBPACK_IMPORTED_MODULE_121__ = __webpack_require__(/*! primeng/terminal */ 39128);
-/* harmony import */ var primeng_tieredmenu__WEBPACK_IMPORTED_MODULE_122__ = __webpack_require__(/*! primeng/tieredmenu */ 51487);
-/* harmony import */ var primeng_timeline__WEBPACK_IMPORTED_MODULE_123__ = __webpack_require__(/*! primeng/timeline */ 76687);
-/* harmony import */ var primeng_toast__WEBPACK_IMPORTED_MODULE_124__ = __webpack_require__(/*! primeng/toast */ 29129);
-/* harmony import */ var primeng_togglebutton__WEBPACK_IMPORTED_MODULE_125__ = __webpack_require__(/*! primeng/togglebutton */ 95293);
-/* harmony import */ var primeng_toolbar__WEBPACK_IMPORTED_MODULE_126__ = __webpack_require__(/*! primeng/toolbar */ 44575);
-/* harmony import */ var primeng_tooltip__WEBPACK_IMPORTED_MODULE_127__ = __webpack_require__(/*! primeng/tooltip */ 24329);
-/* harmony import */ var primeng_tristatecheckbox__WEBPACK_IMPORTED_MODULE_128__ = __webpack_require__(/*! primeng/tristatecheckbox */ 61604);
-/* harmony import */ var primeng_tree__WEBPACK_IMPORTED_MODULE_129__ = __webpack_require__(/*! primeng/tree */ 93449);
-/* harmony import */ var primeng_treeselect__WEBPACK_IMPORTED_MODULE_130__ = __webpack_require__(/*! primeng/treeselect */ 64016);
-/* harmony import */ var primeng_treetable__WEBPACK_IMPORTED_MODULE_131__ = __webpack_require__(/*! primeng/treetable */ 92385);
-/* harmony import */ var primeng_animate__WEBPACK_IMPORTED_MODULE_132__ = __webpack_require__(/*! primeng/animate */ 70498);
-/* harmony import */ var primeng_card__WEBPACK_IMPORTED_MODULE_133__ = __webpack_require__(/*! primeng/card */ 34357);
-/* harmony import */ var primeng_blockui__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! primeng/blockui */ 40081);
-/* harmony import */ var primeng_progressspinner__WEBPACK_IMPORTED_MODULE_100__ = __webpack_require__(/*! primeng/progressspinner */ 22901);
+/* harmony import */ var primeng_accordion__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! primeng/accordion */ 79854);
+/* harmony import */ var primeng_autocomplete__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! primeng/autocomplete */ 75630);
+/* harmony import */ var primeng_avatar__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! primeng/avatar */ 37063);
+/* harmony import */ var primeng_avatargroup__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! primeng/avatargroup */ 11385);
+/* harmony import */ var primeng_badge__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! primeng/badge */ 52381);
+/* harmony import */ var primeng_breadcrumb__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! primeng/breadcrumb */ 47298);
+/* harmony import */ var primeng_button__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! primeng/button */ 76328);
+/* harmony import */ var primeng_calendar__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! primeng/calendar */ 32547);
+/* harmony import */ var primeng_carousel__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! primeng/carousel */ 8707);
+/* harmony import */ var primeng_cascadeselect__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! primeng/cascadeselect */ 78671);
+/* harmony import */ var primeng_chart__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! primeng/chart */ 62348);
+/* harmony import */ var primeng_checkbox__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! primeng/checkbox */ 40749);
+/* harmony import */ var primeng_chip__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! primeng/chip */ 80287);
+/* harmony import */ var primeng_chips__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! primeng/chips */ 65980);
+/* harmony import */ var primeng_confirmdialog__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! primeng/confirmdialog */ 60097);
+/* harmony import */ var primeng_colorpicker__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! primeng/colorpicker */ 26303);
+/* harmony import */ var primeng_contextmenu__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! primeng/contextmenu */ 55945);
+/* harmony import */ var primeng_dataview__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! primeng/dataview */ 81233);
+/* harmony import */ var primeng_virtualscroller__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! primeng/virtualscroller */ 58476);
+/* harmony import */ var primeng_dialog__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! primeng/dialog */ 1837);
+/* harmony import */ var primeng_divider__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! primeng/divider */ 1154);
+/* harmony import */ var primeng_dock__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! primeng/dock */ 41706);
+/* harmony import */ var primeng_dragdrop__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! primeng/dragdrop */ 92281);
+/* harmony import */ var primeng_dropdown__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! primeng/dropdown */ 38992);
+/* harmony import */ var primeng_dynamicdialog__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! primeng/dynamicdialog */ 62648);
+/* harmony import */ var primeng_fieldset__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! primeng/fieldset */ 94619);
+/* harmony import */ var primeng_fileupload__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! primeng/fileupload */ 16193);
+/* harmony import */ var primeng_galleria__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! primeng/galleria */ 70806);
+/* harmony import */ var primeng_inplace__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! primeng/inplace */ 82116);
+/* harmony import */ var primeng_inputmask__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! primeng/inputmask */ 51227);
+/* harmony import */ var primeng_inputswitch__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! primeng/inputswitch */ 13585);
+/* harmony import */ var primeng_inputtext__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! primeng/inputtext */ 69906);
+/* harmony import */ var primeng_inputnumber__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! primeng/inputnumber */ 87990);
+/* harmony import */ var primeng_inputtextarea__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! primeng/inputtextarea */ 71102);
+/* harmony import */ var primeng_image__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! primeng/image */ 21478);
+/* harmony import */ var primeng_knob__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! primeng/knob */ 74397);
+/* harmony import */ var primeng_listbox__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! primeng/listbox */ 2210);
+/* harmony import */ var primeng_megamenu__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! primeng/megamenu */ 66792);
+/* harmony import */ var primeng_menu__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! primeng/menu */ 60625);
+/* harmony import */ var primeng_menubar__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! primeng/menubar */ 80552);
+/* harmony import */ var primeng_message__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(/*! primeng/message */ 73589);
+/* harmony import */ var primeng_messages__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(/*! primeng/messages */ 58547);
+/* harmony import */ var primeng_multiselect__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! primeng/multiselect */ 30850);
+/* harmony import */ var primeng_orderlist__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! primeng/orderlist */ 67397);
+/* harmony import */ var primeng_organizationchart__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! primeng/organizationchart */ 95918);
+/* harmony import */ var primeng_overlaypanel__WEBPACK_IMPORTED_MODULE_95__ = __webpack_require__(/*! primeng/overlaypanel */ 16664);
+/* harmony import */ var primeng_paginator__WEBPACK_IMPORTED_MODULE_96__ = __webpack_require__(/*! primeng/paginator */ 42722);
+/* harmony import */ var primeng_panel__WEBPACK_IMPORTED_MODULE_97__ = __webpack_require__(/*! primeng/panel */ 24266);
+/* harmony import */ var primeng_panelmenu__WEBPACK_IMPORTED_MODULE_98__ = __webpack_require__(/*! primeng/panelmenu */ 39028);
+/* harmony import */ var primeng_password__WEBPACK_IMPORTED_MODULE_99__ = __webpack_require__(/*! primeng/password */ 68848);
+/* harmony import */ var primeng_picklist__WEBPACK_IMPORTED_MODULE_100__ = __webpack_require__(/*! primeng/picklist */ 19238);
+/* harmony import */ var primeng_progressbar__WEBPACK_IMPORTED_MODULE_102__ = __webpack_require__(/*! primeng/progressbar */ 88395);
+/* harmony import */ var primeng_radiobutton__WEBPACK_IMPORTED_MODULE_103__ = __webpack_require__(/*! primeng/radiobutton */ 69902);
+/* harmony import */ var primeng_rating__WEBPACK_IMPORTED_MODULE_104__ = __webpack_require__(/*! primeng/rating */ 62415);
+/* harmony import */ var primeng_scroller__WEBPACK_IMPORTED_MODULE_107__ = __webpack_require__(/*! primeng/scroller */ 73705);
+/* harmony import */ var primeng_scrollpanel__WEBPACK_IMPORTED_MODULE_108__ = __webpack_require__(/*! primeng/scrollpanel */ 14250);
+/* harmony import */ var primeng_scrolltop__WEBPACK_IMPORTED_MODULE_109__ = __webpack_require__(/*! primeng/scrolltop */ 68933);
+/* harmony import */ var primeng_selectbutton__WEBPACK_IMPORTED_MODULE_105__ = __webpack_require__(/*! primeng/selectbutton */ 70205);
+/* harmony import */ var primeng_sidebar__WEBPACK_IMPORTED_MODULE_106__ = __webpack_require__(/*! primeng/sidebar */ 34179);
+/* harmony import */ var primeng_skeleton__WEBPACK_IMPORTED_MODULE_110__ = __webpack_require__(/*! primeng/skeleton */ 32712);
+/* harmony import */ var primeng_slidemenu__WEBPACK_IMPORTED_MODULE_111__ = __webpack_require__(/*! primeng/slidemenu */ 40691);
+/* harmony import */ var primeng_slider__WEBPACK_IMPORTED_MODULE_112__ = __webpack_require__(/*! primeng/slider */ 14950);
+/* harmony import */ var primeng_speeddial__WEBPACK_IMPORTED_MODULE_113__ = __webpack_require__(/*! primeng/speeddial */ 19869);
+/* harmony import */ var primeng_spinner__WEBPACK_IMPORTED_MODULE_114__ = __webpack_require__(/*! primeng/spinner */ 65233);
+/* harmony import */ var primeng_splitbutton__WEBPACK_IMPORTED_MODULE_116__ = __webpack_require__(/*! primeng/splitbutton */ 33650);
+/* harmony import */ var primeng_splitter__WEBPACK_IMPORTED_MODULE_115__ = __webpack_require__(/*! primeng/splitter */ 80330);
+/* harmony import */ var primeng_steps__WEBPACK_IMPORTED_MODULE_117__ = __webpack_require__(/*! primeng/steps */ 72420);
+/* harmony import */ var primeng_tabmenu__WEBPACK_IMPORTED_MODULE_119__ = __webpack_require__(/*! primeng/tabmenu */ 67077);
+/* harmony import */ var primeng_table__WEBPACK_IMPORTED_MODULE_118__ = __webpack_require__(/*! primeng/table */ 17485);
+/* harmony import */ var primeng_tabview__WEBPACK_IMPORTED_MODULE_120__ = __webpack_require__(/*! primeng/tabview */ 79504);
+/* harmony import */ var primeng_tag__WEBPACK_IMPORTED_MODULE_121__ = __webpack_require__(/*! primeng/tag */ 33042);
+/* harmony import */ var primeng_terminal__WEBPACK_IMPORTED_MODULE_122__ = __webpack_require__(/*! primeng/terminal */ 39128);
+/* harmony import */ var primeng_tieredmenu__WEBPACK_IMPORTED_MODULE_123__ = __webpack_require__(/*! primeng/tieredmenu */ 51487);
+/* harmony import */ var primeng_timeline__WEBPACK_IMPORTED_MODULE_124__ = __webpack_require__(/*! primeng/timeline */ 76687);
+/* harmony import */ var primeng_toast__WEBPACK_IMPORTED_MODULE_125__ = __webpack_require__(/*! primeng/toast */ 29129);
+/* harmony import */ var primeng_togglebutton__WEBPACK_IMPORTED_MODULE_126__ = __webpack_require__(/*! primeng/togglebutton */ 95293);
+/* harmony import */ var primeng_toolbar__WEBPACK_IMPORTED_MODULE_127__ = __webpack_require__(/*! primeng/toolbar */ 44575);
+/* harmony import */ var primeng_tooltip__WEBPACK_IMPORTED_MODULE_128__ = __webpack_require__(/*! primeng/tooltip */ 24329);
+/* harmony import */ var primeng_tristatecheckbox__WEBPACK_IMPORTED_MODULE_129__ = __webpack_require__(/*! primeng/tristatecheckbox */ 61604);
+/* harmony import */ var primeng_tree__WEBPACK_IMPORTED_MODULE_130__ = __webpack_require__(/*! primeng/tree */ 93449);
+/* harmony import */ var primeng_treeselect__WEBPACK_IMPORTED_MODULE_131__ = __webpack_require__(/*! primeng/treeselect */ 64016);
+/* harmony import */ var primeng_treetable__WEBPACK_IMPORTED_MODULE_132__ = __webpack_require__(/*! primeng/treetable */ 92385);
+/* harmony import */ var primeng_animate__WEBPACK_IMPORTED_MODULE_133__ = __webpack_require__(/*! primeng/animate */ 70498);
+/* harmony import */ var primeng_card__WEBPACK_IMPORTED_MODULE_134__ = __webpack_require__(/*! primeng/card */ 34357);
+/* harmony import */ var primeng_blockui__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! primeng/blockui */ 40081);
+/* harmony import */ var primeng_progressspinner__WEBPACK_IMPORTED_MODULE_101__ = __webpack_require__(/*! primeng/progressspinner */ 22901);
 /* harmony import */ var _pages_edit_document_edit_document_edit_document_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./pages/edit-document/edit-document/edit-document.component */ 66031);
-/* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_137__ = __webpack_require__(/*! @auth0/angular-jwt */ 4467);
+/* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_138__ = __webpack_require__(/*! @auth0/angular-jwt */ 4467);
 /* harmony import */ var _modules_logout_logout_logout_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./modules/logout/logout/logout.component */ 23019);
 /* harmony import */ var _pages_create_document_create_document_create_document_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./pages/create-document/create-document/create-document.component */ 29603);
 /* harmony import */ var _pages_create_document_create_billing_form_create_billing_form_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./pages/create-document/create-billing-form/create-billing-form.component */ 34246);
 /* harmony import */ var _pages_create_document_create_document_table_items_create_document_table_items_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./pages/create-document/create-document-table-items/create-document-table-items.component */ 61503);
 /* harmony import */ var _components_loading_loading_loading_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./components/loading/loading/loading.component */ 52353);
 /* harmony import */ var _components_delete_delete_item_delete_item_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./components/delete/delete-item/delete-item.component */ 43189);
-/* harmony import */ var primeng_api__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! primeng/api */ 14356);
+/* harmony import */ var primeng_api__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! primeng/api */ 14356);
 /* harmony import */ var _pages_edit_document_edit_billing_form_edit_billing_form_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./pages/edit-document/edit-billing-form/edit-billing-form.component */ 88695);
 /* harmony import */ var _pages_edit_document_edit_document_table_items_edit_document_table_items_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./pages/edit-document/edit-document-table-items/edit-document-table-items.component */ 5519);
 /* harmony import */ var _components_edit_client_modal_edit_client_modal_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./components/edit-client-modal/edit-client-modal.component */ 22434);
 /* harmony import */ var _modules_registration_registration_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./modules/registration/registration.component */ 43891);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_138__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var _modules_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./modules/reset-password/reset-password.component */ 50978);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_139__ = __webpack_require__(/*! @angular/router */ 60124);
 
 
 
@@ -462,33 +469,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-(0,_angular_common__WEBPACK_IMPORTED_MODULE_40__.registerLocaleData)(_angular_common_locales_en__WEBPACK_IMPORTED_MODULE_41__["default"], 'en-EN');
+
+(0,_angular_common__WEBPACK_IMPORTED_MODULE_41__.registerLocaleData)(_angular_common_locales_en__WEBPACK_IMPORTED_MODULE_42__["default"], 'en-EN');
 class AppModule {
   static #_ = this.ɵfac = function AppModule_Factory(t) {
     return new (t || AppModule)();
   };
-  static #_2 = this.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_42__["ɵɵdefineNgModule"]({
+  static #_2 = this.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_43__["ɵɵdefineNgModule"]({
     type: AppModule,
     bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__.AppComponent, _components_documments_listing_documments_listing_component__WEBPACK_IMPORTED_MODULE_28__.DocummentsListingComponent]
   });
-  static #_3 = this.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_42__["ɵɵdefineInjector"]({
+  static #_3 = this.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_43__["ɵɵdefineInjector"]({
     providers: [{
-      provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_43__.HTTP_INTERCEPTORS,
+      provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_44__.HTTP_INTERCEPTORS,
       useClass: _loading_interceptor__WEBPACK_IMPORTED_MODULE_0__.LoadingInterceptor,
       multi: true
-    }, primeng_api__WEBPACK_IMPORTED_MODULE_44__.ConfirmationService, primeng_api__WEBPACK_IMPORTED_MODULE_44__.MessageService, {
-      provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_43__.HTTP_INTERCEPTORS,
+    }, primeng_api__WEBPACK_IMPORTED_MODULE_45__.ConfirmationService, primeng_api__WEBPACK_IMPORTED_MODULE_45__.MessageService, {
+      provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_44__.HTTP_INTERCEPTORS,
       useClass: _services_Auth_AuthInterceptor_auth_interceptor_interceptor__WEBPACK_IMPORTED_MODULE_1__.AuthInterceptorInterceptor,
       multi: true
     }],
-    imports: [primeng_avatar__WEBPACK_IMPORTED_MODULE_45__.AvatarModule, primeng_avatargroup__WEBPACK_IMPORTED_MODULE_46__.AvatarGroupModule, _angular_platform_browser__WEBPACK_IMPORTED_MODULE_47__.BrowserModule, _angular_forms__WEBPACK_IMPORTED_MODULE_48__.FormsModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_43__.HttpClientModule, _angular_forms__WEBPACK_IMPORTED_MODULE_48__.ReactiveFormsModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_49__.BrowserAnimationsModule, primeng_accordion__WEBPACK_IMPORTED_MODULE_50__.AccordionModule, primeng_autocomplete__WEBPACK_IMPORTED_MODULE_51__.AutoCompleteModule, primeng_badge__WEBPACK_IMPORTED_MODULE_52__.BadgeModule, primeng_breadcrumb__WEBPACK_IMPORTED_MODULE_53__.BreadcrumbModule, primeng_blockui__WEBPACK_IMPORTED_MODULE_54__.BlockUIModule, primeng_button__WEBPACK_IMPORTED_MODULE_55__.ButtonModule, primeng_calendar__WEBPACK_IMPORTED_MODULE_56__.CalendarModule, primeng_carousel__WEBPACK_IMPORTED_MODULE_57__.CarouselModule, primeng_cascadeselect__WEBPACK_IMPORTED_MODULE_58__.CascadeSelectModule, primeng_chart__WEBPACK_IMPORTED_MODULE_59__.ChartModule, primeng_checkbox__WEBPACK_IMPORTED_MODULE_60__.CheckboxModule, primeng_chips__WEBPACK_IMPORTED_MODULE_61__.ChipsModule, primeng_chip__WEBPACK_IMPORTED_MODULE_62__.ChipModule, primeng_colorpicker__WEBPACK_IMPORTED_MODULE_63__.ColorPickerModule, primeng_confirmdialog__WEBPACK_IMPORTED_MODULE_64__.ConfirmDialogModule, primeng_contextmenu__WEBPACK_IMPORTED_MODULE_65__.ContextMenuModule, primeng_virtualscroller__WEBPACK_IMPORTED_MODULE_66__.VirtualScrollerModule, primeng_dataview__WEBPACK_IMPORTED_MODULE_67__.DataViewModule, primeng_dialog__WEBPACK_IMPORTED_MODULE_68__.DialogModule, primeng_divider__WEBPACK_IMPORTED_MODULE_69__.DividerModule, primeng_dock__WEBPACK_IMPORTED_MODULE_70__.DockModule, primeng_dragdrop__WEBPACK_IMPORTED_MODULE_71__.DragDropModule, primeng_dropdown__WEBPACK_IMPORTED_MODULE_72__.DropdownModule, primeng_dynamicdialog__WEBPACK_IMPORTED_MODULE_73__.DynamicDialogModule, primeng_fieldset__WEBPACK_IMPORTED_MODULE_74__.FieldsetModule, primeng_fileupload__WEBPACK_IMPORTED_MODULE_75__.FileUploadModule, primeng_galleria__WEBPACK_IMPORTED_MODULE_76__.GalleriaModule, primeng_inplace__WEBPACK_IMPORTED_MODULE_77__.InplaceModule, primeng_inputmask__WEBPACK_IMPORTED_MODULE_78__.InputMaskModule, primeng_inputswitch__WEBPACK_IMPORTED_MODULE_79__.InputSwitchModule, primeng_inputtext__WEBPACK_IMPORTED_MODULE_80__.InputTextModule, primeng_inputtextarea__WEBPACK_IMPORTED_MODULE_81__.InputTextareaModule, primeng_inputnumber__WEBPACK_IMPORTED_MODULE_82__.InputNumberModule, primeng_image__WEBPACK_IMPORTED_MODULE_83__.ImageModule, primeng_knob__WEBPACK_IMPORTED_MODULE_84__.KnobModule, primeng_listbox__WEBPACK_IMPORTED_MODULE_85__.ListboxModule, primeng_megamenu__WEBPACK_IMPORTED_MODULE_86__.MegaMenuModule, primeng_menu__WEBPACK_IMPORTED_MODULE_87__.MenuModule, primeng_menubar__WEBPACK_IMPORTED_MODULE_88__.MenubarModule, primeng_message__WEBPACK_IMPORTED_MODULE_89__.MessageModule, primeng_messages__WEBPACK_IMPORTED_MODULE_90__.MessagesModule, primeng_multiselect__WEBPACK_IMPORTED_MODULE_91__.MultiSelectModule, primeng_organizationchart__WEBPACK_IMPORTED_MODULE_92__.OrganizationChartModule, primeng_orderlist__WEBPACK_IMPORTED_MODULE_93__.OrderListModule, primeng_overlaypanel__WEBPACK_IMPORTED_MODULE_94__.OverlayPanelModule, primeng_paginator__WEBPACK_IMPORTED_MODULE_95__.PaginatorModule, primeng_panel__WEBPACK_IMPORTED_MODULE_96__.PanelModule, primeng_panelmenu__WEBPACK_IMPORTED_MODULE_97__.PanelMenuModule, primeng_password__WEBPACK_IMPORTED_MODULE_98__.PasswordModule, primeng_picklist__WEBPACK_IMPORTED_MODULE_99__.PickListModule, primeng_progressspinner__WEBPACK_IMPORTED_MODULE_100__.ProgressSpinnerModule, primeng_progressbar__WEBPACK_IMPORTED_MODULE_101__.ProgressBarModule, primeng_radiobutton__WEBPACK_IMPORTED_MODULE_102__.RadioButtonModule, primeng_rating__WEBPACK_IMPORTED_MODULE_103__.RatingModule, primeng_selectbutton__WEBPACK_IMPORTED_MODULE_104__.SelectButtonModule, primeng_sidebar__WEBPACK_IMPORTED_MODULE_105__.SidebarModule, primeng_scroller__WEBPACK_IMPORTED_MODULE_106__.ScrollerModule, primeng_scrollpanel__WEBPACK_IMPORTED_MODULE_107__.ScrollPanelModule, primeng_scrolltop__WEBPACK_IMPORTED_MODULE_108__.ScrollTopModule, primeng_skeleton__WEBPACK_IMPORTED_MODULE_109__.SkeletonModule, primeng_slidemenu__WEBPACK_IMPORTED_MODULE_110__.SlideMenuModule, primeng_slider__WEBPACK_IMPORTED_MODULE_111__.SliderModule, primeng_speeddial__WEBPACK_IMPORTED_MODULE_112__.SpeedDialModule, primeng_spinner__WEBPACK_IMPORTED_MODULE_113__.SpinnerModule, primeng_splitter__WEBPACK_IMPORTED_MODULE_114__.SplitterModule, primeng_splitbutton__WEBPACK_IMPORTED_MODULE_115__.SplitButtonModule, primeng_steps__WEBPACK_IMPORTED_MODULE_116__.StepsModule, primeng_table__WEBPACK_IMPORTED_MODULE_117__.TableModule, primeng_tabmenu__WEBPACK_IMPORTED_MODULE_118__.TabMenuModule, primeng_tabview__WEBPACK_IMPORTED_MODULE_119__.TabViewModule, primeng_tag__WEBPACK_IMPORTED_MODULE_120__.TagModule, primeng_terminal__WEBPACK_IMPORTED_MODULE_121__.TerminalModule, primeng_tieredmenu__WEBPACK_IMPORTED_MODULE_122__.TieredMenuModule, primeng_timeline__WEBPACK_IMPORTED_MODULE_123__.TimelineModule, primeng_toast__WEBPACK_IMPORTED_MODULE_124__.ToastModule, primeng_togglebutton__WEBPACK_IMPORTED_MODULE_125__.ToggleButtonModule, primeng_toolbar__WEBPACK_IMPORTED_MODULE_126__.ToolbarModule, primeng_tooltip__WEBPACK_IMPORTED_MODULE_127__.TooltipModule, primeng_tristatecheckbox__WEBPACK_IMPORTED_MODULE_128__.TriStateCheckboxModule, primeng_tree__WEBPACK_IMPORTED_MODULE_129__.TreeModule, primeng_treeselect__WEBPACK_IMPORTED_MODULE_130__.TreeSelectModule, primeng_treetable__WEBPACK_IMPORTED_MODULE_131__.TreeTableModule, primeng_animate__WEBPACK_IMPORTED_MODULE_132__.AnimateModule, primeng_card__WEBPACK_IMPORTED_MODULE_133__.CardModule, _profabric_angular_components__WEBPACK_IMPORTED_MODULE_134__.ProfabricComponentsModule, _angular_common__WEBPACK_IMPORTED_MODULE_40__.CommonModule, _angular_platform_browser__WEBPACK_IMPORTED_MODULE_47__.BrowserModule, _ngrx_store__WEBPACK_IMPORTED_MODULE_135__.StoreModule.forRoot({
+    imports: [primeng_avatar__WEBPACK_IMPORTED_MODULE_46__.AvatarModule, primeng_avatargroup__WEBPACK_IMPORTED_MODULE_47__.AvatarGroupModule, _angular_platform_browser__WEBPACK_IMPORTED_MODULE_48__.BrowserModule, _angular_forms__WEBPACK_IMPORTED_MODULE_49__.FormsModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_44__.HttpClientModule, _angular_forms__WEBPACK_IMPORTED_MODULE_49__.ReactiveFormsModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_50__.BrowserAnimationsModule, primeng_accordion__WEBPACK_IMPORTED_MODULE_51__.AccordionModule, primeng_autocomplete__WEBPACK_IMPORTED_MODULE_52__.AutoCompleteModule, primeng_badge__WEBPACK_IMPORTED_MODULE_53__.BadgeModule, primeng_breadcrumb__WEBPACK_IMPORTED_MODULE_54__.BreadcrumbModule, primeng_blockui__WEBPACK_IMPORTED_MODULE_55__.BlockUIModule, primeng_button__WEBPACK_IMPORTED_MODULE_56__.ButtonModule, primeng_calendar__WEBPACK_IMPORTED_MODULE_57__.CalendarModule, primeng_carousel__WEBPACK_IMPORTED_MODULE_58__.CarouselModule, primeng_cascadeselect__WEBPACK_IMPORTED_MODULE_59__.CascadeSelectModule, primeng_chart__WEBPACK_IMPORTED_MODULE_60__.ChartModule, primeng_checkbox__WEBPACK_IMPORTED_MODULE_61__.CheckboxModule, primeng_chips__WEBPACK_IMPORTED_MODULE_62__.ChipsModule, primeng_chip__WEBPACK_IMPORTED_MODULE_63__.ChipModule, primeng_colorpicker__WEBPACK_IMPORTED_MODULE_64__.ColorPickerModule, primeng_confirmdialog__WEBPACK_IMPORTED_MODULE_65__.ConfirmDialogModule, primeng_contextmenu__WEBPACK_IMPORTED_MODULE_66__.ContextMenuModule, primeng_virtualscroller__WEBPACK_IMPORTED_MODULE_67__.VirtualScrollerModule, primeng_dataview__WEBPACK_IMPORTED_MODULE_68__.DataViewModule, primeng_dialog__WEBPACK_IMPORTED_MODULE_69__.DialogModule, primeng_divider__WEBPACK_IMPORTED_MODULE_70__.DividerModule, primeng_dock__WEBPACK_IMPORTED_MODULE_71__.DockModule, primeng_dragdrop__WEBPACK_IMPORTED_MODULE_72__.DragDropModule, primeng_dropdown__WEBPACK_IMPORTED_MODULE_73__.DropdownModule, primeng_dynamicdialog__WEBPACK_IMPORTED_MODULE_74__.DynamicDialogModule, primeng_fieldset__WEBPACK_IMPORTED_MODULE_75__.FieldsetModule, primeng_fileupload__WEBPACK_IMPORTED_MODULE_76__.FileUploadModule, primeng_galleria__WEBPACK_IMPORTED_MODULE_77__.GalleriaModule, primeng_inplace__WEBPACK_IMPORTED_MODULE_78__.InplaceModule, primeng_inputmask__WEBPACK_IMPORTED_MODULE_79__.InputMaskModule, primeng_inputswitch__WEBPACK_IMPORTED_MODULE_80__.InputSwitchModule, primeng_inputtext__WEBPACK_IMPORTED_MODULE_81__.InputTextModule, primeng_inputtextarea__WEBPACK_IMPORTED_MODULE_82__.InputTextareaModule, primeng_inputnumber__WEBPACK_IMPORTED_MODULE_83__.InputNumberModule, primeng_image__WEBPACK_IMPORTED_MODULE_84__.ImageModule, primeng_knob__WEBPACK_IMPORTED_MODULE_85__.KnobModule, primeng_listbox__WEBPACK_IMPORTED_MODULE_86__.ListboxModule, primeng_megamenu__WEBPACK_IMPORTED_MODULE_87__.MegaMenuModule, primeng_menu__WEBPACK_IMPORTED_MODULE_88__.MenuModule, primeng_menubar__WEBPACK_IMPORTED_MODULE_89__.MenubarModule, primeng_message__WEBPACK_IMPORTED_MODULE_90__.MessageModule, primeng_messages__WEBPACK_IMPORTED_MODULE_91__.MessagesModule, primeng_multiselect__WEBPACK_IMPORTED_MODULE_92__.MultiSelectModule, primeng_organizationchart__WEBPACK_IMPORTED_MODULE_93__.OrganizationChartModule, primeng_orderlist__WEBPACK_IMPORTED_MODULE_94__.OrderListModule, primeng_overlaypanel__WEBPACK_IMPORTED_MODULE_95__.OverlayPanelModule, primeng_paginator__WEBPACK_IMPORTED_MODULE_96__.PaginatorModule, primeng_panel__WEBPACK_IMPORTED_MODULE_97__.PanelModule, primeng_panelmenu__WEBPACK_IMPORTED_MODULE_98__.PanelMenuModule, primeng_password__WEBPACK_IMPORTED_MODULE_99__.PasswordModule, primeng_picklist__WEBPACK_IMPORTED_MODULE_100__.PickListModule, primeng_progressspinner__WEBPACK_IMPORTED_MODULE_101__.ProgressSpinnerModule, primeng_progressbar__WEBPACK_IMPORTED_MODULE_102__.ProgressBarModule, primeng_radiobutton__WEBPACK_IMPORTED_MODULE_103__.RadioButtonModule, primeng_rating__WEBPACK_IMPORTED_MODULE_104__.RatingModule, primeng_selectbutton__WEBPACK_IMPORTED_MODULE_105__.SelectButtonModule, primeng_sidebar__WEBPACK_IMPORTED_MODULE_106__.SidebarModule, primeng_scroller__WEBPACK_IMPORTED_MODULE_107__.ScrollerModule, primeng_scrollpanel__WEBPACK_IMPORTED_MODULE_108__.ScrollPanelModule, primeng_scrolltop__WEBPACK_IMPORTED_MODULE_109__.ScrollTopModule, primeng_skeleton__WEBPACK_IMPORTED_MODULE_110__.SkeletonModule, primeng_slidemenu__WEBPACK_IMPORTED_MODULE_111__.SlideMenuModule, primeng_slider__WEBPACK_IMPORTED_MODULE_112__.SliderModule, primeng_speeddial__WEBPACK_IMPORTED_MODULE_113__.SpeedDialModule, primeng_spinner__WEBPACK_IMPORTED_MODULE_114__.SpinnerModule, primeng_splitter__WEBPACK_IMPORTED_MODULE_115__.SplitterModule, primeng_splitbutton__WEBPACK_IMPORTED_MODULE_116__.SplitButtonModule, primeng_steps__WEBPACK_IMPORTED_MODULE_117__.StepsModule, primeng_table__WEBPACK_IMPORTED_MODULE_118__.TableModule, primeng_tabmenu__WEBPACK_IMPORTED_MODULE_119__.TabMenuModule, primeng_tabview__WEBPACK_IMPORTED_MODULE_120__.TabViewModule, primeng_tag__WEBPACK_IMPORTED_MODULE_121__.TagModule, primeng_terminal__WEBPACK_IMPORTED_MODULE_122__.TerminalModule, primeng_tieredmenu__WEBPACK_IMPORTED_MODULE_123__.TieredMenuModule, primeng_timeline__WEBPACK_IMPORTED_MODULE_124__.TimelineModule, primeng_toast__WEBPACK_IMPORTED_MODULE_125__.ToastModule, primeng_togglebutton__WEBPACK_IMPORTED_MODULE_126__.ToggleButtonModule, primeng_toolbar__WEBPACK_IMPORTED_MODULE_127__.ToolbarModule, primeng_tooltip__WEBPACK_IMPORTED_MODULE_128__.TooltipModule, primeng_tristatecheckbox__WEBPACK_IMPORTED_MODULE_129__.TriStateCheckboxModule, primeng_tree__WEBPACK_IMPORTED_MODULE_130__.TreeModule, primeng_treeselect__WEBPACK_IMPORTED_MODULE_131__.TreeSelectModule, primeng_treetable__WEBPACK_IMPORTED_MODULE_132__.TreeTableModule, primeng_animate__WEBPACK_IMPORTED_MODULE_133__.AnimateModule, primeng_card__WEBPACK_IMPORTED_MODULE_134__.CardModule, _profabric_angular_components__WEBPACK_IMPORTED_MODULE_135__.ProfabricComponentsModule, _angular_common__WEBPACK_IMPORTED_MODULE_41__.CommonModule, _angular_platform_browser__WEBPACK_IMPORTED_MODULE_48__.BrowserModule, _ngrx_store__WEBPACK_IMPORTED_MODULE_136__.StoreModule.forRoot({
       auth: _store_auth_reducer__WEBPACK_IMPORTED_MODULE_18__.authReducer,
       ui: _store_ui_reducer__WEBPACK_IMPORTED_MODULE_19__.uiReducer
-    }), _angular_common_http__WEBPACK_IMPORTED_MODULE_43__.HttpClientModule, _angular_forms__WEBPACK_IMPORTED_MODULE_48__.FormsModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_2__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_48__.ReactiveFormsModule, ngx_toastr__WEBPACK_IMPORTED_MODULE_136__.ToastrModule.forRoot({
+    }), _angular_common_http__WEBPACK_IMPORTED_MODULE_44__.HttpClientModule, _angular_forms__WEBPACK_IMPORTED_MODULE_49__.FormsModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_2__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_49__.ReactiveFormsModule, ngx_toastr__WEBPACK_IMPORTED_MODULE_137__.ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
       preventDuplicates: true
-    }), _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_137__.JwtModule.forRoot({
+    }), _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_138__.JwtModule.forRoot({
       config: {
         tokenGetter: () => {
           return localStorage.getItem('token');
@@ -501,13 +509,13 @@ class AppModule {
 }
 
 (function () {
-  (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_42__["ɵɵsetNgModuleScope"](AppModule, {
-    declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__.AppComponent, _modules_main_main_component__WEBPACK_IMPORTED_MODULE_4__.MainComponent, _modules_main_header_header_component__WEBPACK_IMPORTED_MODULE_6__.HeaderComponent, _modules_main_footer_footer_component__WEBPACK_IMPORTED_MODULE_7__.FooterComponent, _modules_main_menu_sidebar_menu_sidebar_component__WEBPACK_IMPORTED_MODULE_8__.MenuSidebarComponent, _pages_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_9__.DashboardComponent, _modules_main_header_messages_messages_component__WEBPACK_IMPORTED_MODULE_10__.MessagesComponent, _modules_main_header_notifications_notifications_component__WEBPACK_IMPORTED_MODULE_11__.NotificationsComponent, _modules_main_header_user_user_component__WEBPACK_IMPORTED_MODULE_12__.UserComponent, _modules_main_header_language_language_component__WEBPACK_IMPORTED_MODULE_13__.LanguageComponent, _pages_main_menu_main_menu_component__WEBPACK_IMPORTED_MODULE_14__.MainMenuComponent, _pages_main_menu_sub_menu_sub_menu_component__WEBPACK_IMPORTED_MODULE_15__.SubMenuComponent, _components_menu_item_menu_item_component__WEBPACK_IMPORTED_MODULE_16__.MenuItemComponent, _modules_main_control_sidebar_control_sidebar_component__WEBPACK_IMPORTED_MODULE_17__.ControlSidebarComponent, _components_sidebar_search_sidebar_search_component__WEBPACK_IMPORTED_MODULE_20__.SidebarSearchComponent, _pages_dashboard_chartjs_chartjs_component__WEBPACK_IMPORTED_MODULE_21__.ChartjsComponent, _pages_admin_admin_component__WEBPACK_IMPORTED_MODULE_22__.AdminComponent, _pages_products_products_component__WEBPACK_IMPORTED_MODULE_24__.ProductsComponent, _pages_clients_clients_component__WEBPACK_IMPORTED_MODULE_25__.ClientsComponent, _pages_users_users_component__WEBPACK_IMPORTED_MODULE_26__.UsersComponent, _pages_settings_settings_component__WEBPACK_IMPORTED_MODULE_23__.SettingsComponent, _components_add_client_modal_add_client_modal_component__WEBPACK_IMPORTED_MODULE_27__.AddClientModalComponent, _components_documments_listing_documments_listing_component__WEBPACK_IMPORTED_MODULE_28__.DocummentsListingComponent, _pages_edit_document_edit_document_edit_document_component__WEBPACK_IMPORTED_MODULE_29__.EditDocumentComponent, _modules_login_login_component__WEBPACK_IMPORTED_MODULE_5__.LoginComponent, _modules_logout_logout_logout_component__WEBPACK_IMPORTED_MODULE_30__.LogoutComponent, _pages_create_document_create_document_create_document_component__WEBPACK_IMPORTED_MODULE_31__.CreateDocumentComponent, _pages_create_document_create_billing_form_create_billing_form_component__WEBPACK_IMPORTED_MODULE_32__.CreateBillingFormComponent, _pages_create_document_create_document_table_items_create_document_table_items_component__WEBPACK_IMPORTED_MODULE_33__.CreateDocumentTableItemsComponent, _components_loading_loading_loading_component__WEBPACK_IMPORTED_MODULE_34__.LoadingComponent, _components_delete_delete_item_delete_item_component__WEBPACK_IMPORTED_MODULE_35__.DeleteItemComponent, _pages_edit_document_edit_billing_form_edit_billing_form_component__WEBPACK_IMPORTED_MODULE_36__.EditBillingFormComponent, _pages_edit_document_edit_document_table_items_edit_document_table_items_component__WEBPACK_IMPORTED_MODULE_37__.EditDocumentTableItemsComponent, _components_edit_client_modal_edit_client_modal_component__WEBPACK_IMPORTED_MODULE_38__.EditClientModalComponent, _modules_registration_registration_component__WEBPACK_IMPORTED_MODULE_39__.RegistrationComponent],
-    imports: [primeng_avatar__WEBPACK_IMPORTED_MODULE_45__.AvatarModule, primeng_avatargroup__WEBPACK_IMPORTED_MODULE_46__.AvatarGroupModule, _angular_platform_browser__WEBPACK_IMPORTED_MODULE_47__.BrowserModule, _angular_forms__WEBPACK_IMPORTED_MODULE_48__.FormsModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_43__.HttpClientModule, _angular_forms__WEBPACK_IMPORTED_MODULE_48__.ReactiveFormsModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_49__.BrowserAnimationsModule, primeng_accordion__WEBPACK_IMPORTED_MODULE_50__.AccordionModule, primeng_autocomplete__WEBPACK_IMPORTED_MODULE_51__.AutoCompleteModule, primeng_badge__WEBPACK_IMPORTED_MODULE_52__.BadgeModule, primeng_breadcrumb__WEBPACK_IMPORTED_MODULE_53__.BreadcrumbModule, primeng_blockui__WEBPACK_IMPORTED_MODULE_54__.BlockUIModule, primeng_button__WEBPACK_IMPORTED_MODULE_55__.ButtonModule, primeng_calendar__WEBPACK_IMPORTED_MODULE_56__.CalendarModule, primeng_carousel__WEBPACK_IMPORTED_MODULE_57__.CarouselModule, primeng_cascadeselect__WEBPACK_IMPORTED_MODULE_58__.CascadeSelectModule, primeng_chart__WEBPACK_IMPORTED_MODULE_59__.ChartModule, primeng_checkbox__WEBPACK_IMPORTED_MODULE_60__.CheckboxModule, primeng_chips__WEBPACK_IMPORTED_MODULE_61__.ChipsModule, primeng_chip__WEBPACK_IMPORTED_MODULE_62__.ChipModule, primeng_colorpicker__WEBPACK_IMPORTED_MODULE_63__.ColorPickerModule, primeng_confirmdialog__WEBPACK_IMPORTED_MODULE_64__.ConfirmDialogModule, primeng_contextmenu__WEBPACK_IMPORTED_MODULE_65__.ContextMenuModule, primeng_virtualscroller__WEBPACK_IMPORTED_MODULE_66__.VirtualScrollerModule, primeng_dataview__WEBPACK_IMPORTED_MODULE_67__.DataViewModule, primeng_dialog__WEBPACK_IMPORTED_MODULE_68__.DialogModule, primeng_divider__WEBPACK_IMPORTED_MODULE_69__.DividerModule, primeng_dock__WEBPACK_IMPORTED_MODULE_70__.DockModule, primeng_dragdrop__WEBPACK_IMPORTED_MODULE_71__.DragDropModule, primeng_dropdown__WEBPACK_IMPORTED_MODULE_72__.DropdownModule, primeng_dynamicdialog__WEBPACK_IMPORTED_MODULE_73__.DynamicDialogModule, primeng_fieldset__WEBPACK_IMPORTED_MODULE_74__.FieldsetModule, primeng_fileupload__WEBPACK_IMPORTED_MODULE_75__.FileUploadModule, primeng_galleria__WEBPACK_IMPORTED_MODULE_76__.GalleriaModule, primeng_inplace__WEBPACK_IMPORTED_MODULE_77__.InplaceModule, primeng_inputmask__WEBPACK_IMPORTED_MODULE_78__.InputMaskModule, primeng_inputswitch__WEBPACK_IMPORTED_MODULE_79__.InputSwitchModule, primeng_inputtext__WEBPACK_IMPORTED_MODULE_80__.InputTextModule, primeng_inputtextarea__WEBPACK_IMPORTED_MODULE_81__.InputTextareaModule, primeng_inputnumber__WEBPACK_IMPORTED_MODULE_82__.InputNumberModule, primeng_image__WEBPACK_IMPORTED_MODULE_83__.ImageModule, primeng_knob__WEBPACK_IMPORTED_MODULE_84__.KnobModule, primeng_listbox__WEBPACK_IMPORTED_MODULE_85__.ListboxModule, primeng_megamenu__WEBPACK_IMPORTED_MODULE_86__.MegaMenuModule, primeng_menu__WEBPACK_IMPORTED_MODULE_87__.MenuModule, primeng_menubar__WEBPACK_IMPORTED_MODULE_88__.MenubarModule, primeng_message__WEBPACK_IMPORTED_MODULE_89__.MessageModule, primeng_messages__WEBPACK_IMPORTED_MODULE_90__.MessagesModule, primeng_multiselect__WEBPACK_IMPORTED_MODULE_91__.MultiSelectModule, primeng_organizationchart__WEBPACK_IMPORTED_MODULE_92__.OrganizationChartModule, primeng_orderlist__WEBPACK_IMPORTED_MODULE_93__.OrderListModule, primeng_overlaypanel__WEBPACK_IMPORTED_MODULE_94__.OverlayPanelModule, primeng_paginator__WEBPACK_IMPORTED_MODULE_95__.PaginatorModule, primeng_panel__WEBPACK_IMPORTED_MODULE_96__.PanelModule, primeng_panelmenu__WEBPACK_IMPORTED_MODULE_97__.PanelMenuModule, primeng_password__WEBPACK_IMPORTED_MODULE_98__.PasswordModule, primeng_picklist__WEBPACK_IMPORTED_MODULE_99__.PickListModule, primeng_progressspinner__WEBPACK_IMPORTED_MODULE_100__.ProgressSpinnerModule, primeng_progressbar__WEBPACK_IMPORTED_MODULE_101__.ProgressBarModule, primeng_radiobutton__WEBPACK_IMPORTED_MODULE_102__.RadioButtonModule, primeng_rating__WEBPACK_IMPORTED_MODULE_103__.RatingModule, primeng_selectbutton__WEBPACK_IMPORTED_MODULE_104__.SelectButtonModule, primeng_sidebar__WEBPACK_IMPORTED_MODULE_105__.SidebarModule, primeng_scroller__WEBPACK_IMPORTED_MODULE_106__.ScrollerModule, primeng_scrollpanel__WEBPACK_IMPORTED_MODULE_107__.ScrollPanelModule, primeng_scrolltop__WEBPACK_IMPORTED_MODULE_108__.ScrollTopModule, primeng_skeleton__WEBPACK_IMPORTED_MODULE_109__.SkeletonModule, primeng_slidemenu__WEBPACK_IMPORTED_MODULE_110__.SlideMenuModule, primeng_slider__WEBPACK_IMPORTED_MODULE_111__.SliderModule, primeng_speeddial__WEBPACK_IMPORTED_MODULE_112__.SpeedDialModule, primeng_spinner__WEBPACK_IMPORTED_MODULE_113__.SpinnerModule, primeng_splitter__WEBPACK_IMPORTED_MODULE_114__.SplitterModule, primeng_splitbutton__WEBPACK_IMPORTED_MODULE_115__.SplitButtonModule, primeng_steps__WEBPACK_IMPORTED_MODULE_116__.StepsModule, primeng_table__WEBPACK_IMPORTED_MODULE_117__.TableModule, primeng_tabmenu__WEBPACK_IMPORTED_MODULE_118__.TabMenuModule, primeng_tabview__WEBPACK_IMPORTED_MODULE_119__.TabViewModule, primeng_tag__WEBPACK_IMPORTED_MODULE_120__.TagModule, primeng_terminal__WEBPACK_IMPORTED_MODULE_121__.TerminalModule, primeng_tieredmenu__WEBPACK_IMPORTED_MODULE_122__.TieredMenuModule, primeng_timeline__WEBPACK_IMPORTED_MODULE_123__.TimelineModule, primeng_toast__WEBPACK_IMPORTED_MODULE_124__.ToastModule, primeng_togglebutton__WEBPACK_IMPORTED_MODULE_125__.ToggleButtonModule, primeng_toolbar__WEBPACK_IMPORTED_MODULE_126__.ToolbarModule, primeng_tooltip__WEBPACK_IMPORTED_MODULE_127__.TooltipModule, primeng_tristatecheckbox__WEBPACK_IMPORTED_MODULE_128__.TriStateCheckboxModule, primeng_tree__WEBPACK_IMPORTED_MODULE_129__.TreeModule, primeng_treeselect__WEBPACK_IMPORTED_MODULE_130__.TreeSelectModule, primeng_treetable__WEBPACK_IMPORTED_MODULE_131__.TreeTableModule, primeng_animate__WEBPACK_IMPORTED_MODULE_132__.AnimateModule, primeng_card__WEBPACK_IMPORTED_MODULE_133__.CardModule, _profabric_angular_components__WEBPACK_IMPORTED_MODULE_134__.ProfabricComponentsModule, _angular_common__WEBPACK_IMPORTED_MODULE_40__.CommonModule, _angular_platform_browser__WEBPACK_IMPORTED_MODULE_47__.BrowserModule, _ngrx_store__WEBPACK_IMPORTED_MODULE_135__.StoreRootModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_43__.HttpClientModule, _angular_forms__WEBPACK_IMPORTED_MODULE_48__.FormsModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_2__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_48__.ReactiveFormsModule, ngx_toastr__WEBPACK_IMPORTED_MODULE_136__.ToastrModule, _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_137__.JwtModule]
+  (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_43__["ɵɵsetNgModuleScope"](AppModule, {
+    declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__.AppComponent, _modules_main_main_component__WEBPACK_IMPORTED_MODULE_4__.MainComponent, _modules_main_header_header_component__WEBPACK_IMPORTED_MODULE_6__.HeaderComponent, _modules_main_footer_footer_component__WEBPACK_IMPORTED_MODULE_7__.FooterComponent, _modules_main_menu_sidebar_menu_sidebar_component__WEBPACK_IMPORTED_MODULE_8__.MenuSidebarComponent, _pages_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_9__.DashboardComponent, _modules_main_header_messages_messages_component__WEBPACK_IMPORTED_MODULE_10__.MessagesComponent, _modules_main_header_notifications_notifications_component__WEBPACK_IMPORTED_MODULE_11__.NotificationsComponent, _modules_main_header_user_user_component__WEBPACK_IMPORTED_MODULE_12__.UserComponent, _modules_main_header_language_language_component__WEBPACK_IMPORTED_MODULE_13__.LanguageComponent, _pages_main_menu_main_menu_component__WEBPACK_IMPORTED_MODULE_14__.MainMenuComponent, _pages_main_menu_sub_menu_sub_menu_component__WEBPACK_IMPORTED_MODULE_15__.SubMenuComponent, _components_menu_item_menu_item_component__WEBPACK_IMPORTED_MODULE_16__.MenuItemComponent, _modules_main_control_sidebar_control_sidebar_component__WEBPACK_IMPORTED_MODULE_17__.ControlSidebarComponent, _components_sidebar_search_sidebar_search_component__WEBPACK_IMPORTED_MODULE_20__.SidebarSearchComponent, _pages_dashboard_chartjs_chartjs_component__WEBPACK_IMPORTED_MODULE_21__.ChartjsComponent, _pages_admin_admin_component__WEBPACK_IMPORTED_MODULE_22__.AdminComponent, _pages_products_products_component__WEBPACK_IMPORTED_MODULE_24__.ProductsComponent, _pages_clients_clients_component__WEBPACK_IMPORTED_MODULE_25__.ClientsComponent, _pages_users_users_component__WEBPACK_IMPORTED_MODULE_26__.UsersComponent, _pages_settings_settings_component__WEBPACK_IMPORTED_MODULE_23__.SettingsComponent, _components_add_client_modal_add_client_modal_component__WEBPACK_IMPORTED_MODULE_27__.AddClientModalComponent, _components_documments_listing_documments_listing_component__WEBPACK_IMPORTED_MODULE_28__.DocummentsListingComponent, _pages_edit_document_edit_document_edit_document_component__WEBPACK_IMPORTED_MODULE_29__.EditDocumentComponent, _modules_login_login_component__WEBPACK_IMPORTED_MODULE_5__.LoginComponent, _modules_logout_logout_logout_component__WEBPACK_IMPORTED_MODULE_30__.LogoutComponent, _pages_create_document_create_document_create_document_component__WEBPACK_IMPORTED_MODULE_31__.CreateDocumentComponent, _pages_create_document_create_billing_form_create_billing_form_component__WEBPACK_IMPORTED_MODULE_32__.CreateBillingFormComponent, _pages_create_document_create_document_table_items_create_document_table_items_component__WEBPACK_IMPORTED_MODULE_33__.CreateDocumentTableItemsComponent, _components_loading_loading_loading_component__WEBPACK_IMPORTED_MODULE_34__.LoadingComponent, _components_delete_delete_item_delete_item_component__WEBPACK_IMPORTED_MODULE_35__.DeleteItemComponent, _pages_edit_document_edit_billing_form_edit_billing_form_component__WEBPACK_IMPORTED_MODULE_36__.EditBillingFormComponent, _pages_edit_document_edit_document_table_items_edit_document_table_items_component__WEBPACK_IMPORTED_MODULE_37__.EditDocumentTableItemsComponent, _components_edit_client_modal_edit_client_modal_component__WEBPACK_IMPORTED_MODULE_38__.EditClientModalComponent, _modules_registration_registration_component__WEBPACK_IMPORTED_MODULE_39__.RegistrationComponent, _modules_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_40__.ResetPasswordComponent],
+    imports: [primeng_avatar__WEBPACK_IMPORTED_MODULE_46__.AvatarModule, primeng_avatargroup__WEBPACK_IMPORTED_MODULE_47__.AvatarGroupModule, _angular_platform_browser__WEBPACK_IMPORTED_MODULE_48__.BrowserModule, _angular_forms__WEBPACK_IMPORTED_MODULE_49__.FormsModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_44__.HttpClientModule, _angular_forms__WEBPACK_IMPORTED_MODULE_49__.ReactiveFormsModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_50__.BrowserAnimationsModule, primeng_accordion__WEBPACK_IMPORTED_MODULE_51__.AccordionModule, primeng_autocomplete__WEBPACK_IMPORTED_MODULE_52__.AutoCompleteModule, primeng_badge__WEBPACK_IMPORTED_MODULE_53__.BadgeModule, primeng_breadcrumb__WEBPACK_IMPORTED_MODULE_54__.BreadcrumbModule, primeng_blockui__WEBPACK_IMPORTED_MODULE_55__.BlockUIModule, primeng_button__WEBPACK_IMPORTED_MODULE_56__.ButtonModule, primeng_calendar__WEBPACK_IMPORTED_MODULE_57__.CalendarModule, primeng_carousel__WEBPACK_IMPORTED_MODULE_58__.CarouselModule, primeng_cascadeselect__WEBPACK_IMPORTED_MODULE_59__.CascadeSelectModule, primeng_chart__WEBPACK_IMPORTED_MODULE_60__.ChartModule, primeng_checkbox__WEBPACK_IMPORTED_MODULE_61__.CheckboxModule, primeng_chips__WEBPACK_IMPORTED_MODULE_62__.ChipsModule, primeng_chip__WEBPACK_IMPORTED_MODULE_63__.ChipModule, primeng_colorpicker__WEBPACK_IMPORTED_MODULE_64__.ColorPickerModule, primeng_confirmdialog__WEBPACK_IMPORTED_MODULE_65__.ConfirmDialogModule, primeng_contextmenu__WEBPACK_IMPORTED_MODULE_66__.ContextMenuModule, primeng_virtualscroller__WEBPACK_IMPORTED_MODULE_67__.VirtualScrollerModule, primeng_dataview__WEBPACK_IMPORTED_MODULE_68__.DataViewModule, primeng_dialog__WEBPACK_IMPORTED_MODULE_69__.DialogModule, primeng_divider__WEBPACK_IMPORTED_MODULE_70__.DividerModule, primeng_dock__WEBPACK_IMPORTED_MODULE_71__.DockModule, primeng_dragdrop__WEBPACK_IMPORTED_MODULE_72__.DragDropModule, primeng_dropdown__WEBPACK_IMPORTED_MODULE_73__.DropdownModule, primeng_dynamicdialog__WEBPACK_IMPORTED_MODULE_74__.DynamicDialogModule, primeng_fieldset__WEBPACK_IMPORTED_MODULE_75__.FieldsetModule, primeng_fileupload__WEBPACK_IMPORTED_MODULE_76__.FileUploadModule, primeng_galleria__WEBPACK_IMPORTED_MODULE_77__.GalleriaModule, primeng_inplace__WEBPACK_IMPORTED_MODULE_78__.InplaceModule, primeng_inputmask__WEBPACK_IMPORTED_MODULE_79__.InputMaskModule, primeng_inputswitch__WEBPACK_IMPORTED_MODULE_80__.InputSwitchModule, primeng_inputtext__WEBPACK_IMPORTED_MODULE_81__.InputTextModule, primeng_inputtextarea__WEBPACK_IMPORTED_MODULE_82__.InputTextareaModule, primeng_inputnumber__WEBPACK_IMPORTED_MODULE_83__.InputNumberModule, primeng_image__WEBPACK_IMPORTED_MODULE_84__.ImageModule, primeng_knob__WEBPACK_IMPORTED_MODULE_85__.KnobModule, primeng_listbox__WEBPACK_IMPORTED_MODULE_86__.ListboxModule, primeng_megamenu__WEBPACK_IMPORTED_MODULE_87__.MegaMenuModule, primeng_menu__WEBPACK_IMPORTED_MODULE_88__.MenuModule, primeng_menubar__WEBPACK_IMPORTED_MODULE_89__.MenubarModule, primeng_message__WEBPACK_IMPORTED_MODULE_90__.MessageModule, primeng_messages__WEBPACK_IMPORTED_MODULE_91__.MessagesModule, primeng_multiselect__WEBPACK_IMPORTED_MODULE_92__.MultiSelectModule, primeng_organizationchart__WEBPACK_IMPORTED_MODULE_93__.OrganizationChartModule, primeng_orderlist__WEBPACK_IMPORTED_MODULE_94__.OrderListModule, primeng_overlaypanel__WEBPACK_IMPORTED_MODULE_95__.OverlayPanelModule, primeng_paginator__WEBPACK_IMPORTED_MODULE_96__.PaginatorModule, primeng_panel__WEBPACK_IMPORTED_MODULE_97__.PanelModule, primeng_panelmenu__WEBPACK_IMPORTED_MODULE_98__.PanelMenuModule, primeng_password__WEBPACK_IMPORTED_MODULE_99__.PasswordModule, primeng_picklist__WEBPACK_IMPORTED_MODULE_100__.PickListModule, primeng_progressspinner__WEBPACK_IMPORTED_MODULE_101__.ProgressSpinnerModule, primeng_progressbar__WEBPACK_IMPORTED_MODULE_102__.ProgressBarModule, primeng_radiobutton__WEBPACK_IMPORTED_MODULE_103__.RadioButtonModule, primeng_rating__WEBPACK_IMPORTED_MODULE_104__.RatingModule, primeng_selectbutton__WEBPACK_IMPORTED_MODULE_105__.SelectButtonModule, primeng_sidebar__WEBPACK_IMPORTED_MODULE_106__.SidebarModule, primeng_scroller__WEBPACK_IMPORTED_MODULE_107__.ScrollerModule, primeng_scrollpanel__WEBPACK_IMPORTED_MODULE_108__.ScrollPanelModule, primeng_scrolltop__WEBPACK_IMPORTED_MODULE_109__.ScrollTopModule, primeng_skeleton__WEBPACK_IMPORTED_MODULE_110__.SkeletonModule, primeng_slidemenu__WEBPACK_IMPORTED_MODULE_111__.SlideMenuModule, primeng_slider__WEBPACK_IMPORTED_MODULE_112__.SliderModule, primeng_speeddial__WEBPACK_IMPORTED_MODULE_113__.SpeedDialModule, primeng_spinner__WEBPACK_IMPORTED_MODULE_114__.SpinnerModule, primeng_splitter__WEBPACK_IMPORTED_MODULE_115__.SplitterModule, primeng_splitbutton__WEBPACK_IMPORTED_MODULE_116__.SplitButtonModule, primeng_steps__WEBPACK_IMPORTED_MODULE_117__.StepsModule, primeng_table__WEBPACK_IMPORTED_MODULE_118__.TableModule, primeng_tabmenu__WEBPACK_IMPORTED_MODULE_119__.TabMenuModule, primeng_tabview__WEBPACK_IMPORTED_MODULE_120__.TabViewModule, primeng_tag__WEBPACK_IMPORTED_MODULE_121__.TagModule, primeng_terminal__WEBPACK_IMPORTED_MODULE_122__.TerminalModule, primeng_tieredmenu__WEBPACK_IMPORTED_MODULE_123__.TieredMenuModule, primeng_timeline__WEBPACK_IMPORTED_MODULE_124__.TimelineModule, primeng_toast__WEBPACK_IMPORTED_MODULE_125__.ToastModule, primeng_togglebutton__WEBPACK_IMPORTED_MODULE_126__.ToggleButtonModule, primeng_toolbar__WEBPACK_IMPORTED_MODULE_127__.ToolbarModule, primeng_tooltip__WEBPACK_IMPORTED_MODULE_128__.TooltipModule, primeng_tristatecheckbox__WEBPACK_IMPORTED_MODULE_129__.TriStateCheckboxModule, primeng_tree__WEBPACK_IMPORTED_MODULE_130__.TreeModule, primeng_treeselect__WEBPACK_IMPORTED_MODULE_131__.TreeSelectModule, primeng_treetable__WEBPACK_IMPORTED_MODULE_132__.TreeTableModule, primeng_animate__WEBPACK_IMPORTED_MODULE_133__.AnimateModule, primeng_card__WEBPACK_IMPORTED_MODULE_134__.CardModule, _profabric_angular_components__WEBPACK_IMPORTED_MODULE_135__.ProfabricComponentsModule, _angular_common__WEBPACK_IMPORTED_MODULE_41__.CommonModule, _angular_platform_browser__WEBPACK_IMPORTED_MODULE_48__.BrowserModule, _ngrx_store__WEBPACK_IMPORTED_MODULE_136__.StoreRootModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_44__.HttpClientModule, _angular_forms__WEBPACK_IMPORTED_MODULE_49__.FormsModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_2__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_49__.ReactiveFormsModule, ngx_toastr__WEBPACK_IMPORTED_MODULE_137__.ToastrModule, _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_138__.JwtModule]
   });
 })();
-_angular_core__WEBPACK_IMPORTED_MODULE_42__["ɵɵsetComponentScope"](_modules_main_menu_sidebar_menu_sidebar_component__WEBPACK_IMPORTED_MODULE_8__.MenuSidebarComponent, function () {
-  return [_angular_common__WEBPACK_IMPORTED_MODULE_40__.NgForOf, _angular_router__WEBPACK_IMPORTED_MODULE_138__.RouterLink, _profabric_angular_components__WEBPACK_IMPORTED_MODULE_134__.PfImage, _components_menu_item_menu_item_component__WEBPACK_IMPORTED_MODULE_16__.MenuItemComponent, _components_sidebar_search_sidebar_search_component__WEBPACK_IMPORTED_MODULE_20__.SidebarSearchComponent];
+_angular_core__WEBPACK_IMPORTED_MODULE_43__["ɵɵsetComponentScope"](_modules_main_menu_sidebar_menu_sidebar_component__WEBPACK_IMPORTED_MODULE_8__.MenuSidebarComponent, function () {
+  return [_angular_common__WEBPACK_IMPORTED_MODULE_41__.NgForOf, _angular_router__WEBPACK_IMPORTED_MODULE_139__.RouterLink, _profabric_angular_components__WEBPACK_IMPORTED_MODULE_135__.PfImage, _components_menu_item_menu_item_component__WEBPACK_IMPORTED_MODULE_16__.MenuItemComponent, _components_sidebar_search_sidebar_search_component__WEBPACK_IMPORTED_MODULE_20__.SidebarSearchComponent];
 }, []);
 
 /***/ }),
@@ -1981,7 +1989,7 @@ class LoginComponent {
     },
     decls: 30,
     vars: 3,
-    consts: [[1, "login-box"], [1, "login-logo"], [2, "color", "black", "padding", "8px", "background-color", "#ffffff78", "width", "100% !important", "border-top-left-radius", "14px", "border-top-right-radius", "14px", "text-shadow", "1px 1px 2px #0000004d"], [1, "card", 2, "background", "none"], [1, "card-body", "login-card-body", 2, "background-color", "#ffffff78", "border-bottom-right-radius", "14px", "border-bottom-left-radius", "14px"], [2, "text-align", "center", "padding", "10px"], [3, "formGroup", "ngSubmit"], [1, "input-group", "mb-3"], [1, "p-inputgroup"], [1, "p-inputgroup-addon"], [1, "pi", "pi-user"], ["pInputText", "", "placeholder", "Username", "formControlName", "username"], [1, "pi", "pi-lock"], ["pInputText", "", "placeholder", "Password", "formControlName", "password", "type", "password"], [1, "row"], [1, "col-4"], ["type", "submit", "label", "Login", "icon", "pi pi-check", "styleClass", "p-button-secondary"], ["routerLinkActive", "router-link-active", 3, "routerLink"], ["label", "Register", "icon", "pi pi-plus", "styleClass", "p-button-success"], ["routerLink", "password-reset/", 2, "padding", "10px", "text-align", "center"]],
+    consts: [[1, "login-box"], [1, "login-logo"], [2, "color", "black", "padding", "8px", "background-color", "#ffffff78", "width", "100% !important", "border-top-left-radius", "14px", "border-top-right-radius", "14px", "text-shadow", "1px 1px 2px #0000004d"], [1, "card", 2, "background", "none"], [1, "card-body", "login-card-body", 2, "background-color", "#ffffff78", "border-bottom-right-radius", "14px", "border-bottom-left-radius", "14px"], [2, "text-align", "center", "padding", "10px"], [3, "formGroup", "ngSubmit"], [1, "input-group", "mb-3"], [1, "p-inputgroup"], [1, "p-inputgroup-addon"], [1, "pi", "pi-user"], ["pInputText", "", "placeholder", "Username", "formControlName", "username"], [1, "pi", "pi-lock"], ["pInputText", "", "placeholder", "Password", "formControlName", "password", "type", "password"], [1, "row"], [1, "col-4"], ["type", "submit", "label", "Login", "icon", "pi pi-check", "styleClass", "p-button-secondary"], ["routerLinkActive", "router-link-active", 3, "routerLink"], ["label", "Register", "icon", "pi pi-plus", "styleClass", "p-button-success"], ["routerLink", "/reset-password/", 2, "padding", "10px", "text-align", "center"]],
     template: function LoginComponent_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "p", 2)(3, "b");
@@ -2973,6 +2981,166 @@ class RegistrationComponent {
     },
     dependencies: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName, _angular_router__WEBPACK_IMPORTED_MODULE_5__.RouterLink, _angular_router__WEBPACK_IMPORTED_MODULE_5__.RouterLinkActive, primeng_button__WEBPACK_IMPORTED_MODULE_7__.Button, primeng_inputtext__WEBPACK_IMPORTED_MODULE_8__.InputText],
     styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJyZWdpc3RyYXRpb24uY29tcG9uZW50LnNjc3MifQ== */\n/*# sourceURL=webpack://./src/app/modules/registration/registration.component.scss */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvbW9kdWxlcy9yZWdpc3RyYXRpb24vcmVnaXN0cmF0aW9uLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQSw0S0FBNEsiLCJzb3VyY2VSb290IjoiIn0= */"]
+  });
+}
+
+/***/ }),
+
+/***/ 50978:
+/*!********************************************************************!*\
+  !*** ./src/app/modules/reset-password/reset-password.component.ts ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ResetPasswordComponent": () => (/* binding */ ResetPasswordComponent)
+/* harmony export */ });
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 2508);
+/* harmony import */ var environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! environments/environment */ 92340);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ 58987);
+/* harmony import */ var _services_Auth_JWTAuthService_jwt_auth_service_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @services/Auth/JWTAuthService/jwt-auth-service.service */ 95928);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var primeng_api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! primeng/api */ 14356);
+/* harmony import */ var primeng_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! primeng/button */ 76328);
+/* harmony import */ var primeng_inputtext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! primeng/inputtext */ 69906);
+
+
+
+
+
+
+
+
+
+
+
+const _c0 = function () {
+  return ["/login"];
+};
+class ResetPasswordComponent {
+  constructor(http, formBuilder, jwtAuthService, router, renderer, messageService) {
+    this.http = http;
+    this.formBuilder = formBuilder;
+    this.jwtAuthService = jwtAuthService;
+    this.router = router;
+    this.renderer = renderer;
+    this.messageService = messageService;
+    this.class = 'login-box';
+    this.registrationForm = this.formBuilder.group({
+      username: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]],
+      password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]],
+      email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.email, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]]
+    });
+    this.api_server = environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.api_server;
+    this.register_path = environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.endpoints.register;
+  }
+  ngOnInit() {
+    this.renderer.addClass(document.querySelector('app-root'), 'login-page');
+  }
+  onSubmit() {
+    if (this.registrationForm.valid) {
+      let formData = {
+        username: this.registrationForm.get('username')?.value,
+        password: this.registrationForm.get('password')?.value,
+        email: this.registrationForm.get('password')?.value
+      };
+      const apiUrl = `${this.api_server}/${this.register_path}`;
+      this.http.post(apiUrl, formData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).subscribe(response => {
+        this.router.navigateByUrl('/login');
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Registration Successfull',
+          detail: 'Please Login To Continue'
+        });
+      }, error => {
+        try {
+          console.log(error);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Registration Error',
+            detail: error.error.detail
+          });
+        } catch (err) {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Server Error',
+            detail: "Server Error Please Contact The Administrator"
+          });
+        }
+      });
+    }
+    if (this.registrationForm.invalid) {
+      console.log("Registration Form Invalid");
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Registration Error',
+        detail: "Registration Form Invalid"
+      });
+    }
+  }
+  get controls() {
+    return this.registrationForm.controls;
+  }
+  ngOnDestroy() {
+    this.renderer.removeClass(document.querySelector('app-root'), 'login-page');
+  }
+  static #_ = this.ɵfac = function ResetPasswordComponent_Factory(t) {
+    return new (t || ResetPasswordComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_4__.HttpClient), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_services_Auth_JWTAuthService_jwt_auth_service_service__WEBPACK_IMPORTED_MODULE_1__.JwtAuthService), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__.Router), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_3__.Renderer2), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](primeng_api__WEBPACK_IMPORTED_MODULE_6__.MessageService));
+  };
+  static #_2 = this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({
+    type: ResetPasswordComponent,
+    selectors: [["app-reset-password"]],
+    hostVars: 2,
+    hostBindings: function ResetPasswordComponent_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵclassMap"](ctx.class);
+      }
+    },
+    decls: 22,
+    vars: 3,
+    consts: [[1, "login-box"], [1, "login-logo"], [2, "color", "black", "padding", "8px", "background-color", "#ffffff78", "width", "100% !important", "border-top-left-radius", "14px", "border-top-right-radius", "14px", "text-shadow", "1px 1px 2px #0000004d"], [1, "card", 2, "background", "none"], [1, "card-body", "login-card-body", 2, "background-color", "#ffffff78", "border-bottom-right-radius", "14px", "border-bottom-left-radius", "14px"], [2, "text-align", "center", "padding", "10px"], [3, "formGroup", "ngSubmit"], [1, "input-group", "mb-3"], [1, "p-inputgroup"], [1, "p-inputgroup-addon"], [1, "pi", "pi-box"], ["pInputText", "", "placeholder", "email", "formControlName", "email"], [1, "row"], [1, "col-4"], ["type", "submit", "label", "Reset", "icon", "pi pi-check", "styleClass", "p-button-secondary"], ["routerLinkActive", "router-link-active", 3, "routerLink"], ["label", "login", "icon", "pi pi-arrow-left", "styleClass", "p-button-success"]],
+    template: function ResetPasswordComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "p", 2)(3, "b");
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](4, "E");
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](5, "-FACTURE ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](6, "div", 3)(7, "div", 4)(8, "h6", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](9, "Enter your email to get a password reset link :");
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](10, "form", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngSubmit", function ResetPasswordComponent_Template_form_ngSubmit_10_listener() {
+          return ctx.onSubmit();
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](11, "div", 7)(12, "div", 8)(13, "span", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](14, "i", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](15, "input", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](16, "div", 12)(17, "div", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](18, "p-button", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](19, "div", 13)(20, "a", 15);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](21, "p-button", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()()()()()();
+      }
+      if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("formGroup", ctx.registrationForm);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵpureFunction0"](2, _c0));
+      }
+    },
+    dependencies: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName, _angular_router__WEBPACK_IMPORTED_MODULE_5__.RouterLink, _angular_router__WEBPACK_IMPORTED_MODULE_5__.RouterLinkActive, primeng_button__WEBPACK_IMPORTED_MODULE_7__.Button, primeng_inputtext__WEBPACK_IMPORTED_MODULE_8__.InputText],
+    styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJyZXNldC1wYXNzd29yZC5jb21wb25lbnQuc2NzcyJ9 */\n/*# sourceURL=webpack://./src/app/modules/reset-password/reset-password.component.scss */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvbW9kdWxlcy9yZXNldC1wYXNzd29yZC9yZXNldC1wYXNzd29yZC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQ0EsNEtBQTRLIiwic291cmNlUm9vdCI6IiJ9 */"]
   });
 }
 

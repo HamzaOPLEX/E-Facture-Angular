@@ -15,6 +15,7 @@ import { DocummentsListingComponent } from './components/documments-listing/docu
 import { EditDocumentComponent } from './pages/edit-document/edit-document/edit-document.component';
 import { CreateDocumentComponent } from './pages/create-document/create-document/create-document.component';
 import { RegistrationComponent } from './modules/registration/registration.component';
+import { ResetPasswordComponent } from './modules/reset-password/reset-password.component';
 
 
 
@@ -81,6 +82,11 @@ const routes: Routes = [
     {
         path: 'register',
         component: RegistrationComponent,
+        canActivate: [LoginAuthGuard]
+    },
+    {
+        path: 'reset-password',
+        component: ResetPasswordComponent,
         canActivate: [LoginAuthGuard]
     },
     {path: '**', redirectTo: ''}

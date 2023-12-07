@@ -139,6 +139,7 @@ import { EditBillingFormComponent } from './pages/edit-document/edit-billing-for
 import { EditDocumentTableItemsComponent } from './pages/edit-document/edit-document-table-items/edit-document-table-items.component';
 import { EditClientModalComponent } from './components/edit-client-modal/edit-client-modal.component';
 import { RegistrationComponent } from './modules/registration/registration.component';
+import { ResetPasswordComponent } from './modules/reset-password/reset-password.component';
 
 
 
@@ -180,7 +181,8 @@ registerLocaleData(localeEn, 'en-EN');
         EditBillingFormComponent,
         EditDocumentTableItemsComponent,
         EditClientModalComponent,
-        RegistrationComponent
+        RegistrationComponent,
+        ResetPasswordComponent
     ],
     imports: [
         AvatarModule,

@@ -14,14 +14,13 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { environment } from 'environments/environment';
-import { json } from '@angular-devkit/core';
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.scss']
 })
-export class RegistrationComponent {
+export class ResetPasswordComponent {
   @HostBinding('class') class = 'login-box';
 
   ngOnInit(): void {
@@ -45,7 +44,7 @@ export class RegistrationComponent {
   registrationForm = this.formBuilder.group({
     username: ['', [Validators.required]],
     password: ['', [Validators.required]],
-    email: ['', [Validators.email,Validators.required]]
+    email: ['', [Validators.email, Validators.required]]
   })
 
   api_server = environment.api_server
@@ -69,7 +68,7 @@ export class RegistrationComponent {
         },
         (error) => {
           try {
-            this.messageService.add({ severity: 'error', summary: 'Registration Error', detail: JSON.stringify(error.error.detail) });
+            this.messageService.add({ severity: 'error', summary: 'Registration Error', detail: error.error.detail.detail });
           }
           catch (err) {
             this.messageService.add({ severity: 'error', summary: 'Server Error', detail: "Server Error Please Contact The Administrator" });
